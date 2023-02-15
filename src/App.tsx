@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
 import CoinTicker from "./components/CoinTicker/CoinTicker";
-import Test from "./components/Test";
+import BookMarker from "./components/Bookmarker/BookMarker";
 
 function App() {
   return (
     <div className="App">
       <CoinTicker />
-      <Test />
+      <BookMarker />
     </div>
   );
 }
