@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { testatom } from "../recoil/test";
+import { testatom } from "../recoil/store";
 
 function Test() {
   const [test, setTest] = useRecoilState(testatom);

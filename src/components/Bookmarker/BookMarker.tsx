@@ -1,15 +1,15 @@
 import axios from "axios";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { bookmarker } from "../../recoil/BookMarker";
+import { bookmarker } from "../../recoil/store";
 
-function BookMarker() {
+const BookMarker = () => {
   const [myBookMarker, setMyBookMarker] = useRecoilState(bookmarker);
   const a = async () => {
     try {
       const checkUser: any = await axios.get("http://localhost:5000/users");
       setMyBookMarker(checkUser);
-      console.log(checkUser);
+      console.log(...checkUser.bookmark);
     } catch {
       throw new Error("Whoops!");
     }
@@ -19,6 +19,6 @@ function BookMarker() {
   };
   a();
   return <div>{myBookMarker}</div>;
-}
+};
 
 export default BookMarker;
