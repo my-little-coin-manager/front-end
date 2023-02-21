@@ -25,6 +25,7 @@ const CoinTicker = () => {
 
   const getCoinName = async () => {
     try {
+      // 코인 마켓 코드 가져오는 코드
       const config = { params: { isDeatils: true } };
       const response: any = await axios.get("https://api.upbit.com/v1/market/all", config);
       const coinList = response.data;
@@ -41,6 +42,7 @@ const CoinTicker = () => {
       });
 
       return coinList;
+
     } catch (error) {
       console.log(error);
     }
@@ -119,6 +121,7 @@ const CoinTicker = () => {
   return (
     <div>
       {JSON.stringify(Object.values(allCoin))}
+
       {/* {시세.KRW.map((data: any) => {
         console.log(data);
         return <div key={data.code}>{data.trade_price}</div>;
