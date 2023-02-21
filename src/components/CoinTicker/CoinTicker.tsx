@@ -12,15 +12,15 @@ const CoinTicker = () => {
     BTC: []
   });
 
-  const [시세, set시세] = useState<any>({
+  const [data, setData] = useState<any>({
     KRW: []
   });
 
   const getCoinName = async () => {
     try {
+      // 코인 마켓 코드 가져오는 코드
       const config = { params: { isDeatils: true } };
       const response: any = await axios.get("https://api.upbit.com/v1/market/all", config);
-      // allCoin = response.data;
       const coinList = response.data;
       const KRWCoinName = coinList
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
@@ -33,6 +33,7 @@ const CoinTicker = () => {
         return { ...prevState, KRW: KRWCoinName, BTC: BTCCoinName };
       });
 
+      // 코인 마켓 코드 분류
       const responseKRW = coinList
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
         .map((data: any) => data.market);
@@ -42,49 +43,33 @@ const CoinTicker = () => {
         .map((data: any) => data.market);
 
       const ws = new WebSocket("wss://api.upbit.com/websocket/v1");
+
       ws.onopen = () => {
-        ws.send(`[{"ticket":"test"},{"type":"ticker","codes": ["KRW-BTC"]}]`);
+        // ws.send(`[{"ticket":"test"},{"type":"ticker","codes": ${JSON.stringify(responseKRW)}}]`);
+        ws.send(`[{"ticket":"test"},{"type":"ticker","codes": ['KRW-TON', 'KRW-CRE']}]`);
       };
 
-      const allCoin: any[] = [];
       ws.onmessage = async (e) => {
         const { data } = e;
+
         const text = await new Response(data).text();
-        const text2 = JSON.parse(text);
-        console.log(text2);
-        // allCoin.push(text2);
-        set시세((prevState: any) => {
-          return { KRW: [text2] };
-        });
-        // console.log(allCoin);
+        const parseText = JSON.parse(text);
+
+        // console.log(parseText.code);
+        // setData((prevState: any) => {
+        //   return { ...prevState, KRW: [...prevState.KRW, parseText] };
+        // });
       };
 
       ws.onerror = (e) => {
         console.log(e);
       };
-
-      // let KRWCoin = "";
-      // let BTCCoin = "";
-      // for (const coin of coinList) {
-      //   if (!coin.market.indexOf("KRW")) {
-      //     console.log(coin.market.indexOf("KRW"));
-      //     KRWCoin += `${coin.market},`;
-      //   } else {
-      //     BTCCoin += `${coin.market},`;
-      //   }
-      // }
-
-      // await setCoinMarket(() => {
-      //   return { KRW: KRWCoin.substring(0, KRWCoin.length - 1), BTC: BTCCoin.substring(0, BTCCoin.length - 1) };
-      // });
-
-      // return KRWCoin.substring(0, KRWCoin.length - 1);
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(시세);
+  // console.log(coinList.KRW);
   // const getAllCoinTicker = async (coinMarket: any) => {
   //   console.log(coinMarket);
   //   try {
@@ -105,14 +90,13 @@ const CoinTicker = () => {
       getAllCoinTicker(res);
     }); */
   }, []);
-  console.log(시세);
 
   return (
     <div>
-      {시세.KRW.map((data: any) => {
+      {/* {시세.KRW.map((data: any) => {
         console.log(data);
         return <div key={data.code}>{data.trade_price}</div>;
-      })}
+      })} */}
     </div>
   );
 };
