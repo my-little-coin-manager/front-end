@@ -42,7 +42,6 @@ const CoinTicker = () => {
       });
 
       return coinList;
-
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +66,7 @@ const CoinTicker = () => {
     };
   };
 
-  console.log(allCoin);
+  // console.log(allCoin);
 
   useEffect(() => {
     getCoinName().then(() => {
