@@ -1,15 +1,20 @@
 import React from "react";
-import "./App.css";
 import CoinTicker from "./components/CoinTicker/CoinTicker";
 import BookMarker from "./components/Bookmarker/BookMarker";
+import styled from "styled-components";
 
 function App() {
   return (
-    <div className="App">
-      <CoinTicker />
+    <Container>
       <BookMarker />
-    </div>
+      <CoinTicker />
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin: 0 10%;
+  display: flex;
+`;
 
 export default App;
