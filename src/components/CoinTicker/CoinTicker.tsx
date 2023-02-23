@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { coinMarkets, coinTickers } from "recoil/atoms";
 import axios from "axios";
@@ -15,6 +15,7 @@ import styled from "styled-components";
 const CoinTicker = () => {
   const [coinMarketList, setCoinMarketList] = useRecoilState<any>(coinMarkets);
   const [coinTicker, setCoinTicker] = useRecoilState<any>(coinTickers);
+  const [flash, setFlash] = useState<any>(false);
 
   const getCoinName = async () => {
     try {
@@ -70,21 +71,50 @@ const CoinTicker = () => {
   }, []);
 
   return (
-    <ul>
-      {Object.values(coinTicker).map((ele: any, idx: number) => {
-        return (
-          <CoinList key={ele.code}>
-            <p>{coinMarketList.KRW[idx].korean_name}</p>
-            <p>{ele.trade_price}</p>
-          </CoinList>
-        );
-      })}
-    </ul>
+    <CoinTickerContainer>
+      <ul>
+        {Object.values(coinTicker).map((ele: any, idx: number) => {
+          return (
+            <CoinList key={ele.code}>
+              <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
+              <p>{coinMarketList.KRW[idx].korean_name}</p>
+              <p>{ele.trade_price.toLocaleString("ko-KR")}</p>
+            </CoinList>
+          );
+        })}
+      </ul>
+    </CoinTickerContainer>
   );
 };
 
+const CoinTickerContainer = styled.aside`
+  width: 30%;
+  height: 100vh;
+  overflow-y: scroll;
+  margin: 0;
+
+  & ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  & ul li:not(:last-child) {
+    border-bottom: 1px solid black;
+  }
+`;
+
 const CoinList = styled.li`
-  text-decoration: none;
+  display: flex;
+
+  & img {
+    width: 25px;
+    height: 25px;
+    margin: auto 0;
+  }
+
+  & p {
+    margin-left: 10px;
+  }
 `;
 
 export default CoinTicker;
