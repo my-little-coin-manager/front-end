@@ -1,84 +1,12 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { bookmarker, allCoinTicker, allCoinName } from "../../recoil/store";
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { coinMarkets, coinTickers } from "../../recoil/atoms";
 import styled from "styled-components";
-import { parseJsonText } from "typescript";
 
 const BookMarker = () => {
   // const [myBookMarker, setMyBookMarker] = useRecoilState(bookmarker);
-  const [coinName, setCoinName] = useRecoilState(allCoinName);
-  const [coinTicker, setCoinTicker] = useRecoilState(allCoinTicker);
-
-  const getAllCoinData = async () => {
-    try {
-      // //유저 데이터 받아오기
-      // const allData: any = await axios.get("http://localhost:5000/users");
-
-      //모든 코인정보 받아오고 웹소켓 연결위한 분류 (한글명, 마켓네임, 영문명)
-      const allData: any | string = await axios.get("http://api.upbit.com/v1/market/all");
-      const coinKRW = allData.data
-        .filter((list: { [key: string]: string }) => list.market.includes("KRW-"))
-        .map((list: any) => list);
-      setCoinName(coinKRW);
-
-      // // 유저 데이터 북마크 추출
-      // const userData = allData.data;
-      // const userBookmark = userData[0];
-      // setMyBookMarker(userBookmark.bookmark);
-
-      // //모든 코인정보 추출 (한글명, 마켓네임, 영문명)
-      // const coinInfo = allCoin.data;
-      // setAllCoinList(coinInfo);
-      return coinKRW;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onWebSocket = async (res: any) => {
-    //받아온 모든 코인정보 웹소켓 연결
-    const ws = new WebSocket("wss://api.upbit.com/websocket/v1");
-    ws.onopen = () => {
-      ws.send(`[{"ticket":"test"},{"type":"ticker","codes":${JSON.stringify(res.map((list: any) => list.market))}}]`);
-    };
-
-    ws.onmessage = async (e) => {
-      const { data } = e;
-      const text: any = await new Response(data).text();
-      const parseText = JSON.parse(text);
-
-      setCoinTicker((prev: any) => {
-        return { ...prev, [parseText.code]: parseText };
-      });
-    };
-
-    ws.onerror = (error: any) => {
-      console.log(error);
-    };
-  };
-
-  // console.log(coinTicker);
-
-  // console.log(coinName);
-  // console.log(JSON.stringify(coinName.map((list: any) => list.market)));
-
-  useEffect(() => {
-    getAllCoinData().then((res: any) => {
-      onWebSocket(res);
-    });
-  }, []);
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/users")
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((userBookmark) => {
-  //       setMyBookMarker(userBookmark);
-  //       const test = myBookMarker.toString();
-  //       console.log(myBookMarker[0]);
-  //     });
-  // }, []);
+  const coinMarketList = useRecoilValue<any>(coinMarkets);
+  const coinTicker = useRecoilValue<any>(coinTickers);
 
   return (
     <>
@@ -103,16 +31,12 @@ const BookMarker = () => {
             <span>거래대금</span>
           </CoinValue>
         </ListhHead>
-        {coinName.map((data: any) => {
-          // console.log(data);
+        {Object.values(coinTicker).map((ele: any, idx: number) => {
           return (
-            <CoinBlock key={data.market}>
-              <div>
-                <span>{data.korean_name}</span>
-                <br />
-                <span>{data.market}</span>
-              </div>
-            </CoinBlock>
+            <div key={ele.code}>
+              <p>{coinMarketList.KRW[idx].korean_name}</p>
+              <p>{ele.trade_price}</p>
+            </div>
           );
         })}
       </ListContainer>
