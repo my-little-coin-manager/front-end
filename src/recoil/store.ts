@@ -1,7 +1,9 @@
+
 import { atom, selector } from "recoil";
 import axios from "axios";
 
 const API_HOST = "https://api.upbit.com/v1/market/all";
+
 
 export const bookmarker = atom({
   key: "bookmarker",
@@ -55,3 +57,4 @@ export const websocketOn = selector({
     console.log(get);
   }
 });
+

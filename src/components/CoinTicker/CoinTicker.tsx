@@ -39,6 +39,7 @@ const CoinTicker = () => {
       });
 
       return KRWCoinName;
+
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +60,7 @@ const CoinTicker = () => {
       console.log(e);
     };
   };
+
 
   useEffect(() => {
     getCoinName().then((res) => {
