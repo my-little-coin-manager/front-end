@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { coinMarkets, coinTickers } from "recoil/atoms";
 import axios from "axios";
@@ -17,7 +17,6 @@ const CoinTicker = () => {
   const [coinTicker, setCoinTicker] = useRecoilState<any>(coinTickers);
 
   const ws = useRef<any>(null);
-  const inputRef = useRef<any>();
 
   const getCoinMarkets = async () => {
     try {
@@ -31,8 +30,6 @@ const CoinTicker = () => {
       const BTC_markets = coinMarkets
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
         .map((data: any) => data);
-
-      console.log("getCoin 실행");
 
       setCoinMarketList((prevState: any) => {
         return { ...prevState, KRW: KRW_markets, BTC: BTC_markets };
@@ -94,16 +91,24 @@ const CoinTicker = () => {
             return (
               <CoinList key={ele.code}>
                 <CoinName>
-                  <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
-                  <p>{coinMarketList.KRW[idx].korean_name}</p>
-                  <p>{ele.code}</p>
+                  <span>
+                    <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
+                    <span>
+                      <p>{coinMarketList.KRW[idx].korean_name}</p>
+                      <p>
+                        {ele.code.split("-")[1]}/{ele.code.split("-")[0]}
+                      </p>
+                    </span>
+                  </span>
                 </CoinName>
                 <CoinPrice change={ele.change}>{ele.trade_price.toLocaleString("ko-KR")} KRW</CoinPrice>
-                <Change>
+                <Change change={ele.change}>
                   <p>{(ele.signed_change_rate * 100).toFixed(2)}%</p>
-                  <p>{ele.signed_change_price}</p>
+                  <p>{ele.signed_change_price.toLocaleString("ko-KR")}</p>
                 </Change>
-                <td>{Math.round(ele.acc_trade_price_24h / 1000000).toLocaleString("ko-KR")}백만</td>
+                <AccTradePrice>
+                  {Math.round(ele.acc_trade_price_24h / 1000000).toLocaleString("ko-KR")}백만
+                </AccTradePrice>
               </CoinList>
             );
           })}
@@ -126,35 +131,84 @@ const CoinTickerContainer = styled.aside`
   & ul li:not(:last-child) {
     border-bottom: 1px solid black;
   }
+
+  & table {
+    border-collapse: collapse;
+  }
+
+  & thead {
+    height: 40px;
+    color: #666;
+    font-size: 12px;
+    background-color: #f9fafc;
+  }
 `;
 
-const CoinList = styled.tr``;
+const CoinList = styled.tr`
+  height: 60px;
+  border-bottom: solid 1px #d6d6d6;
 
-const Change = styled.td`
+  & td:first-child {
+    padding-left: 20px;
+  }
+
+  & td:last-child {
+    padding-right: 20px;
+  }
+`;
+
+const Change = styled.td<{ change: string }>`
+  width: 25%;
   text-align: right;
+  font-size: 12px;
   & p {
+    color: ${({ change }) => (change === "RISE" ? "#c84a31" : change === "FALL" ? "#1261c4" : "#333")};
     margin: 0;
   }
 `;
 
 const CoinName = styled.td`
-  display: flex;
+  color: #333;
+  font-weight: 600;
+  font-size: 11px;
+
   & img {
     width: 25px;
     height: 25px;
     margin: auto 0;
   }
+
   & p {
-    margin-left: 10px;
-    font-weight: 600;
+    margin: 0 0 0 10px;
+  }
+
+  & span {
+    display: flex;
+  }
+
+  & span span {
+    display: block;
+  }
+
+  & span span :last-child {
+    color: gray;
+    font-size: 10px;
   }
 `;
 
 const CoinPrice = styled.td<{ change: string }>`
-  font-size: 1em;
-  color: ${({ change }) => (change === "RISE" ? "red" : change === "FALL" ? "blue" : "black")};
+  width: 25%;
+  font-size: 12px;
+  color: ${({ change }) => (change === "RISE" ? "#c84a31" : change === "FALL" ? "#1261c4" : "#333")};
   text-align: right;
   font-weight: 700;
+`;
+
+const AccTradePrice = styled.td`
+  color: #333;
+  width: 25%;
+  font-size: 12px;
+  text-align: right;
 `;
 
 export default CoinTicker;
