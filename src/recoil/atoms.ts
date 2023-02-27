@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 
 const API_HOST = "https://api.upbit.com/v1/market/all";
 
@@ -7,6 +7,7 @@ export const bookmarker = atom({
   default: []
 });
 
+//실시간 코인 시세
 export const coinTickers = atom({
   key: "coinTickers",
   default: {}
@@ -19,9 +20,4 @@ export const coinMarkets = atom({
     KRW: [],
     BTC: []
   }
-});
-
-export const websocketState = atom({
-  key: "websocketState",
-  default: {}
 });
