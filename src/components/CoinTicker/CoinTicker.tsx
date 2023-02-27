@@ -80,19 +80,35 @@ const CoinTicker = () => {
 
   return (
     <CoinTickerContainer>
-      <ul>
-        {Object.values(coinTicker).map((ele: any, idx: number) => {
-          return (
-            <CoinList key={ele.code}>
-              <span>
-                <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
-                <p>{coinMarketList.KRW[idx].korean_name}</p>
-              </span>
-              <CoinPrice change={ele.change}>{ele.trade_price.toLocaleString("ko-KR")} KRW</CoinPrice>
-            </CoinList>
-          );
-        })}
-      </ul>
+      <table align="center">
+        <thead>
+          <tr>
+            <th>한글명</th>
+            <th>현재가</th>
+            <th>전일대비</th>
+            <th>거래대금</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.values(coinTicker).map((ele: any, idx: number) => {
+            return (
+              <CoinList key={ele.code}>
+                <CoinName>
+                  <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
+                  <p>{coinMarketList.KRW[idx].korean_name}</p>
+                  <p>{ele.code}</p>
+                </CoinName>
+                <CoinPrice change={ele.change}>{ele.trade_price.toLocaleString("ko-KR")} KRW</CoinPrice>
+                <Change>
+                  <p>{(ele.signed_change_rate * 100).toFixed(2)}%</p>
+                  <p>{ele.signed_change_price}</p>
+                </Change>
+                <td>{Math.round(ele.acc_trade_price_24h / 1000000).toLocaleString("ko-KR")}백만</td>
+              </CoinList>
+            );
+          })}
+        </tbody>
+      </table>
     </CoinTickerContainer>
   );
 };
@@ -112,15 +128,17 @@ const CoinTickerContainer = styled.aside`
   }
 `;
 
-const CoinList = styled.li`
-  display: flex;
-  padding: 0 10px;
-  justify-content: space-between;
+const CoinList = styled.tr``;
 
-  & span {
-    display: flex;
+const Change = styled.td`
+  text-align: right;
+  & p {
+    margin: 0;
   }
+`;
 
+const CoinName = styled.td`
+  display: flex;
   & img {
     width: 25px;
     height: 25px;
@@ -132,8 +150,10 @@ const CoinList = styled.li`
   }
 `;
 
-const CoinPrice = styled.p<{ change: string }>`
+const CoinPrice = styled.td<{ change: string }>`
+  font-size: 1em;
   color: ${({ change }) => (change === "RISE" ? "red" : change === "FALL" ? "blue" : "black")};
+  text-align: right;
   font-weight: 700;
 `;
 
