@@ -21,3 +21,9 @@ export const coinMarkets = atom({
     BTC: []
   }
 });
+
+//선택된 코인
+export const coinSelect = atom({
+  key: "coinSelect",
+  default: "KRW-BTC"
+});

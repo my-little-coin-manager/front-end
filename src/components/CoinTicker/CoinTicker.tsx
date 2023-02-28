@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
-import { coinMarkets, coinTickers } from "recoil/atoms";
+import { coinMarkets, coinTickers, coinSelect } from "recoil/atoms";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -15,6 +15,7 @@ import styled from "styled-components";
 const CoinTicker = () => {
   const [coinMarketList, setCoinMarketList] = useRecoilState<any>(coinMarkets);
   const [coinTicker, setCoinTicker] = useRecoilState<any>(coinTickers);
+  const [coinSelected, setCoinSelected] = useRecoilState<any>(coinSelect);
 
   const ws = useRef<any>(null);
   const inputRef = useRef<any>();
@@ -92,7 +93,12 @@ const CoinTicker = () => {
         <tbody>
           {Object.values(coinTicker).map((ele: any, idx: number) => {
             return (
-              <CoinList key={ele.code}>
+              <CoinList
+                onClick={() => {
+                  setCoinSelected(ele.code);
+                }}
+                key={ele.code}
+              >
                 <CoinName>
                   <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
                   <p>{coinMarketList.KRW[idx].korean_name}</p>
@@ -128,7 +134,11 @@ const CoinTickerContainer = styled.aside`
   }
 `;
 
-const CoinList = styled.tr``;
+const CoinList = styled.tr`
+  &:hover {
+    background-color: blueviolet;
+  }
+`;
 
 const Change = styled.td`
   text-align: right;

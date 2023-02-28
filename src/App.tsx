@@ -1,12 +1,14 @@
 import React from "react";
 import CoinTicker from "./components/CoinTicker/CoinTicker";
-import BookMarker from "./components/Bookmarker/BookMarker";
+import CoinDetail from "./components/CoinDetail/CoinDetail";
+// import BookMarker from "./components/Bookmarker/BookMarker";
 import styled from "styled-components";
 
 function App() {
   return (
     <Container>
-      <BookMarker />
+      <CoinDetail />
+      {/* <BookMarker /> */}
       <CoinTicker />
     </Container>
   );
