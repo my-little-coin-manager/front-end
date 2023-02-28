@@ -1,8 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { coinMarkets, coinTickers, coinSelect } from "recoil/atoms";
 import axios from "axios";
 import styled from "styled-components";
+import CoinPrice from "./CoinPrice";
+import CoinChange from "./CoinChange";
+import AccTradePrice from "./AccTradePirce";
+import CoinName from "./CoinName";
 
 // type TCoin = {
 //   code: string;
@@ -18,7 +22,6 @@ const CoinTicker = () => {
   const [coinSelected, setCoinSelected] = useRecoilState<any>(coinSelect);
 
   const ws = useRef<any>(null);
-  const inputRef = useRef<any>();
 
   const getCoinMarkets = async () => {
     try {
@@ -32,8 +35,6 @@ const CoinTicker = () => {
       const BTC_markets = coinMarkets
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
         .map((data: any) => data);
-
-      console.log("getCoin 실행");
 
       setCoinMarketList((prevState: any) => {
         return { ...prevState, KRW: KRW_markets, BTC: BTC_markets };
@@ -93,23 +94,19 @@ const CoinTicker = () => {
         <tbody>
           {Object.values(coinTicker).map((ele: any, idx: number) => {
             return (
-              <CoinList
-                onClick={() => {
+
+              <CoinList onClick={() => {
                   setCoinSelected(ele.code);
                 }}
-                key={ele.code}
-              >
-                <CoinName>
-                  <img src={`https://static.upbit.com/logos/${ele.code.split("-")[1]}.png`} alt="" />
-                  <p>{coinMarketList.KRW[idx].korean_name}</p>
-                  <p>{ele.code}</p>
-                </CoinName>
-                <CoinPrice change={ele.change}>{ele.trade_price.toLocaleString("ko-KR")} KRW</CoinPrice>
-                <Change>
-                  <p>{(ele.signed_change_rate * 100).toFixed(2)}%</p>
-                  <p>{ele.signed_change_price}</p>
-                </Change>
-                <td>{Math.round(ele.acc_trade_price_24h / 1000000).toLocaleString("ko-KR")}백만</td>
+                 key={coinMarketList.KRW[idx].market}>
+                <CoinName
+                  koreanName={coinMarketList.KRW[idx].korean_name}
+                  marketCode={coinMarketList.KRW[idx].market}
+                />
+                <CoinPrice price={ele.trade_price} change={ele.change} />
+                <CoinChange change={ele.change} rate={ele.signed_change_rate} price={ele.signed_change_price} />
+                <AccTradePrice price={ele.acc_trade_price_24h} />
+
               </CoinList>
             );
           })}
@@ -132,39 +129,30 @@ const CoinTickerContainer = styled.aside`
   & ul li:not(:last-child) {
     border-bottom: 1px solid black;
   }
+
+  & table {
+    border-collapse: collapse;
+  }
+
+  & thead {
+    height: 40px;
+    color: #666;
+    font-size: 12px;
+    background-color: #f9fafc;
+  }
 `;
 
 const CoinList = styled.tr`
-  &:hover {
-    background-color: blueviolet;
-  }
-`;
+  height: 60px;
+  border-bottom: solid 1px #d6d6d6;
 
-const Change = styled.td`
-  text-align: right;
-  & p {
-    margin: 0;
+  & td:first-child {
+    padding-left: 20px;
   }
-`;
 
-const CoinName = styled.td`
-  display: flex;
-  & img {
-    width: 25px;
-    height: 25px;
-    margin: auto 0;
+  & td:last-child {
+    padding-right: 20px;
   }
-  & p {
-    margin-left: 10px;
-    font-weight: 600;
-  }
-`;
-
-const CoinPrice = styled.td<{ change: string }>`
-  font-size: 1em;
-  color: ${({ change }) => (change === "RISE" ? "red" : change === "FALL" ? "blue" : "black")};
-  text-align: right;
-  font-weight: 700;
 `;
 
 export default CoinTicker;
