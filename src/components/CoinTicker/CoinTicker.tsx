@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
-import { coinMarkets, coinTickers } from "recoil/atoms";
+import { coinMarkets, coinTickers, coinSelect } from "recoil/atoms";
 import axios from "axios";
 import styled from "styled-components";
 import CoinPrice from "./CoinPrice";
@@ -19,6 +19,7 @@ import CoinName from "./CoinName";
 const CoinTicker = () => {
   const [coinMarketList, setCoinMarketList] = useRecoilState<any>(coinMarkets);
   const [coinTicker, setCoinTicker] = useRecoilState<any>(coinTickers);
+  const [coinSelected, setCoinSelected] = useRecoilState<any>(coinSelect);
 
   const ws = useRef<any>(null);
 
@@ -93,7 +94,11 @@ const CoinTicker = () => {
         <tbody>
           {Object.values(coinTicker).map((ele: any, idx: number) => {
             return (
-              <CoinList key={coinMarketList.KRW[idx].market}>
+
+              <CoinList onClick={() => {
+                  setCoinSelected(ele.code);
+                }}
+                 key={coinMarketList.KRW[idx].market}>
                 <CoinName
                   koreanName={coinMarketList.KRW[idx].korean_name}
                   marketCode={coinMarketList.KRW[idx].market}
@@ -101,6 +106,7 @@ const CoinTicker = () => {
                 <CoinPrice price={ele.trade_price} change={ele.change} />
                 <CoinChange change={ele.change} rate={ele.signed_change_rate} price={ele.signed_change_price} />
                 <AccTradePrice price={ele.acc_trade_price_24h} />
+
               </CoinList>
             );
           })}
