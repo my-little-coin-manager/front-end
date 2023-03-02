@@ -1,7 +1,5 @@
 import { atom } from "recoil";
 
-const API_HOST = "https://api.upbit.com/v1/market/all";
-
 export const bookmarker = atom({
   key: "bookmarker",
   default: []
