@@ -1,17 +1,8 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const CoinPrice = ({ price, change }: any) => {
-  const tradePrice = useMemo(() => {
-    console.log("코인가격");
-    return price;
-  }, [price]);
-
-  const tickerChange = useMemo(() => {
-    return change;
-  }, [change]);
-
-  return <TickerPrice change={tickerChange}>{tradePrice.toLocaleString("ko-KR")}</TickerPrice>;
+  return <TickerPrice change={change}>{price.toLocaleString("ko-KR")}</TickerPrice>;
 };
 
 export default CoinPrice;

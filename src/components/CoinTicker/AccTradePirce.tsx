@@ -1,12 +1,8 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const AccTradePrice = ({ price }: any) => {
-  const priceTrade = useMemo(() => {
-    return Math.round(price / 1000000).toLocaleString("ko-KR");
-  }, [price]);
-
-  return <TradePrice>{priceTrade}백만</TradePrice>;
+  return <TradePrice>{Math.round(price / 1000000).toLocaleString("ko-KR")}백만</TradePrice>;
 };
 
 const TradePrice = styled.td`
