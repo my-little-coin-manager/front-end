@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { coinMarkets, coinTickers, coinSelect } from "../../recoil/atoms";
 import styled from "styled-components";
+import CoinChart from "components/Chart/CoinChart";
 
 const CoinDetail = () => {
   const markets = useRecoilValue<any>(coinMarkets);
@@ -66,7 +67,7 @@ const CoinDetail = () => {
           </div>
         </PriceHighLow>
       </DetailPrice>
-      <div id="chart"></div>
+      <CoinChart />
     </DetailContainer>
   );
 };
@@ -77,7 +78,7 @@ export default CoinDetail;
 const DetailContainer = styled.div`
   border: 1px solid blue;
   width: 70rem;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 134px);
   margin-top: 50px;
   padding: 1rem;
 `;
