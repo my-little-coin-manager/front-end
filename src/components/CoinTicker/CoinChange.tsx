@@ -1,19 +1,11 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const CoinChange = ({ change, rate, price }: any) => {
-  const changeRate = useMemo(() => {
-    return (rate * 100).toFixed(2);
-  }, [rate]);
-
-  const changePrice = useMemo(() => {
-    return price.toLocaleString("ko-KR");
-  }, [price]);
-
   return (
     <ChangedCoin change={change}>
-      <p>{changeRate}%</p>
-      <p>{changePrice}</p>
+      <p>{(rate * 100).toFixed(2)}%</p>
+      <p>{price.toLocaleString("ko-KR")}</p>
     </ChangedCoin>
   );
 };

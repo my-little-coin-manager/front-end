@@ -2,23 +2,16 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 
 const CoinName = ({ koreanName, marketCode }: any) => {
-  const name = useMemo(() => {
-    console.log("이름 변경");
-    return koreanName;
-  }, [koreanName]);
-
-  const market = useMemo(() => {
-    return marketCode.split("-");
-  }, [marketCode]);
+  const splitMarketCode = marketCode.split("-");
 
   return (
     <Coin>
       <span>
-        <img src={`https://static.upbit.com/logos/${market[1]}.png`} alt="" />
+        <img src={`https://static.upbit.com/logos/${splitMarketCode[1]}.png`} alt="" />
         <span>
-          <p>{name}</p>
+          <p>{koreanName}</p>
           <p>
-            {market[1]}/{market[0]}
+            {splitMarketCode[1]}/{splitMarketCode[0]}
           </p>
         </span>
       </span>
