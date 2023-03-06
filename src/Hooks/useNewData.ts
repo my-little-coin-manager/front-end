@@ -8,8 +8,6 @@ const useNewData = () => {
   const data = [{ ticket: "test" }, { type: "ticker", codes: [selected], isOnlyRealtime: true }];
   const ws = useRef<any>();
 
-  // console.log(selected);
-
   useEffect(() => {
     ws.current = new WebSocket("wss://api.upbit.com/websocket/v1");
     ws.current.onopen = () => {
@@ -36,7 +34,8 @@ const useNewData = () => {
     return () => {
       ws.current.close();
     };
-  }, []);
+  }, [selected]);
+
   return liveCandle;
 };
 
