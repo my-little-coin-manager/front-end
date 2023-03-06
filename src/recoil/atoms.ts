@@ -25,3 +25,15 @@ export const coinSelect = atom({
   key: "coinSelect",
   default: "KRW-BTC"
 });
+
+//코인 차트데이터
+export const coinCandle = atom({
+  key: "coinCandle",
+  default: {}
+});
+
+//차트 실시간데이터
+export const liveCandleData = atom({
+  key: "liveCandleData",
+  default: {}
+});
