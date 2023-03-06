@@ -1,11 +1,9 @@
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { coinMarkets, coinTickers, coinCandle, coinSelect } from "recoil/atoms";
+import { coinCandle, coinSelect } from "recoil/atoms";
 import React, { useEffect, useState } from "react";
 
 const useGetInitialDataList = () => {
-  const market = useRecoilValue(coinMarkets);
-  const tickers = useRecoilValue(coinTickers);
   const selected = useRecoilValue(coinSelect);
 
   const [coinCandles, setCoinCandles] = useRecoilState<any>(coinCandle);
@@ -17,8 +15,6 @@ const useGetInitialDataList = () => {
       count: 200
     }
   };
-
-  // console.log(config);
 
   const getCandles = async () => {
     try {
@@ -32,8 +28,7 @@ const useGetInitialDataList = () => {
           high: high_price,
           close: trade_price,
           volume: candle_acc_trade_volume,
-          timestamp: timestamp,
-          turnover: ((opening_price + low_price + high_price + trade_price) / 4) * candle_acc_trade_volume
+          timestamp: Math.floor(timestamp / 24 / 60 / 60 / 1000) * 24 * 60 * 60 * 1000
         };
       });
 
@@ -47,7 +42,6 @@ const useGetInitialDataList = () => {
     getCandles();
   }, [selected]);
 
-  // console.log(coinCandles);
   return { coinCandles };
 };
 
