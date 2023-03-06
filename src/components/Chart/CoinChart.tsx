@@ -1,9 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { init, dispose } from "klinecharts";
-import useGetInitialDataList from "./useGetInitialDataList";
+import useGetInitialDataList from "../../Hooks/useGetInitialDataList";
+import { liveCandleData } from "recoil/atoms";
+import useNewData from "../../Hooks/useNewData";
 
 const CoinChart = () => {
+  const [initialized, setInitialized] = useState(false);
   const { coinCandles } = useGetInitialDataList();
+  const newData = useNewData();
+
+  // console.log(newData);
 
   // console.log(coinCandles);
 
@@ -13,6 +19,7 @@ const CoinChart = () => {
     chart = init("coinChart");
     const fetchData = async () => {
       chart.applyNewData(coinCandles);
+      setInitialized(true);
     };
     fetchData();
     return () => {
@@ -20,6 +27,13 @@ const CoinChart = () => {
     };
   }, [coinCandles]);
 
-  return <div id="coinChart" className="coinChart" style={{ width: "1100px", height: "600px" }}></div>;
+  useEffect(() => {
+    chart = init("coinChart");
+    if (initialized) {
+      chart.updateData(newData);
+    }
+  }, [newData]);
+
+  return <div id="coinChart" className="coinChart" style={{ width: "1100px", height: "550px" }}></div>;
 };
 export default CoinChart;

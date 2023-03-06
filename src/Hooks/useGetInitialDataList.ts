@@ -1,17 +1,18 @@
 import axios from "axios";
-import { useRecoilValue } from "recoil";
-import { coinMarkets, coinTickers } from "recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { coinMarkets, coinTickers, coinCandle, coinSelect } from "recoil/atoms";
 import React, { useEffect, useState } from "react";
 
 const useGetInitialDataList = () => {
   const market = useRecoilValue(coinMarkets);
   const tickers = useRecoilValue(coinTickers);
+  const selected = useRecoilValue(coinSelect);
 
-  const [coinCandles, setCoinCandles] = useState<any>([]);
+  const [coinCandles, setCoinCandles] = useRecoilState<any>(coinCandle);
 
   const config = {
     params: {
-      market: "KRW-BTC",
+      market: selected,
       to: new Date().toISOString(),
       count: 200
     }
@@ -44,7 +45,7 @@ const useGetInitialDataList = () => {
 
   useEffect(() => {
     getCandles();
-  }, []);
+  }, [selected]);
 
   // console.log(coinCandles);
   return { coinCandles };
