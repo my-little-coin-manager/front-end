@@ -16,8 +16,8 @@ function App() {
 }
 
 const Container = styled.div`
+  background-color: #e9ecf1;
   height: 100vh;
-  border: 1px solid red;
   padding: 0 10%;
   display: flex;
 `;
