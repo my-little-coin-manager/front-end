@@ -36,11 +36,15 @@ const CoinTicker = () => {
 };
 
 const CoinTickerContainer = styled.aside`
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
   width: 30%;
   height: calc(100vh - 100px);
+  overflow: hidden;
   overflow-y: scroll;
   margin-top: 50px;
-  border: 1px solid black;
+
   & ul {
     margin: 0;
     padding: 0;
@@ -54,10 +58,27 @@ const CoinTickerContainer = styled.aside`
   }
 
   & thead {
+    position: sticky;
+    top: 0;
     height: 40px;
     color: #666;
     font-size: 12px;
     background-color: #f9fafc;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 90%;
+    border-radius: 0.4rem;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.4rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 10px;
   }
 `;
 

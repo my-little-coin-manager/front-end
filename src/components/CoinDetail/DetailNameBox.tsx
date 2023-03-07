@@ -17,13 +17,14 @@ const DetailNameBox = ({ select, focus }: any) => {
 const NameBox = styled.div`
   display: flex;
   text-align: center;
-  height: 3rem;
-  padding-bottom: 1rem;
+  height: 4.9rem;
+  margin: 0 auto;
+  /* padding-bottom: 1rem; */
   border-bottom: 1px solid #d9d9d9;
   & img {
     width: 3rem;
     height: 3rem;
-    margin-right: 0.8rem;
+    margin: 0.4rem 1rem 0 0;
   }
   & div {
     display: inline-flex;
@@ -31,7 +32,7 @@ const NameBox = styled.div`
 
   & p {
     font-size: 2.2rem;
-    margin: 0 1rem 0 0;
+    margin: 0.4rem 1rem 0 0;
     font-weight: bold;
   }
 `;
