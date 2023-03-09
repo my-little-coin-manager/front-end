@@ -2,20 +2,16 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "Hooks/useGetCoins";
-
-// type TCoin = {
-//   code: string;
-// };
-
-// type TCoinList = {
-//   [key: string]: TCoin;
-// };
+import { ticker } from "types/types";
 
 const CoinTicker = () => {
   const { coinMarketList, coinTicker } = useGetCoins("KRW");
 
   return (
     <CoinTickerContainer>
+      {/* <input>
+        <button>검색</button>
+      </input> */}
       <table align="center">
         <thead>
           <tr>
@@ -26,7 +22,7 @@ const CoinTicker = () => {
           </tr>
         </thead>
         <tbody>
-          {Object.values(coinTicker).map((ele: any, idx: number) => {
+          {Object.values<ticker>(coinTicker).map((ele, idx: number) => {
             return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList.KRW[idx]} />;
           })}
         </tbody>

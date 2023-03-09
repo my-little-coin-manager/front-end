@@ -17,6 +17,7 @@ const useNewData = () => {
       const text = await new Response(e.data).text();
       const message = JSON.parse(text);
       const { opening_price, low_price, high_price, trade_price, timestamp, trade_volume } = message;
+
       setLiveCandle({
         open: opening_price,
         low: low_price,

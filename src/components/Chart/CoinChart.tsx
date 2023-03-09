@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
 import { init, dispose, CandleType, LineType } from "klinecharts";
 
 import useGetInitialDataList from "../../Hooks/useGetInitialDataList";

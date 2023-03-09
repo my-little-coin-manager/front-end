@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { ticker } from "types/types";
 
-const DetailPrice = ({ select, ticker }: any) => {
+interface PriceProps {
+  select: string;
+  ticker: ticker;
+}
+
+const DetailPrice = ({ select, ticker }: PriceProps) => {
   return (
     <Price>
       <State change={ticker?.change}>

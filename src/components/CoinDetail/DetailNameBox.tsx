@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { market } from "types/types";
 
-const DetailNameBox = ({ select, focus }: any) => {
+interface NameBoxProps {
+  select: string;
+  focus?: market;
+}
+
+const DetailNameBox = ({ select, focus }: NameBoxProps) => {
   return (
     <NameBox>
       <img src={`https://static.upbit.com/logos/${select.split("-")[1]}.png`} alt="" />

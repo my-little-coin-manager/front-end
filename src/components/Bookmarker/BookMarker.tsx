@@ -2,11 +2,12 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { coinMarkets, coinTickers } from "../../recoil/atoms";
 import styled from "styled-components";
+import { ticker } from "types/types";
 
 const BookMarker = () => {
   // const [myBookMarker, setMyBookMarker] = useRecoilState(bookmarker);
-  const coinMarketList = useRecoilValue<any>(coinMarkets);
-  const coinTicker = useRecoilValue<any>(coinTickers);
+  const coinMarketList = useRecoilValue(coinMarkets);
+  const coinTicker = useRecoilValue(coinTickers);
 
   return (
     <>
@@ -31,7 +32,8 @@ const BookMarker = () => {
             <span>거래대금</span>
           </CoinValue>
         </ListhHead>
-        {Object.values(coinTicker).map((ele: any, idx: number) => {
+        {Object.values(coinTicker).map((ele: ticker, idx: number) => {
+          console.log(ele);
           return (
             <div key={ele.code}>
               <p>{coinMarketList.KRW[idx].korean_name}</p>

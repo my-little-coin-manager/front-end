@@ -1,8 +1,6 @@
 import React from "react";
 import CoinTicker from "./components/CoinTicker/CoinTicker";
 import CoinDetail from "./components/CoinDetail/CoinDetail";
-// import BookMarker from "./components/Bookmarker/BookMarker";
-import CoinChart from "components/Chart/CoinChart";
 import styled from "styled-components";
 
 function App() {
