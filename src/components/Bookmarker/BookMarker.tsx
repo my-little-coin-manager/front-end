@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { coinMarkets, coinTickers } from "../../recoil/atoms";
 import styled from "styled-components";
-import { ticker } from "types/types";
+import { ticker } from "Types/types";
 
 const BookMarker = () => {
   // const [myBookMarker, setMyBookMarker] = useRecoilState(bookmarker);

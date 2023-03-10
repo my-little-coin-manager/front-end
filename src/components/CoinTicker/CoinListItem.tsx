@@ -6,7 +6,7 @@ import CoinPrice from "./CoinPrice";
 import CoinChange from "./CoinChange";
 import AccTradePrice from "./AccTradePirce";
 import CoinName from "./CoinName";
-import { market, ticker } from "types/types";
+import { market, ticker } from "Types/types";
 
 interface ListItemProps {
   item: ticker;

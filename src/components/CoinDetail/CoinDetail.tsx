@@ -5,7 +5,7 @@ import DetailPrice from "./DetailPrice";
 import { coinMarkets, coinTickers, coinSelect } from "../../recoil/atoms";
 import styled from "styled-components";
 import CoinChart from "components/Chart/CoinChart";
-import { market } from "types/types";
+import { market } from "Types/types";
 
 const CoinDetail = () => {
   const markets = useRecoilValue(coinMarkets);

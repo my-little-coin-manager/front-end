@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ticker } from "types/types";
+import { ticker } from "Types/types";
 
 interface PriceProps {
   select: string;
