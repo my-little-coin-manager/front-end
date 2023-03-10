@@ -2,11 +2,12 @@ import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { coinCandle, coinSelect } from "recoil/atoms";
 import React, { useEffect, useState } from "react";
+import { IInitialData } from "types/types";
 
 const useGetInitialDataList = () => {
   const selected = useRecoilValue(coinSelect);
 
-  const [coinCandles, setCoinCandles] = useRecoilState<any>(coinCandle);
+  const [coinCandles, setCoinCandles] = useRecoilState(coinCandle);
 
   const config = {
     params: {
@@ -20,7 +21,8 @@ const useGetInitialDataList = () => {
     try {
       const response = await axios.get(`https://api.upbit.com/v1/candles/days`, config);
       const data = response.data;
-      const item = data.reverse().map((item: any) => {
+      console.log(data);
+      const item = data.reverse().map((item: IInitialData) => {
         const { opening_price, low_price, high_price, trade_price, timestamp, candle_acc_trade_volume } = item;
         return {
           open: opening_price,

@@ -6,9 +6,15 @@ import CoinPrice from "./CoinPrice";
 import CoinChange from "./CoinChange";
 import AccTradePrice from "./AccTradePirce";
 import CoinName from "./CoinName";
+import { market, ticker } from "types/types";
 
-const CoinListItem = ({ item, coinMarkets }: any) => {
-  const setCoinSelected = useSetRecoilState<any>(coinSelect);
+interface ListItemProps {
+  item: ticker;
+  coinMarkets: market;
+}
+
+const CoinListItem = ({ item, coinMarkets }: ListItemProps) => {
+  const setCoinSelected = useSetRecoilState(coinSelect);
 
   return (
     <CoinList

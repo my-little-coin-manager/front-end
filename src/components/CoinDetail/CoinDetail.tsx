@@ -1,18 +1,18 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
 import DetailNameBox from "./DetailNameBox";
 import DetailPrice from "./DetailPrice";
 import { coinMarkets, coinTickers, coinSelect } from "../../recoil/atoms";
 import styled from "styled-components";
 import CoinChart from "components/Chart/CoinChart";
+import { market } from "types/types";
 
 const CoinDetail = () => {
-  const markets = useRecoilValue<any>(coinMarkets);
-  const tickers = useRecoilValue<any>(coinTickers);
-  const selected = useRecoilValue<any>(coinSelect);
+  const markets = useRecoilValue(coinMarkets);
+  const tickers = useRecoilValue(coinTickers);
+  const selected = useRecoilValue<string>(coinSelect);
 
-  const selectedMk = markets?.KRW.find((data: any) => data.market === selected);
-
+  const selectedMk = markets?.KRW.find((data: market) => data.market === selected);
   return (
     <DetailContainer>
       <DetailNameBox select={selected} focus={selectedMk} />

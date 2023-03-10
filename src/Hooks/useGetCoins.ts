@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { StoreID, useRecoilState } from "recoil";
 import { coinMarkets, coinTickers } from "recoil/atoms";
+import { market, ticker } from "types/types";
 
 const useGetCoins = (type: string) => {
   const [coinMarketList, setCoinMarketList] = useRecoilState<any>(coinMarkets);
@@ -13,17 +14,17 @@ const useGetCoins = (type: string) => {
   const getMarkets = async () => {
     try {
       const config = { params: { isDeatils: true } };
-      const response: any = await axios.get(marketUrl, config);
+      const response = await axios.get(marketUrl, config);
       const coinMarkets = response.data;
 
       const KRW_markets = coinMarkets
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
-        .map((data: any) => data);
+        .map((data: string) => data);
       const BTC_markets = coinMarkets
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
-        .map((data: any) => data);
+        .map((data: string) => data);
 
-      setCoinMarketList((prevState: any) => {
+      setCoinMarketList((prevState: market) => {
         return { ...prevState, KRW: KRW_markets, BTC: BTC_markets };
       });
 
@@ -36,9 +37,9 @@ const useGetCoins = (type: string) => {
     }
   };
 
-  const getCoinTikcer = (markets: any) => {
+  const getCoinTikcer = (markets: market[]) => {
     ws.current = new WebSocket(webSocketUrl);
-    const marketName = markets.map((data: any) => data.market);
+    const marketName = markets.map((data: market) => data.market);
     const data = [{ ticket: "test" }, { type: "ticker", codes: marketName }];
 
     ws.current.onopen = () => {
@@ -50,12 +51,12 @@ const useGetCoins = (type: string) => {
       const text: any = await new Response(data).text();
       const parseText = JSON.parse(text);
 
-      setCoinTicker((prev: any) => {
+      setCoinTicker((prev: ticker) => {
         return { ...prev, [parseText.code]: parseText };
       });
     };
 
-    ws.current.onerror = (error: any) => {
+    ws.current.onerror = (error: string) => {
       console.log(error);
     };
   };

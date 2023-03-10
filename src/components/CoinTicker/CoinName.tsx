@@ -1,7 +1,12 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 
-const CoinName = ({ koreanName, marketCode }: any) => {
+interface NameProps {
+  koreanName: string;
+  marketCode: string;
+}
+
+const CoinName = ({ koreanName, marketCode }: NameProps) => {
   const splitMarketCode = marketCode.split("-");
 
   return (

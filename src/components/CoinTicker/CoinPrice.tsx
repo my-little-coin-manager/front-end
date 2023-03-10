@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const CoinPrice = ({ price, change }: any) => {
+interface PriceProps {
+  price: number;
+  change: string;
+}
+
+const CoinPrice = ({ price, change }: PriceProps) => {
   return <TickerPrice change={change}>{price.toLocaleString("ko-KR")}</TickerPrice>;
 };
 

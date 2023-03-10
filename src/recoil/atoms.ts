@@ -1,18 +1,14 @@
 import { atom } from "recoil";
-
-export const bookmarker = atom({
-  key: "bookmarker",
-  default: []
-});
+import { livecandle, marketName, tickerInfo } from "types/types";
 
 //실시간 코인 시세
-export const coinTickers = atom({
+export const coinTickers = atom<tickerInfo>({
   key: "coinTickers",
   default: {}
 });
 
 //코인 마켓 가져오기
-export const coinMarkets = atom({
+export const coinMarkets = atom<marketName>({
   key: "coinMarkets",
   default: {
     KRW: [],
@@ -21,7 +17,7 @@ export const coinMarkets = atom({
 });
 
 //선택된 코인
-export const coinSelect = atom({
+export const coinSelect = atom<string>({
   key: "coinSelect",
   default: "KRW-BTC"
 });

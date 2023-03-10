@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const CoinChange = ({ change, rate, price }: any) => {
+interface ChangeProps {
+  change: string;
+  rate: number;
+  price: number;
+}
+
+const CoinChange = ({ change, rate, price }: ChangeProps) => {
   return (
     <ChangedCoin change={change}>
       <p>{(rate * 100).toFixed(2)}%</p>
