@@ -35,7 +35,7 @@ export const liveCandleData = atom({
 });
 
 //북마크 정보
-export const userBookmark = atom({
+export const userBookmark = atom<string[] | undefined>({
   key: "userBookmark",
-  default: {}
+  default: []
 });

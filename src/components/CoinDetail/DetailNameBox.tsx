@@ -1,7 +1,7 @@
+import BookMarker from "components/Bookmarker/BookMarker";
 import React from "react";
 import styled from "styled-components";
 import { market } from "Types/types";
-import filledStar from "../../asset/png/filled_star.png";
 
 interface NameBoxProps {
   select: string;
@@ -16,9 +16,7 @@ const DetailNameBox = ({ select, focus }: NameBoxProps) => {
         <p>{focus?.korean_name}</p>
         <h4>{focus?.market}</h4>
       </div>
-      <BookmarkStar>
-        <img src={filledStar}></img>
-      </BookmarkStar>
+      <BookMarker focus={focus} />
     </NameBox>
   );
 };
