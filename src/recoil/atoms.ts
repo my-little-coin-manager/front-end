@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { livecandle, marketName, tickerInfo } from "types/types";
+import { marketName, tickerInfo } from "Types/types";
 
 //실시간 코인 시세
 export const coinTickers = atom<tickerInfo>({
@@ -29,4 +29,10 @@ export const coinCandle = atom({
 export const liveCandleData = atom({
   key: "liveCandleData",
   default: {}
+});
+
+//북마크 정보
+export const userBookmark = atom<string[] | undefined>({
+  key: "userBookmark",
+  default: []
 });

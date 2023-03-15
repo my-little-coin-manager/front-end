@@ -71,4 +71,3 @@ export type livecandle = {
   turnover: number;
   volume: number;
 };
-// export type liveCandleData = { [live: number]: livecandle };

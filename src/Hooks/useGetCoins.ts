@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { coinMarkets, coinTickers } from "recoil/atoms";
-import { market, ticker } from "types/types";
+import { market, ticker } from "Types/types";
 
 const useGetCoins = () => {
   const [coinMarketList, setCoinMarketList] = useRecoilState<any>(coinMarkets);
