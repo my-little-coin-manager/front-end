@@ -10,33 +10,43 @@ const Header = () => {
     setLoginModal(!loginModal);
   };
 
-  console.log(loginModal);
-
   return (
     <HeaderContainer>
-      <h1 style={{ width: "200px" }}>
+      <h1>
         <Logo />
       </h1>
       <nav>
-        <button onClick={onLoginModal}>Sign In</button>
-        {loginModal ? <Login /> : null}
-        <button>Sign Up</button>
+        <p onClick={onLoginModal}>SIGN IN</p>
+        <p>SIGN UP</p>
       </nav>
+      {loginModal ? <Login /> : null}
     </HeaderContainer>
   );
 };
 
 const HeaderContainer = styled.div`
-  width: 100%;
   display: flex;
   background-color: white;
   align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 0 4%;
 
   & h1 {
     margin: 0;
+    width: 200px;
+    display: flex;
   }
 
   & nav {
+    & p {
+      margin-left: 20px;
+      color: #333;
+      &:hover {
+        cursor: pointer;
+        color: #3d6bfb;
+      }
+    }
     display: flex;
   }
 `;
