@@ -5,14 +5,14 @@ import DetailPrice from "./DetailPrice";
 import { coinMarkets, coinTickers, coinSelect } from "../../recoil/atoms";
 import styled from "styled-components";
 import CoinChart from "components/Chart/CoinChart";
-import { market } from "Types/types";
+import { market } from "types/types";
 
 const CoinDetail = () => {
   const markets = useRecoilValue(coinMarkets);
   const tickers = useRecoilValue(coinTickers);
   const selected = useRecoilValue<string>(coinSelect);
-
   const selectedMk = markets?.find((data: market) => data.market === selected);
+
   return (
     <DetailContainer>
       <DetailNameBox select={selected} focus={selectedMk} />

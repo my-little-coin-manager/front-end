@@ -11,10 +11,12 @@ const Login = () => {
   const [userInfo, setUserInfo] = useState<any>({ id: "", pw: "" });
 
   const getUser = async (userInfo: any) => {
-    const response = await axios.get(process.env.REACT_APP_API_URL + "/user", {
-      params: userInfo
-    });
-    localStorage.setItem("token", response.data.token);
+    try {
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
+      localStorage.setItem("token", response.data.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onLogin = (e: any) => {

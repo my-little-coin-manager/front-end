@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { coinCandle, coinSelect } from "recoil/atoms";
 import React, { useEffect, useState } from "react";
-import { IInitialData } from "Types/types";
+import { IInitialData } from "types/types";
 
 const useGetInitialDataList = () => {
   const selected = useRecoilValue(coinSelect);
