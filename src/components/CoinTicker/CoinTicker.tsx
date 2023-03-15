@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "Hooks/useGetCoins";
-import { ticker } from "types/types";
+import { ticker } from "Types/types";
 
 const CoinTicker = () => {
   const { coinMarketList, coinTicker } = useGetCoins("KRW");
