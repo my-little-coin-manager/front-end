@@ -30,9 +30,11 @@ const BookMarker = ({ focus }: BookmarkerProps) => {
   };
 
   return (
+
     <BookmarkStar onClick={changeStatus}>
       <img src={status ? filledStar : emptyStar}></img>
     </BookmarkStar>
+
   );
 };
 export default BookMarker;

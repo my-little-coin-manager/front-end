@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
-import { StoreID, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { coinMarkets, coinTickers } from "recoil/atoms";
 import { market, ticker } from "Types/types";
 
-const useGetCoins = (type: string) => {
+const useGetCoins = () => {
   const [coinMarketList, setCoinMarketList] = useRecoilState<any>(coinMarkets);
   const [coinTicker, setCoinTicker] = useRecoilState<any>(coinTickers);
+
   const marketUrl = "https://api.upbit.com/v1/market/all";
   const webSocketUrl = "wss://api.upbit.com/websocket/v1";
+
   const ws = useRef<any>();
 
   const getMarkets = async () => {
@@ -20,17 +22,9 @@ const useGetCoins = (type: string) => {
       const KRW_markets = coinMarkets
         .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
         .map((data: string) => data);
-      const BTC_markets = coinMarkets
-        .filter((data: { [key: string]: string }) => data.market.includes("KRW-"))
-        .map((data: string) => data);
 
-      setCoinMarketList((prevState: market) => {
-        return { ...prevState, KRW: KRW_markets, BTC: BTC_markets };
-      });
+      setCoinMarketList([...KRW_markets]);
 
-      if (type === "BTC") {
-        return BTC_markets;
-      }
       return KRW_markets;
     } catch (error) {
       console.log(error);

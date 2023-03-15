@@ -12,7 +12,7 @@ const CoinDetail = () => {
   const tickers = useRecoilValue(coinTickers);
   const selected = useRecoilValue<string>(coinSelect);
 
-  const selectedMk = markets?.KRW.find((data: market) => data.market === selected);
+  const selectedMk = markets?.find((data: market) => data.market === selected);
   return (
     <DetailContainer>
       <DetailNameBox select={selected} focus={selectedMk} />

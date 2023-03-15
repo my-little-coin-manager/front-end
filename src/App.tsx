@@ -1,15 +1,18 @@
 import React from "react";
 import CoinTicker from "./components/CoinTicker/CoinTicker";
 import CoinDetail from "./components/CoinDetail/CoinDetail";
+import Header from "components/Header/Header";
 import styled from "styled-components";
 
 function App() {
   return (
-    <Container>
-      <CoinDetail />
-      {/* <BookMarker /> */}
-      <CoinTicker />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <CoinDetail />
+        <CoinTicker />
+      </Container>
+    </>
   );
 }
 
