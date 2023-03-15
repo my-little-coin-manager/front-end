@@ -18,16 +18,15 @@ const BookMarker = ({ focus }: BookmarkerProps) => {
   // const coinMarketList = useRecoilValue(coinMarkets);
   // const coinTicker = useRecoilValue(coinTickers);
   const changeStatus = () => {
-    if (status === false) {
+    if (!status) {
       setStatus(true);
-
-      // } else {
-      //   setStatus(false);
+    } else {
+      setStatus(false);
       //   const remove = bookmarkInfo?.filter((value: any) => !value.includes(focus?.market));
       //   setBookmarkInfo(remove);
       // }
-      console.log(bookmarkInfo);
     }
+    console.log(bookmarkInfo);
   };
 
   return (

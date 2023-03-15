@@ -12,7 +12,6 @@ const CoinName = ({ koreanName, marketCode }: NameProps) => {
   return (
     <Coin>
       <span>
-        <div>1</div>
         <img src={`https://static.upbit.com/logos/${splitMarketCode[1]}.png`} alt="" />
         <span>
           <p>{koreanName}</p>
