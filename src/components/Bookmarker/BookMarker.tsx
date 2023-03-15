@@ -36,7 +36,7 @@ const BookMarker = () => {
           console.log(ele);
           return (
             <div key={ele.code}>
-              <p>{coinMarketList.KRW[idx].korean_name}</p>
+              <p>{coinMarketList[idx].korean_name}</p>
               <p>{ele.trade_price}</p>
             </div>
           );

@@ -10,10 +10,7 @@ export const coinTickers = atom<tickerInfo>({
 //코인 마켓 가져오기
 export const coinMarkets = atom<marketName>({
   key: "coinMarkets",
-  default: {
-    KRW: [],
-    BTC: []
-  }
+  default: []
 });
 
 //선택된 코인
