@@ -16,7 +16,7 @@ const DetailNameBox = ({ select, focus }: NameBoxProps) => {
         <p>{focus?.korean_name}</p>
         <h4>{focus?.market}</h4>
       </div>
-      <BookMarker focus={focus} />
+      <BookMarker select={select} focus={focus} />
     </NameBox>
   );
 };

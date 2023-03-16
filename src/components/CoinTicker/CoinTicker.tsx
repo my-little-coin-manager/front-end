@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 import { ticker } from "types/types";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { menuSelect, userBookmark } from "recoil/atoms";
+import useBookmarkData from "hooks/useBookmarkData";
 
 const CoinTicker = () => {
+  const users = useRecoilValue(userBookmark);
+  const [select, setSelect] = useRecoilState(menuSelect);
   const { coinMarketList, coinTicker } = useGetCoins();
+  const filterBookmark = Object.values(coinTicker).filter((x: any) => users.includes(x.code));
+  const test = coinMarketList.filter((x: any) => users.includes(x.market));
 
+  const selectMenu = (e: any) => {
+    e.target.id === "all" ? setSelect("all") : setSelect("bookmark");
+  };
+
+  // console.log(test);
   return (
     <CoinTickerContainer>
+      <SelectMenu>
+        <p onClick={selectMenu} id={"all"}>
+          전체코인
+        </p>
+        <p onClick={selectMenu} id={"bookmark"}>
+          북마크
+        </p>
+      </SelectMenu>
       <table align="center">
         <thead>
           <tr>
@@ -19,9 +39,15 @@ const CoinTicker = () => {
           </tr>
         </thead>
         <tbody>
-          {Object.values<ticker>(coinTicker).map((ele, idx: number) => {
-            return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
-          })}
+          {select === "all"
+            ? Object.values<ticker>(coinTicker).map((ele, idx: number) => {
+                return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
+              })
+            : select === "bookmark"
+            ? filterBookmark.map((ele: any, idx: number) => {
+                return <CoinListItem key={ele.code} item={ele} coinMarkets={test[idx]} />;
+              })
+            : null}
         </tbody>
       </table>
     </CoinTickerContainer>
@@ -72,6 +98,28 @@ const CoinTickerContainer = styled.aside`
     width: 0.5rem;
     height: 0.5rem;
     padding: 10px;
+  }
+`;
+// 북마크 포트폴리오 메뉴선택 블럭
+const SelectMenu = styled.div`
+  height: 2.2rem;
+  display: flex;
+  justify-content: center;
+
+  & p:first-child {
+    margin: auto 3.5rem;
+
+    &:hover {
+      scale: 105%;
+    }
+  }
+
+  & p:last-child {
+    margin: auto 3.5rem;
+
+    &:hover {
+      scale: 105%;
+    }
   }
 `;
 
