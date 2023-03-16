@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { coinMarkets, coinTickers, userBookmark } from "../../recoil/atoms";
 import styled from "styled-components";
-import { ticker } from "Types/types";
-import { market } from "Types/types";
+import { ticker } from "types/types";
+import { market } from "types/types";
 import filledStar from "../../asset/png/filled_star.png";
 import emptyStar from "../../asset/png/empty_star.png";
 
@@ -30,11 +30,9 @@ const BookMarker = ({ focus }: BookmarkerProps) => {
   };
 
   return (
-
     <BookmarkStar onClick={changeStatus}>
       <img src={status ? filledStar : emptyStar}></img>
     </BookmarkStar>
-
   );
 };
 export default BookMarker;

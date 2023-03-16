@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { marketName, tickerInfo } from "Types/types";
+import { marketName, tickerInfo } from "types/types";
 
 //실시간 코인 시세
 export const coinTickers = atom<tickerInfo>({
