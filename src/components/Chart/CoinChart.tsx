@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { init, dispose, CandleType, LineType } from "klinecharts";
 
-import useGetInitialDataList from "../../Hooks/useGetInitialDataList";
-import useNewData from "../../Hooks/useNewData";
+import useGetInitialDataList from "../../hooks/useGetInitialDataList";
+import useNewData from "../../hooks/useNewData";
 import styled from "styled-components";
 
 const types = [
