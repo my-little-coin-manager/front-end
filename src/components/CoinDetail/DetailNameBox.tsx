@@ -1,7 +1,7 @@
 import BookMarker from "components/Bookmarker/BookMarker";
 import React from "react";
 import styled from "styled-components";
-import { market } from "Types/types";
+import { market } from "types/types";
 
 interface NameBoxProps {
   select: string;

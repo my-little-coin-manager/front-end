@@ -4,7 +4,6 @@ import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 import { ticker } from "types/types";
 
-
 const CoinTicker = () => {
   const { coinMarketList, coinTicker } = useGetCoins();
 
