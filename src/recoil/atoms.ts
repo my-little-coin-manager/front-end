@@ -32,7 +32,13 @@ export const liveCandleData = atom({
 });
 
 //북마크 정보
-export const userBookmark = atom<string[] | undefined>({
+export const userBookmark = atom<string[]>({
   key: "userBookmark",
   default: []
+});
+
+//전체코인 or 북마크 선택
+export const menuSelect = atom<string>({
+  key: "menuSelect",
+  default: "all"
 });

@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userBookmark, coinSelect } from "../../recoil/atoms";
 import styled from "styled-components";
-import { ticker } from "types/types";
-import { market } from "types/types";
 import filledStar from "../../asset/png/filled_star.png";
 import emptyStar from "../../asset/png/empty_star.png";
 import axios from "axios";
+import { market } from "types/types";
 
-const BookMarker = () => {
-  const selected = useRecoilValue<string>(coinSelect);
+interface NameBoxProps {
+  select: string;
+  focus?: market;
+}
+
+const BookMarker = ({ select, focus }: NameBoxProps) => {
+  // const select = useRecoilValue<string>(coinSelect);
   const [status, setStatus] = useState(false);
   const [bookmarkInfo, setBookmarkInfo] = useRecoilState<any>(userBookmark);
 
@@ -20,34 +24,36 @@ const BookMarker = () => {
     setBookmarkInfo(getUserBookmark.data.result.bookmark);
   };
 
-  const changeStatus = () => {
+  const changeStatus = async () => {
     if (!status) {
       setStatus(true);
-      axios.put(
+      const response = await axios.put(
         process.env.REACT_APP_API_URL + "/bookmark",
-        { bookmark: selected },
+        { bookmark: select },
         {
           headers: { Authorization: `Bearer ${localStorage.token}` }
         }
       );
+      setBookmarkInfo(response.data.result);
     } else {
       setStatus(false);
-      axios.delete(process.env.REACT_APP_API_URL + `/bookmark/${selected}`, {
+      const response = await axios.delete(process.env.REACT_APP_API_URL + `/bookmark/${select}`, {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       });
+      setBookmarkInfo(response.data.result);
     }
   };
+  // console.log(bookmarkInfo);
 
   useEffect(() => {
     check().then(() => {
-      console.log(bookmarkInfo);
-      if (bookmarkInfo.includes(selected)) {
+      if (bookmarkInfo.includes(select)) {
         setStatus(true);
       } else {
         setStatus(false);
       }
     });
-  }, [selected]);
+  }, [bookmarkInfo]);
 
   return (
     <BookmarkStar onClick={changeStatus}>
@@ -55,6 +61,6 @@ const BookMarker = () => {
     </BookmarkStar>
   );
 };
-export default BookMarker;
+export default React.memo(BookMarker);
 
 const BookmarkStar = styled.div``;
