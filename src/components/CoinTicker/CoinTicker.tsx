@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 import { ticker } from "types/types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { menuSelect, userBookmark } from "recoil/atoms";
-import useBookmarkData from "hooks/useBookmarkData";
 
 const CoinTicker = () => {
   const users = useRecoilValue(userBookmark);
@@ -18,7 +17,6 @@ const CoinTicker = () => {
     e.target.id === "all" ? setSelect("all") : setSelect("bookmark");
   };
 
-  // console.log(test);
   return (
     <CoinTickerContainer>
       <SelectMenu>
@@ -39,15 +37,14 @@ const CoinTicker = () => {
           </tr>
         </thead>
         <tbody>
-          {select === "all"
-            ? Object.values<ticker>(coinTicker).map((ele, idx: number) => {
-                return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
-              })
-            : select === "bookmark"
-            ? filterBookmark.map((ele: any, idx: number) => {
-                return <CoinListItem key={ele.code} item={ele} coinMarkets={test[idx]} />;
-              })
-            : null}
+          {select === "all" &&
+            Object.values<ticker>(coinTicker).map((ele, idx: number) => {
+              return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
+            })}
+          {select === "bookmark" &&
+            filterBookmark.map((ele: any, idx: number) => {
+              return <CoinListItem key={ele.code} item={ele} coinMarkets={test[idx]} />;
+            })}
         </tbody>
       </table>
     </CoinTickerContainer>
