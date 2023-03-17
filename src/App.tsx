@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import CoinTicker from "./components/CoinTicker/CoinTicker";
 import CoinDetail from "./components/CoinDetail/CoinDetail";
+import Portfolio from "components/portfolio/Portfolio";
 import Header from "components/Header/Header";
 import styled from "styled-components";
 
 function App() {
+  const [componentsControl, setComponentsControl] = useState("detail");
   return (
     <>
-      <Header />
+      <Header setComponentsControl={setComponentsControl} />
       <Container>
-        <CoinDetail />
+        {componentsControl === "detail" && <CoinDetail />}
+        {componentsControl === "portfolio" && <Portfolio />}
         <CoinTicker />
       </Container>
     </>
