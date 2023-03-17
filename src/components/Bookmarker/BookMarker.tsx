@@ -53,7 +53,7 @@ const BookMarker = ({ select, focus }: NameBoxProps) => {
         setStatus(false);
       }
     });
-  }, [bookmarkInfo]);
+  }, []);
 
   return (
     <BookmarkStar onClick={changeStatus}>

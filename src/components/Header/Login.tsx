@@ -35,7 +35,6 @@ const Login = ({ onSignUpModal }: any) => {
       <button
         type="button"
         onClick={(e) => {
-          e.stopPropagation();
           onSignUpModal();
         }}
       >
