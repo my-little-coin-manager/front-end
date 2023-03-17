@@ -22,7 +22,16 @@ const CoinChart = () => {
 
   useEffect(() => {
     chart = init("coin-chart", {
-      styles: { grid: { horizontal: { style: LineType.Dashed } } }
+      styles: {
+        grid: { horizontal: { style: LineType.Dashed } },
+        candle: {
+          bar: {
+            upColor: "#d24f45",
+            downColor: "#1261c4",
+            noChangeColor: "#888888"
+          }
+        }
+      }
     });
 
     const fetchData = () => {

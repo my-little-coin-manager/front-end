@@ -5,7 +5,6 @@ import useGetCoins from "hooks/useGetCoins";
 import { ticker } from "types/types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { menuSelect, userBookmark } from "recoil/atoms";
-import useBookmarkData from "hooks/useBookmarkData";
 
 const CoinTicker = () => {
   const users = useRecoilValue(userBookmark);
@@ -21,7 +20,7 @@ const CoinTicker = () => {
   // console.log(test);
   return (
     <CoinTickerContainer>
-      <SelectMenu>
+      <SelectMenu color={select}>
         <p onClick={selectMenu} id={"all"}>
           전체코인
         </p>
@@ -102,23 +101,27 @@ const CoinTickerContainer = styled.aside`
 `;
 // 북마크 포트폴리오 메뉴선택 블럭
 const SelectMenu = styled.div`
-  height: 2.2rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
 
   & p:first-child {
     margin: auto 3.5rem;
+    color: ${(props) => (props.color === "all" ? "#2196F3" : "black")};
+    border-bottom: ${(props) => (props.color === "all" ? "3px solid #2196F3" : "3px solid rgba(0,0,0,0)")};
 
     &:hover {
-      scale: 105%;
+      color: #2196f3;
     }
   }
 
   & p:last-child {
     margin: auto 3.5rem;
+    color: ${(props) => (props.color === "bookmark" ? "#2196F3" : "black")};
+    border-bottom: ${(props) => (props.color === "bookmark" ? "3px solid #2196F3" : "3px solid rgba(0,0,0,0)")};
 
     &:hover {
-      scale: 105%;
+      color: #2196f3;
     }
   }
 `;
