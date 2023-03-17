@@ -9,7 +9,7 @@ interface ModalStyled {
   signUpModal: boolean;
 }
 
-const Header = () => {
+const Header = ({ setComponentsControl }: any) => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
@@ -29,8 +29,8 @@ const Header = () => {
         <Logo />
       </h1>
       <nav>
-        <p>PORTFOLIO</p>
-        <p>COIN DETAIL</p>
+        <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
+        <p onClick={() => setComponentsControl("detail")}>COIN DETAIL</p>
       </nav>
       <span>
         <p onClick={onLoginModal}>SIGN IN</p>
