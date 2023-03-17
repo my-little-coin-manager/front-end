@@ -109,6 +109,7 @@ const SelectMenu = styled.div`
     border-bottom: ${(props) => (props.color === "all" ? "3px solid #2196F3" : "3px solid rgba(0,0,0,0)")};
 
     &:hover {
+      cursor: pointer;
       color: #2196f3;
     }
   }
@@ -119,6 +120,7 @@ const SelectMenu = styled.div`
     border-bottom: ${(props) => (props.color === "bookmark" ? "3px solid #2196F3" : "3px solid rgba(0,0,0,0)")};
 
     &:hover {
+      cursor: pointer;
       color: #2196f3;
     }
   }

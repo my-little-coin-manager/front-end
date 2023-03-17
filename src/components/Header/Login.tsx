@@ -23,14 +23,29 @@ const Login = ({ onSignUpModal }: any) => {
       }}
       onSubmit={(e) => onSubmit(e, getUser)}
     >
-      <div>
-        <label htmlFor="">아이디</label>
-        <input type="text" name="id" value={userInfo.id} onChange={(e) => onChangehandler(e)} />
-      </div>
-      <div>
-        <label htmlFor="">비밀번호</label>
-        <input type="password" name="pw" value={userInfo.pw} onChange={(e) => onChangehandler(e)} />
-      </div>
+      <TopMsg>
+        <h2>
+          <p>✕</p>
+          로그인
+        </h2>
+      </TopMsg>
+      <InputContainer>
+        <div>
+          <label htmlFor=""></label>
+          <input type="text" name="id" value={userInfo.id} placeholder="아이디" onChange={(e) => onChangehandler(e)} />
+        </div>
+        <div>
+          <label htmlFor=""></label>
+          <input
+            type="password"
+            name="pw"
+            value={userInfo.pw}
+            placeholder="비밀번호"
+            onChange={(e) => onChangehandler(e)}
+          />
+        </div>
+      </InputContainer>
+
       <button>로그인</button>
       <button
         type="button"
@@ -40,6 +55,7 @@ const Login = ({ onSignUpModal }: any) => {
       >
         회원가입
       </button>
+      <LoginMsg>회원가입을 하고 MLCM의 서비스를 자유롭게 이용하세요!</LoginMsg>
     </LoginContainer>
   );
 };
@@ -57,40 +73,91 @@ const Login = ({ onSignUpModal }: any) => {
 
 const LoginContainer = styled.form`
   width: 300px;
-  height: 200px;
+  height: 28rem;
   position: absolute;
   z-index: 9999;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: 0 1.5rem;
   border-radius: 20px;
   top: calc(50% - 150px);
   left: calc(50% - 200px);
-  /* backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px); */
 
   & button {
-    height: 30px;
+    height: 3rem;
     background-color: #3d6bfb;
     border: none;
     border-radius: 5px;
     margin-bottom: 5px;
     color: #fff;
-    font-weight: 700;
-    font-size: 11px;
+    font-weight: 500;
+    font-size: 0.85rem;
   }
 
-  & div {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  & button:last-child {
+    height: 3rem;
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: gray;
+    font-weight: 500;
+    font-size: 0.85rem;
   }
 
-  & input {
-    width: 70%;
+  & div:first-child {
+    border-bottom: 1.5px solid #e5e7eb;
   }
+
+  & input:first-child {
+    width: 85%;
+    padding: 0.75rem 1rem;
+
+    :focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  & input:last-child {
+    width: 85%;
+    padding: 0.75rem 1rem;
+    border: none;
+
+    :focus {
+      outline: none;
+      border: none;
+    }
+  }
+`;
+
+const TopMsg = styled.div`
+  height: 4rem;
+  & h2 {
+    text-align: center;
+    width: 100%;
+    margin: -2rem 0 0 0;
+
+    & p {
+      text-align: right;
+      margin: 0;
+    }
+  }
+`;
+
+const InputContainer = styled.div`
+  border: 1.5px solid #e5e7eb;
+  margin-bottom: 3rem;
+`;
+
+const LoginMsg = styled.p`
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 11px;
+  color: gray;
+  font-weight: normal;
 `;
 
 export default Login;

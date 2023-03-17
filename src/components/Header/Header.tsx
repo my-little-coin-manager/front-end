@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as Logo } from "../../asset/svg/mlcm_logo.svg";
+import { ReactComponent as Logo } from "../../asset/svg/mlcm_logo_white.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
@@ -9,7 +9,7 @@ interface ModalStyled {
   signUpModal: boolean;
 }
 
-const Header = ({ setComponentsControl }: any) => {
+const Header = ({ componentsControl, setComponentsControl }: any) => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
@@ -28,9 +28,9 @@ const Header = ({ setComponentsControl }: any) => {
       <h1>
         <Logo />
       </h1>
-      <NavBar>
-        <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
+      <NavBar color={componentsControl}>
         <p onClick={() => setComponentsControl("detail")}>COIN DETAIL</p>
+        <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
       </NavBar>
       <span>
         <p onClick={onLoginModal}>SIGN IN</p>
@@ -54,11 +54,12 @@ const Header = ({ setComponentsControl }: any) => {
 
 const HeaderContainer = styled.div`
   display: flex;
-  background-color: white;
+  background-color: #1261c4;
+  height: 4rem;
   align-items: center;
   justify-content: space-between;
-  margin: 0.3rem 0;
   padding: 0 4%;
+  font-weight: 700;
 
   & h1 {
     margin: 0;
@@ -68,8 +69,8 @@ const HeaderContainer = styled.div`
 
   & span {
     & p {
-      margin-left: 20px;
-      color: #333;
+      margin-left: 2rem;
+      color: #fff;
       &:hover {
         cursor: pointer;
         color: #3d6bfb;
@@ -82,9 +83,20 @@ const HeaderContainer = styled.div`
 const NavBar = styled.nav`
   text-align: center;
   display: flex;
-  & p {
-    margin: 0 6rem;
-    color: #333;
+  & p:first-child {
+    margin: 0 4rem;
+    color: ${(props) => (props.color === "detail" ? "#fff" : "rgba(165,175,202,0.8)")};
+
+    &:hover {
+      cursor: pointer;
+      color: #3d6bfb;
+      scale: 100.1%;
+    }
+  }
+
+  & p:last-child {
+    margin: 0 4rem;
+    color: ${(props) => (props.color === "portfolio" ? "#fff" : "rgba(165,175,202,0.8)")};
 
     &:hover {
       cursor: pointer;
