@@ -28,10 +28,11 @@ const Header = () => {
       <h1>
         <Logo />
       </h1>
-      <nav>
+      {/* <NavBar color={color}> */}
+      <NavBar>
         <p>PORTFOLIO</p>
         <p>COIN DETAIL</p>
-      </nav>
+      </NavBar>
       <span>
         <p onClick={onLoginModal}>SIGN IN</p>
         <p onClick={onSignUpModal}>SIGN UP</p>
@@ -57,24 +58,12 @@ const HeaderContainer = styled.div`
   background-color: white;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0;
+  margin: 0.3rem 0;
   padding: 0 4%;
 
   & h1 {
     margin: 0;
     width: 200px;
-    display: flex;
-  }
-
-  & nav {
-    & p {
-      margin-left: 20px;
-      color: #333;
-      &:hover {
-        cursor: pointer;
-        color: #3d6bfb;
-      }
-    }
     display: flex;
   }
 
@@ -88,6 +77,21 @@ const HeaderContainer = styled.div`
       }
     }
     display: flex;
+  }
+`;
+
+const NavBar = styled.nav`
+  text-align: center;
+  display: flex;
+  & p {
+    margin: 0 6rem;
+    color: #333;
+
+    &:hover {
+      cursor: pointer;
+      color: #3d6bfb;
+      scale: 100.1%;
+    }
   }
 `;
 
