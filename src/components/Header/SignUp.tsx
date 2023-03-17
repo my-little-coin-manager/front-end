@@ -23,14 +23,35 @@ const SignUp = () => {
       }}
       onSubmit={(e) => onSubmit(e, postUser)}
     >
-      <div>
-        <label htmlFor="">아이디</label>
-        <input type="text" name="id" value={userInfo.id} onChange={(e) => onChangehandler(e)} />
-      </div>
-      <div>
-        <label htmlFor="">비밀번호</label>
-        <input type="password" name="pw" value={userInfo.pw} onChange={(e) => onChangehandler(e)} />
-      </div>
+      <TopMsg>
+        <h2>
+          <p>✕</p>
+          회원가입
+        </h2>
+      </TopMsg>
+      <InputContainer>
+        <div>
+          <label htmlFor=""></label>
+          <input
+            type="text"
+            name="id"
+            value={userInfo.id}
+            placeholder={"아이디"}
+            onChange={(e) => onChangehandler(e)}
+          />
+        </div>
+        <div>
+          <label htmlFor=""></label>
+          <input
+            type="password"
+            name="pw"
+            value={userInfo.pw}
+            placeholder={"비밀번호"}
+            onChange={(e) => onChangehandler(e)}
+          />
+        </div>
+      </InputContainer>
+
       <button>회원가입</button>
     </SignUpContainer>
   );
@@ -38,14 +59,13 @@ const SignUp = () => {
 
 const SignUpContainer = styled.form`
   width: 300px;
-  height: 200px;
+  height: 28rem;
   position: absolute;
-  z-index: 999;
-  background-color: blue;
+  z-index: 9999;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 20px;
+  padding: 0 1.5rem;
   border-radius: 20px;
   top: calc(50% - 150px);
   left: calc(50% - 200px);
@@ -54,11 +74,62 @@ const SignUpContainer = styled.form`
   & div {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
   }
 
-  & input {
-    width: 70%;
+  & button {
+    height: 3rem;
+    background-color: #3d6bfb;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+`;
+
+const InputContainer = styled.div`
+  border: 1.5px solid #e5e7eb;
+  margin-bottom: 6rem;
+  flex-direction: column;
+
+  & div:first-child {
+    border-bottom: 1.5px solid #e5e7eb;
+  }
+
+  & input:first-child {
+    width: 85%;
+    padding: 0.75rem 1rem;
+
+    :focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  & input:last-child {
+    width: 85%;
+    padding: 0.75rem 1rem;
+    border: none;
+
+    :focus {
+      outline: none;
+      border: none;
+    }
+  }
+`;
+
+const TopMsg = styled.div`
+  & h2 {
+    height: 6rem;
+    text-align: center;
+    width: 100%;
+    margin: 1rem 0 2rem 0;
+
+    & p {
+      text-align: right;
+      margin: 0;
+    }
   }
 `;
 

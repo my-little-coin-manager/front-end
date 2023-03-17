@@ -9,7 +9,7 @@ function App() {
   const [componentsControl, setComponentsControl] = useState("detail");
   return (
     <>
-      <Header setComponentsControl={setComponentsControl} />
+      <Header componentsControl={componentsControl} setComponentsControl={setComponentsControl} />
       <Container>
         {componentsControl === "detail" && <CoinDetail />}
         {componentsControl === "portfolio" && <Portfolio />}
