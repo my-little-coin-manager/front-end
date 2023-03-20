@@ -3,9 +3,10 @@ import React, { useState } from "react";
 type User = {
   id: string;
   pw: string;
+  nickname: string;
 };
 
-const initialState = { id: "", pw: "" };
+const initialState = { id: "", pw: "", nickname: "" };
 
 const useAuth = () => {
   const [userInfo, setUserInfo] = useState<User>(initialState);
@@ -20,7 +21,6 @@ const useAuth = () => {
   const onSubmit = (e: any, axiosFunc: any) => {
     e.preventDefault();
     axiosFunc(userInfo);
-    setUserInfo(initialState);
   };
 
   return { onChangehandler, onSubmit, userInfo };

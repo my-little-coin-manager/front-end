@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useAuth from "hooks/useAuth";
 import axios from "axios";
 import styled from "styled-components";
 
-const SignUp = () => {
+const SignUp = ({ onSignUpModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
+  const [checkPw, setCheckPw] = useState("");
+  const [inspecMsg, setInspecMsg] = useState("비밀번호 확인을 위해 다시 한 번 입력해주세요.");
 
   const postUser = async (userInfo: any) => {
     try {
@@ -16,6 +18,39 @@ const SignUp = () => {
     }
   };
 
+  const checkPassword = () => {
+    if (userInfo.pw !== checkPw) {
+      setInspecMsg("입력한 비밀번호가 서로 다릅니다.");
+    } else {
+      setInspecMsg("비밀번호가 일치합니다.");
+    }
+  };
+
+  const yayaya = () => {
+    if (
+      userInfo.id !== "" &&
+      userInfo.pw !== "" &&
+      userInfo.nickname !== "" &&
+      checkPw !== "" &&
+      inspecMsg === "비밀번호가 일치합니다."
+    )
+      return true;
+    return false;
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkPassword();
+    }, 500);
+    if (checkPw === "") {
+      clearTimeout(timer);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [checkPw]);
+
   return (
     <SignUpContainer
       onClick={(e) => {
@@ -25,7 +60,7 @@ const SignUp = () => {
     >
       <TopMsg>
         <h2>
-          <p>✕</p>
+          <p onClick={() => onSignUpModal(false)}>✕</p>
           회원가입
         </h2>
       </TopMsg>
@@ -43,6 +78,16 @@ const SignUp = () => {
         <div>
           <label htmlFor=""></label>
           <input
+            type="text"
+            name="nickname"
+            value={userInfo.nickname}
+            placeholder="닉네임"
+            onChange={(e) => onChangehandler(e)}
+          />
+        </div>
+        <div>
+          <label htmlFor=""></label>
+          <input
             type="password"
             name="pw"
             value={userInfo.pw}
@@ -50,16 +95,28 @@ const SignUp = () => {
             onChange={(e) => onChangehandler(e)}
           />
         </div>
+        <div>
+          <label htmlFor=""></label>
+          <input
+            type="password"
+            name="pw"
+            value={checkPw}
+            onChange={(e) => {
+              setCheckPw(e.target.value);
+            }}
+            placeholder={"비밀번호 확인"}
+          />
+        </div>
       </InputContainer>
-
-      <button>회원가입</button>
+      <Checkmsg color={inspecMsg}>{inspecMsg}</Checkmsg>
+      {yayaya() === true ? <AbledBtn>회원가입</AbledBtn> : <DisabledBtn disabled={true}>회원가입</DisabledBtn>}
     </SignUpContainer>
   );
 };
 
 const SignUpContainer = styled.form`
   width: 300px;
-  height: 28rem;
+  height: 30rem;
   position: absolute;
   z-index: 9999;
   background-color: #fff;
@@ -75,26 +132,21 @@ const SignUpContainer = styled.form`
     display: flex;
     justify-content: space-between;
   }
-
-  & button {
-    height: 3rem;
-    background-color: #3d6bfb;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    color: #fff;
-    font-weight: 500;
-    font-size: 0.85rem;
-  }
 `;
 
 const InputContainer = styled.div`
   border: 1.5px solid #e5e7eb;
-  margin-bottom: 6rem;
   flex-direction: column;
 
-  & div:first-child {
+  & div:nth-child(1) {
     border-bottom: 1.5px solid #e5e7eb;
+  }
+  & div:nth-child(2) {
+    border-bottom: 1.5px solid #e5e7eb;
+  }
+
+  & div:nth-child(4) {
+    border-top: 1.5px solid #e5e7eb;
   }
 
   & input:first-child {
@@ -119,6 +171,18 @@ const InputContainer = styled.div`
   }
 `;
 
+const Checkmsg = styled.p`
+  margin: 0.25rem 0 4rem 0;
+  font-size: 0.65rem;
+  font-weight: 100;
+  color: ${(props) =>
+    props.color === "입력한 비밀번호가 서로 다릅니다."
+      ? "red"
+      : props.color === "비밀번호가 일치합니다."
+      ? "green"
+      : "rgba(165,175,202,0.8)"};
+`;
+
 const TopMsg = styled.div`
   & h2 {
     height: 6rem;
@@ -127,10 +191,38 @@ const TopMsg = styled.div`
     margin: 1rem 0 2rem 0;
 
     & p {
+      color: "rgba(165,175,202,0.8)";
+      font-weight: lighter;
       text-align: right;
       margin: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
+`;
+
+const AbledBtn = styled.button`
+  height: 3rem;
+  background-color: #3d6bfb;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.85rem;
+`;
+
+const DisabledBtn = styled.button`
+  height: 3rem;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: black;
+  font-weight: 500;
+  font-size: 0.85rem;
 `;
 
 export default SignUp;

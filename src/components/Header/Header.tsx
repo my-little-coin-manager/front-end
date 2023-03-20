@@ -45,8 +45,8 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         loginModal={loginModal}
         signUpModal={signUpModal}
       >
-        {loginModal ? <Login onSignUpModal={onSignUpModal} /> : null}
-        {signUpModal ? <SignUp /> : null}
+        {loginModal ? <Login onSignUpModal={onSignUpModal} onLoginModal={onLoginModal} /> : null}
+        {signUpModal ? <SignUp onSignUpModal={onSignUpModal} /> : null}
       </ModalBackground>
     </HeaderContainer>
   );

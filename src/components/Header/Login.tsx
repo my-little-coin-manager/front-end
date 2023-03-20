@@ -3,7 +3,7 @@ import axios from "axios";
 import useAuth from "hooks/useAuth";
 import styled from "styled-components";
 
-const Login = ({ onSignUpModal }: any) => {
+const Login = ({ onSignUpModal, onLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
   const getUser = async (userInfo: any) => {
@@ -25,7 +25,7 @@ const Login = ({ onSignUpModal }: any) => {
     >
       <TopMsg>
         <h2>
-          <p>✕</p>
+          <p onClick={() => onLoginModal(false)}>✕</p>
           로그인
         </h2>
       </TopMsg>
@@ -141,8 +141,14 @@ const TopMsg = styled.div`
     margin: -2rem 0 0 0;
 
     & p {
+      color: "rgba(165,175,202,0.8)";
+      font-weight: lighter;
       text-align: right;
       margin: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;
