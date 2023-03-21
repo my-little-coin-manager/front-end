@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../asset/svg/mlcm_logo_white.svg";
 import Login from "./Login";
@@ -14,14 +14,22 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
   const [signUpModal, setSignUpModal] = useState(false);
 
   const onLoginModal = (e: any) => {
-    setLoginModal(!loginModal);
+    setLoginModal(true);
     setSignUpModal(false);
   };
 
   const onSignUpModal = (e: any) => {
-    setSignUpModal(!signUpModal);
+    setSignUpModal(true);
     setLoginModal(false);
   };
+
+  const logout = () => {
+    localStorage.clear();
+  };
+
+  // useEffect(() => {
+
+  // }, [localStorage]);
 
   return (
     <HeaderContainer>
@@ -32,10 +40,19 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         <p onClick={() => setComponentsControl("detail")}>COIN DETAIL</p>
         <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
       </NavBar>
-      <span>
-        <p onClick={onLoginModal}>SIGN IN</p>
-        <p onClick={onSignUpModal}>SIGN UP</p>
-      </span>
+
+      {localStorage.getItem("token") === null ? (
+        <span>
+          <p onClick={onLoginModal}>SIGN IN</p>
+          <p onClick={onSignUpModal}>SIGN UP</p>
+        </span>
+      ) : (
+        <span>
+          <span>{localStorage.getItem("nickname")} 님 환영합니다.</span>
+          <p onClick={logout}>로그아웃</p>
+        </span>
+      )}
+
       <ModalBackground
         onClick={(e) => {
           e.stopPropagation();
@@ -45,8 +62,8 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         loginModal={loginModal}
         signUpModal={signUpModal}
       >
-        {loginModal ? <Login onSignUpModal={onSignUpModal} /> : null}
-        {signUpModal ? <SignUp /> : null}
+        {loginModal ? <Login onSignUpModal={onSignUpModal} onLoginModal={onLoginModal} /> : null}
+        {signUpModal ? <SignUp onSignUpModal={onSignUpModal} /> : null}
       </ModalBackground>
     </HeaderContainer>
   );
@@ -68,7 +85,22 @@ const HeaderContainer = styled.div`
   }
 
   & span {
-    & p {
+    & span {
+      font-size: 0.9rem;
+      font-weight: lighter;
+      margin: 1rem 0 0 2rem;
+      color: #fff;
+    }
+    & p:nth-child(1) {
+      margin-left: 2rem;
+      color: #fff;
+      &:hover {
+        cursor: pointer;
+        color: #3d6bfb;
+      }
+    }
+
+    & p:nth-child(2) {
       margin-left: 2rem;
       color: #fff;
       &:hover {
