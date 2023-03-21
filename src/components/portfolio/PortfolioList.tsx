@@ -25,6 +25,7 @@ const PortfolioList = () => {
 
     acc[current.history.market] = acc[current.history.market] || {
       code: current.history.market,
+      koreanName: current.history.koreanName,
       totalPrice: 0,
       averagePrice: 0,
       qty: 0,
@@ -64,51 +65,104 @@ const PortfolioList = () => {
   }, []);
 
   return (
-    <ul>
+    <PortfolioListContainer>
       <History>
-        <p>종목</p>
-        <p>손익률</p>
-        <p>평가손익</p>
-        <p>매입금</p>
-        <p>현재가</p>
-        <p>평가금</p>
-        <p>평균단가</p>
-        <p>보유수량</p>
+        <ListHeader>종목</ListHeader>
+        <ListHeader>손익률</ListHeader>
+        <ListHeader>평가손익</ListHeader>
+        <ListHeader>매입금</ListHeader>
+        <ListHeader>현재가</ListHeader>
+        <ListHeader>평가금</ListHeader>
+        <ListHeader>평균단가</ListHeader>
+        <ListHeader>보유수량</ListHeader>
       </History>
       {Object.values(groupValues).map((ele: any) => {
+        const splitMarketCode = ele.code.split("-");
         return (
           <History key={ele.code}>
-            <p>{ele.code}</p>
-            <p>{Math.round(ele.손익률).toLocaleString("ko-KR")}%</p>
-            <p>{Math.round(ele.평가손익).toLocaleString("ko-KR")}</p>
-            <p>{Math.round(ele.totalPrice).toLocaleString("ko-KR")}</p>
-            {Math.round(ele.nowPrice) === 0 ? (
-              <p>{ele.nowPrice.toLocaleString("ko-KR")}</p>
+            <CoinStock>
+              <img src={`https://static.upbit.com/logos/${splitMarketCode[1]}.png`} alt="" />
+              {ele.koreanName}
+            </CoinStock>
+
+            <Profit profit={ele.평가손익}>{ele.손익률.toFixed(2)}%</Profit>
+
+            {Number.isInteger(ele.averagePrice) ? (
+              <>
+                <Profit profit={ele.평가손익}>{ele.평가손익.toLocaleString("ko-KR")}</Profit>
+                <CoinStock>{ele.totalPrice.toLocaleString("ko-KR")}</CoinStock>
+                <CoinStock>{ele.nowPrice.toLocaleString("ko-KR")}</CoinStock>
+                <CoinStock>{ele.평가금.toLocaleString("ko-KR")}</CoinStock>
+                <CoinStock>{ele.averagePrice.toLocaleString("ko-KR")}</CoinStock>
+              </>
             ) : (
-              <p>{Math.round(ele.nowPrice).toLocaleString("ko-KR")}</p>
-            )}
-            {Math.round(ele.평가금) === 0 ? (
-              <p>{ele.평가금.toLocaleString("ko-KR")}</p>
-            ) : (
-              <p>{Math.round(ele.평가금).toLocaleString("ko-KR")}</p>
+              <>
+                <Profit profit={ele.평가손익}>{ele.평가손익.toFixed(3)}</Profit>
+                <CoinStock>{ele.totalPrice.toFixed(3)}</CoinStock>
+                <CoinStock>{ele.nowPrice.toFixed(3)}</CoinStock>
+                <CoinStock>{ele.평가금.toFixed(3)}</CoinStock>
+                <CoinStock>{ele.averagePrice}</CoinStock>
+              </>
             )}
 
-            <p>{Math.round(ele.averagePrice).toLocaleString("ko-KR")}</p>
-            <p>{ele.qty}</p>
+            <CoinQty>{ele.qty}</CoinQty>
           </History>
         );
       })}
-    </ul>
+    </PortfolioListContainer>
   );
 };
 
 export default PortfolioList;
 
+const PortfolioListContainer = styled.ul`
+  padding: 0;
+`;
+
 const History = styled.li`
   text-decoration: none;
+  height: 4rem;
   display: flex;
-  & p {
-    text-align: center;
-    width: calc(100% / 8);
+  font-size: 15px;
+  :not(:first-child) {
+    border-bottom: solid 1px #d6d6d6;
   }
+`;
+
+const CoinStock = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% / 8);
+  color: #333;
+
+  :first-child {
+    justify-content: left;
+  }
+
+  & img {
+    width: 25px;
+    height: 25px;
+    margin: 0 0.5rem;
+  }
+`;
+
+const ListHeader = styled(CoinStock)`
+  height: 3rem;
+  background-color: #f9fafc;
+  color: #666;
+  font-weight: 700;
+
+  :first-child {
+    justify-content: center;
+  }
+`;
+
+const Profit = styled(CoinStock)<{ profit: number }>`
+  color: ${({ profit }) => (profit > 0 ? "#c84a31" : profit < 0 ? "#1261c4" : "#333")};
+  font-weight: 700;
+`;
+
+const CoinQty = styled(CoinStock)`
+  font-weight: 700;
 `;
