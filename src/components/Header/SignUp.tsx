@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import useAuth from "hooks/useAuth";
 import axios from "axios";
 import styled from "styled-components";
+import AbledBtn from "components/common/AbledBtn";
+import DisabledBtn from "components/common/DisabledBtn";
 
 const SignUp = ({ onSignUpModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
@@ -26,7 +28,7 @@ const SignUp = ({ onSignUpModal }: any) => {
     }
   };
 
-  const yayaya = () => {
+  const checkAll = () => {
     if (
       userInfo.id !== "" &&
       userInfo.pw !== "" &&
@@ -109,7 +111,7 @@ const SignUp = ({ onSignUpModal }: any) => {
         </div>
       </InputContainer>
       <Checkmsg color={inspecMsg}>{inspecMsg}</Checkmsg>
-      {yayaya() === true ? <AbledBtn>회원가입</AbledBtn> : <DisabledBtn disabled={true}>회원가입</DisabledBtn>}
+      {checkAll() === true ? <AbledBtn>회원가입</AbledBtn> : <DisabledBtn>회원가입</DisabledBtn>}
     </SignUpContainer>
   );
 };
@@ -201,28 +203,6 @@ const TopMsg = styled.div`
       }
     }
   }
-`;
-
-const AbledBtn = styled.button`
-  height: 3rem;
-  background-color: #3d6bfb;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 0.85rem;
-`;
-
-const DisabledBtn = styled.button`
-  height: 3rem;
-  background-color: #bbbbbb;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  color: black;
-  font-weight: 500;
-  font-size: 0.85rem;
 `;
 
 export default SignUp;

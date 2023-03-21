@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import useAuth from "hooks/useAuth";
 import styled from "styled-components";
+import AbledBtn from "components/common/AbledBtn";
+import DisabledBtn from "components/common/DisabledBtn";
 
 const Login = ({ onSignUpModal, onLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
@@ -10,6 +12,7 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("nickname", response.data.nickname);
     } catch (error: any) {
       const errMsg = await error.response.data.msg;
       alert(errMsg);
@@ -32,11 +35,19 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
       <InputContainer>
         <div>
           <label htmlFor=""></label>
-          <input type="text" name="id" value={userInfo.id} placeholder="아이디" onChange={(e) => onChangehandler(e)} />
+          <input
+            autoComplete="false"
+            type="text"
+            name="id"
+            value={userInfo.id}
+            placeholder="아이디"
+            onChange={(e) => onChangehandler(e)}
+          />
         </div>
         <div>
           <label htmlFor=""></label>
           <input
+            autoComplete="false"
             type="password"
             name="pw"
             value={userInfo.pw}
@@ -45,16 +56,20 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
           />
         </div>
       </InputContainer>
+      {userInfo.id !== "" && userInfo.pw !== "" ? (
+        <AbledBtn onClick={() => onLoginModal(false)}>로그인</AbledBtn>
+      ) : (
+        <DisabledBtn>로그인</DisabledBtn>
+      )}
 
-      <button>로그인</button>
-      <button
+      <AbledBtn
         type="button"
-        onClick={(e) => {
+        onClick={(e: any) => {
           onSignUpModal();
         }}
       >
         회원가입
-      </button>
+      </AbledBtn>
       <LoginMsg>회원가입을 하고 MLCM의 서비스를 자유롭게 이용하세요!</LoginMsg>
     </LoginContainer>
   );
@@ -84,28 +99,6 @@ const LoginContainer = styled.form`
   border-radius: 20px;
   top: calc(50% - 150px);
   left: calc(50% - 200px);
-
-  & button {
-    height: 3rem;
-    background-color: #3d6bfb;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    color: #fff;
-    font-weight: 500;
-    font-size: 0.85rem;
-  }
-
-  & button:last-child {
-    height: 3rem;
-    background-color: #fff;
-    border: 1px solid gray;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    color: gray;
-    font-weight: 500;
-    font-size: 0.85rem;
-  }
 
   & div:first-child {
     border-bottom: 1.5px solid #e5e7eb;
