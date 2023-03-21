@@ -21,14 +21,5 @@ const PortfoiloContainer = styled.div`
   width: 70rem;
   height: calc(100vh - 134px);
   margin: 50px 1rem 0 0;
-  padding: 1rem;
-`;
-
-const History = styled.li`
-  text-decoration: none;
-  display: flex;
-  & p {
-    text-align: center;
-    width: calc(100% / 8);
-  }
+  padding: 2rem 1rem;
 `;
