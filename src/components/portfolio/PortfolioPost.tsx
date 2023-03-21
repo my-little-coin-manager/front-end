@@ -8,13 +8,13 @@ const PortfolioPost = () => {
   const market = useRecoilValue(coinMarkets);
   const [history, setHistory] = useRecoilState(portfolio);
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState({ market: "", koreanName: "" });
   const [portforlio, setPortfolio] = useState({ transaction: "", price: 0, qty: 0 });
 
   const searchValue = useRef<any>("");
 
   const searchCoin = (e: any) => {
-    setSearch(e.target.value);
+    setSearch({ ...search, koreanName: e.target.value });
   };
 
   const portfolioInfo = (e: any) => {
@@ -24,12 +24,8 @@ const PortfolioPost = () => {
     });
   };
 
-  console.log(portforlio);
-  console.log(search);
-  console.log(history);
-
   const postPortfolio = async (portforlio: any) => {
-    const history = { ...portforlio, market: search };
+    const history = { ...portforlio, ...search };
     const response = await axios.post(
       process.env.REACT_APP_API_URL + "/history",
       { history: history },
@@ -48,7 +44,10 @@ const PortfolioPost = () => {
     postPortfolio(portforlio);
   };
 
-  const searchMarket = search.length > 0 && market.filter((ele) => ele.korean_name.includes(search));
+  const searchMarket =
+    search.koreanName.length > 0 && market.filter((ele) => ele.korean_name.includes(search.koreanName));
+
+  console.log(search);
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -79,7 +78,7 @@ const PortfolioPost = () => {
                 key={ele.market}
                 onClick={() => {
                   searchValue.current.value = ele.korean_name;
-                  setSearch(ele.market);
+                  setSearch({ market: ele.market, koreanName: ele.korean_name });
                 }}
               >
                 {ele.korean_name}

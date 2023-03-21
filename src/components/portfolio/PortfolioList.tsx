@@ -78,7 +78,7 @@ const PortfolioList = () => {
       {Object.values(groupValues).map((ele: any) => {
         return (
           <History key={ele.code}>
-            <p>{ele.code}</p>
+            <p>{ele.koreanName}</p>
             <p>{Math.round(ele.손익률).toLocaleString("ko-KR")}%</p>
             <p>{Math.round(ele.평가손익).toLocaleString("ko-KR")}</p>
             <p>{Math.round(ele.totalPrice).toLocaleString("ko-KR")}</p>
