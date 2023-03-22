@@ -1,4 +1,5 @@
-import React from "react";
+import useAuth from "hooks/useAuth";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const AbledBtn = (props: any) => {

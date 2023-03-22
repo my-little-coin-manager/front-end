@@ -9,6 +9,7 @@ const Login = ({ onSignUpModal, setLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
   const getUser = async (userInfo: any) => {
+    console.log("겟유저");
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
       localStorage.setItem("token", response.data.token);
@@ -50,6 +51,7 @@ const Login = ({ onSignUpModal, setLoginModal }: any) => {
           />
         </div>
       </InputContainer>
+
       {userInfo.id !== "" && userInfo.pw !== "" ? <AbledBtn>로그인</AbledBtn> : <DisabledBtn>로그인</DisabledBtn>}
       <AbledBtn
         type="button"
@@ -64,16 +66,7 @@ const Login = ({ onSignUpModal, setLoginModal }: any) => {
   );
 };
 
-// const ModalBackground = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   backdrop-filter: blur(5px);
-//   background: rgba(0, 0, 0, 0.8);
-//   z-index: 999;
-// `;
+export default Login;
 
 const LoginContainer = styled.form`
   width: 300px;
@@ -147,5 +140,3 @@ const LoginMsg = styled.p`
   color: gray;
   font-weight: normal;
 `;
-
-export default Login;
