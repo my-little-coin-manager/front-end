@@ -56,10 +56,8 @@ const CoinTickerContainer = styled.aside`
   background-color: #fff;
   box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
   width: 30%;
-  height: calc(100vh - 100px);
   overflow: hidden;
   overflow-y: scroll;
-  margin-top: 50px;
 
   & ul {
     margin: 0;

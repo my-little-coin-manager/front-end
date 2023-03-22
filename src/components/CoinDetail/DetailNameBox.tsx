@@ -6,9 +6,10 @@ import { market } from "types/types";
 interface NameBoxProps {
   select: string;
   focus?: market;
+  status: boolean;
 }
 
-const DetailNameBox = ({ select, focus }: NameBoxProps) => {
+const DetailNameBox = ({ select, focus, status }: NameBoxProps) => {
   return (
     <NameBox>
       <div>
@@ -16,7 +17,7 @@ const DetailNameBox = ({ select, focus }: NameBoxProps) => {
         <p>{focus?.korean_name}</p>
         <h4>{focus?.market}</h4>
       </div>
-      <BookMarker select={select} focus={focus} />
+      <BookMarker select={select} status={status} />
     </NameBox>
   );
 };

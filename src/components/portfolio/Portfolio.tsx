@@ -19,7 +19,6 @@ const PortfoiloContainer = styled.div`
   background-color: #fff;
   box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
   width: 70rem;
-  height: calc(100vh - 134px);
-  margin: 50px 1rem 0 0;
+  margin-right: 1rem;
   padding: 2rem 1rem;
 `;

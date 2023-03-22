@@ -1,8 +1,13 @@
-import React from "react";
+import useAuth from "hooks/useAuth";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const AbledBtn = ({ children }: any) => {
-  return <Btn>{children}</Btn>;
+const AbledBtn = (props: any) => {
+  return (
+    <Btn type="submit" onClick={props.onClick}>
+      {props.children}
+    </Btn>
+  );
 };
 
 const Btn = styled.button`

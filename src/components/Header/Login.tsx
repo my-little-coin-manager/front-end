@@ -9,6 +9,7 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
   const getUser = async (userInfo: any) => {
+    console.log("겟유저");
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
       localStorage.setItem("token", response.data.token);
@@ -28,26 +29,18 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
     >
       <TopMsg>
         <h2>
-          <p onClick={() => onLoginModal(false)}>✕</p>
+          <p>✕</p>
           로그인
         </h2>
       </TopMsg>
       <InputContainer>
         <div>
           <label htmlFor=""></label>
-          <input
-            autoComplete="false"
-            type="text"
-            name="id"
-            value={userInfo.id}
-            placeholder="아이디"
-            onChange={(e) => onChangehandler(e)}
-          />
+          <input type="text" name="id" value={userInfo.id} placeholder="아이디" onChange={(e) => onChangehandler(e)} />
         </div>
         <div>
           <label htmlFor=""></label>
           <input
-            autoComplete="false"
             type="password"
             name="pw"
             value={userInfo.pw}
@@ -56,15 +49,11 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
           />
         </div>
       </InputContainer>
-      {userInfo.id !== "" && userInfo.pw !== "" ? (
-        <AbledBtn onClick={() => onLoginModal(false)}>로그인</AbledBtn>
-      ) : (
-        <DisabledBtn>로그인</DisabledBtn>
-      )}
 
+      <AbledBtn>로그인</AbledBtn>
       <AbledBtn
         type="button"
-        onClick={(e: any) => {
+        onClick={() => {
           onSignUpModal();
         }}
       >
@@ -75,16 +64,7 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
   );
 };
 
-// const ModalBackground = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   backdrop-filter: blur(5px);
-//   background: rgba(0, 0, 0, 0.8);
-//   z-index: 999;
-// `;
+export default Login;
 
 const LoginContainer = styled.form`
   width: 300px;
@@ -158,5 +138,3 @@ const LoginMsg = styled.p`
   color: gray;
   font-weight: normal;
 `;
-
-export default Login;

@@ -13,12 +13,14 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
-  const onLoginModal = (e: any) => {
-    setLoginModal(true);
+  const onLoginModal = () => {
+    console.log("로그인모달");
+    setLoginModal(!loginModal);
     setSignUpModal(false);
   };
 
-  const onSignUpModal = (e: any) => {
+  const onSignUpModal = () => {
+    console.log("회원가입모달");
     setSignUpModal(true);
     setLoginModal(false);
   };
@@ -27,9 +29,7 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
     localStorage.clear();
   };
 
-  // useEffect(() => {
-
-  // }, [localStorage]);
+  console.log(signUpModal);
 
   return (
     <HeaderContainer>

@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { coinTickers } from "recoil/atoms";
 import { ticker } from "types/types";
 
 interface PriceProps {
   select: string;
-  ticker: ticker;
 }
 
-const DetailPrice = ({ select, ticker }: PriceProps) => {
+const DetailPrice = ({ select }: PriceProps) => {
+  const tickers = useRecoilValue(coinTickers);
+  const ticker = tickers[select];
   return (
     <Price>
       <State change={ticker?.change}>
