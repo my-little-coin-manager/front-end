@@ -5,7 +5,7 @@ import styled from "styled-components";
 import AbledBtn from "components/common/AbledBtn";
 import DisabledBtn from "components/common/DisabledBtn";
 
-const SignUp = ({ onSignUpModal }: any) => {
+const SignUp = ({ setSignUpModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
   const [checkPw, setCheckPw] = useState("");
   const [inspecMsg, setInspecMsg] = useState("비밀번호 확인을 위해 다시 한 번 입력해주세요.");
@@ -13,7 +13,6 @@ const SignUp = ({ onSignUpModal }: any) => {
   const postUser = async (userInfo: any) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/user", userInfo);
-      console.log(response.data);
     } catch (error: any) {
       const errMsg = await error.response.data.msg;
       alert(errMsg);
@@ -62,7 +61,7 @@ const SignUp = ({ onSignUpModal }: any) => {
     >
       <TopMsg>
         <h2>
-          <p onClick={() => onSignUpModal(false)}>✕</p>
+          <p onClick={() => setSignUpModal(false)}>✕</p>
           회원가입
         </h2>
       </TopMsg>
