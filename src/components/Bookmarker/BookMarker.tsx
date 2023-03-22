@@ -22,7 +22,9 @@ const BookMarker = ({ select, status }: NameBoxProps) => {
   };
 
   const changeStatus = async () => {
-    if (!status) {
+    if (!localStorage.getItem("token")) {
+      alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
+    } else if (!status) {
       const response = await axios.put(
         process.env.REACT_APP_API_URL + "/bookmark",
         { bookmark: select },
@@ -30,16 +32,11 @@ const BookMarker = ({ select, status }: NameBoxProps) => {
           headers: { Authorization: `Bearer ${localStorage.token}` }
         }
       );
-      console.log(status);
-      console.log("수정");
       setBookmarkInfo(response.data.result);
     } else {
       const response = await axios.delete(process.env.REACT_APP_API_URL + `/bookmark/${select}`, {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       });
-      console.log(status);
-      console.log("삭제");
-      console.log(response);
       setBookmarkInfo(response.data.result);
     }
   };
@@ -49,7 +46,6 @@ const BookMarker = ({ select, status }: NameBoxProps) => {
   useEffect(() => {
     check();
   }, []);
-
 
   return (
     <BookmarkStar onClick={changeStatus}>

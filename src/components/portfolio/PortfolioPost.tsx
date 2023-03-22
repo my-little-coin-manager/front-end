@@ -27,7 +27,10 @@ const PortfolioPost = () => {
   const postPortfolio = async (portforlio: any) => {
     const history = { ...portforlio, ...search };
 
-    if (!history.market) {
+    if (!localStorage.getItem("token")) {
+      alert("포트폴리오 기능은 로그인 후 이용할 수 있습니다.");
+      throw new Error("포트폴리오 기능은 로그인 후 이용할 수 있습니다.");
+    } else if (!history.market) {
       alert("코인이름을 입력해주세요.");
       throw new Error("코인이름을 입력해주세요.");
     } else if (!history.qty) {

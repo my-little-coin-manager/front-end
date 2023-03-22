@@ -5,6 +5,7 @@ import useGetCoins from "hooks/useGetCoins";
 import { ticker } from "types/types";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { menuSelect, userBookmark } from "recoil/atoms";
+import { ReactComponent as Exclamation } from "../../asset/svg/exclamation.svg";
 
 const CoinTicker = () => {
   const users = useRecoilValue(userBookmark);
@@ -43,6 +44,18 @@ const CoinTicker = () => {
           filterBookmark.map((ele: any, idx: number) => {
             return <CoinListItem key={ele.code} item={ele} coinMarkets={test[idx]} />;
           })}
+        {select === "bookmark" && !filterBookmark.length && !!localStorage.getItem("token") && (
+          <NoResultMsg>
+            <Exclamation />
+            <p>아직 북마크에 담긴 코인이 없어요.</p>
+          </NoResultMsg>
+        )}
+        {select === "bookmark" && !filterBookmark.length && !localStorage.getItem("token") && (
+          <NoResultMsg>
+            <Exclamation />
+            <p>로그인 후 이용해 주세요.</p>
+          </NoResultMsg>
+        )}
       </ul>
     </CoinTickerContainer>
   );
@@ -130,6 +143,16 @@ const SelectMenu = styled.div`
       cursor: pointer;
       color: #2196f3;
     }
+  }
+`;
+
+const NoResultMsg = styled.div`
+  text-align: center;
+  margin-top: 8rem;
+
+  & p {
+    margin-top: 1rem;
+    color: #c0c0c0;
   }
 `;
 
