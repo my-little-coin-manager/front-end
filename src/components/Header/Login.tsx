@@ -5,7 +5,7 @@ import styled from "styled-components";
 import AbledBtn from "components/common/AbledBtn";
 import DisabledBtn from "components/common/DisabledBtn";
 
-const Login = ({ onSignUpModal, onLoginModal }: any) => {
+const Login = ({ onSignUpModal, setLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
   const getUser = async (userInfo: any) => {
@@ -13,6 +13,8 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("nickname", response.data.nickname);
+      setLoginModal(false);
+      location.reload();
     } catch (error: any) {
       const errMsg = await error.response.data.msg;
       alert(errMsg);
@@ -28,26 +30,18 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
     >
       <TopMsg>
         <h2>
-          <p onClick={() => onLoginModal(false)}>✕</p>
+          <p onClick={() => setLoginModal(false)}>✕</p>
           로그인
         </h2>
       </TopMsg>
       <InputContainer>
         <div>
           <label htmlFor=""></label>
-          <input
-            autoComplete="false"
-            type="text"
-            name="id"
-            value={userInfo.id}
-            placeholder="아이디"
-            onChange={(e) => onChangehandler(e)}
-          />
+          <input type="text" name="id" value={userInfo.id} placeholder="아이디" onChange={(e) => onChangehandler(e)} />
         </div>
         <div>
           <label htmlFor=""></label>
           <input
-            autoComplete="false"
             type="password"
             name="pw"
             value={userInfo.pw}
@@ -56,15 +50,10 @@ const Login = ({ onSignUpModal, onLoginModal }: any) => {
           />
         </div>
       </InputContainer>
-      {userInfo.id !== "" && userInfo.pw !== "" ? (
-        <AbledBtn onClick={() => onLoginModal(false)}>로그인</AbledBtn>
-      ) : (
-        <DisabledBtn>로그인</DisabledBtn>
-      )}
-
+      {userInfo.id !== "" && userInfo.pw !== "" ? <AbledBtn>로그인</AbledBtn> : <DisabledBtn>로그인</DisabledBtn>}
       <AbledBtn
         type="button"
-        onClick={(e: any) => {
+        onClick={() => {
           onSignUpModal();
         }}
       >
