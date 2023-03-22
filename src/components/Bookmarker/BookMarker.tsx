@@ -50,6 +50,7 @@ const BookMarker = ({ select, status }: NameBoxProps) => {
     check();
   }, []);
 
+
   return (
     <BookmarkStar onClick={changeStatus}>
       <img src={status ? filledStar : emptyStar}></img>

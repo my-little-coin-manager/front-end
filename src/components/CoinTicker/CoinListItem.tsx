@@ -41,6 +41,10 @@ const CoinList = styled.tr`
   & td:last-child {
     padding-right: 20px;
   }
+
+  &:hover {
+    background-color: #f1efef;
+  }
 `;
 
 export default React.memo(CoinListItem);

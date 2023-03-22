@@ -13,6 +13,7 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
+
   const onLoginModal = () => {
     console.log("로그인모달");
     setLoginModal(!loginModal);
@@ -27,6 +28,7 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
 
   const logout = () => {
     localStorage.clear();
+    location.reload();
   };
 
   console.log(signUpModal);
@@ -62,8 +64,10 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         loginModal={loginModal}
         signUpModal={signUpModal}
       >
-        {loginModal ? <Login onSignUpModal={onSignUpModal} onLoginModal={onLoginModal} /> : null}
-        {signUpModal ? <SignUp onSignUpModal={onSignUpModal} /> : null}
+        {loginModal ? (
+          <Login onSignUpModal={onSignUpModal} onLoginModal={onLoginModal} setLoginModal={setLoginModal} />
+        ) : null}
+        {signUpModal ? <SignUp onSignUpModal={onSignUpModal} setSignUpModal={setSignUpModal} /> : null}
       </ModalBackground>
     </HeaderContainer>
   );
