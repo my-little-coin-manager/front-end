@@ -12,7 +12,7 @@ const CoinPrice = ({ price, change }: PriceProps) => {
 
 export default CoinPrice;
 
-const TickerPrice = styled.td<{ change: string }>`
+const TickerPrice = styled.p<{ change: string }>`
   width: 25%;
   font-size: 12px;
   color: ${({ change }) => (change === "RISE" ? "#c84a31" : change === "FALL" ? "#1261c4" : "#333")};

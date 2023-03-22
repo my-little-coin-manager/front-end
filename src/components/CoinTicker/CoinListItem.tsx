@@ -30,18 +30,12 @@ const CoinListItem = ({ item, coinMarkets }: ListItemProps) => {
   );
 };
 
-const CoinList = styled.tr`
+const CoinList = styled.li`
   height: 60px;
   border-bottom: solid 1px #d6d6d6;
-
-  & td:first-child {
-    padding-left: 20px;
-  }
-
-  & td:last-child {
-    padding-right: 20px;
-  }
-
+  width: 100%;
+  display: flex;
+  align-items: center;
   &:hover {
     background-color: #f1efef;
   }
