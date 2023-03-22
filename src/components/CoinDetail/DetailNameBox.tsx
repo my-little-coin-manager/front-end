@@ -27,7 +27,7 @@ const NameBox = styled.div`
   display: flex;
   justify-content: space-between;
   text-align: center;
-  height: 4.9rem;
+  height: 4.5rem;
   margin: 0 auto;
   /* padding-bottom: 1rem; */
   border-bottom: 1px solid #d9d9d9;
@@ -38,19 +38,16 @@ const NameBox = styled.div`
   }
   & div {
     display: inline-flex;
+
+    & h4 {
+      margin: auto 0 auto 1rem;
+    }
   }
 
   & p {
     font-size: 2.2rem;
-    margin: 0.4rem 1rem 0 0;
+    margin-top: 1rem;
     font-weight: bold;
-  }
-`;
-
-const BookmarkStar = styled.div`
-  & img {
-    width: 2.5rem;
-    height: 2.5rem;
   }
 `;
 
