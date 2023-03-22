@@ -1,8 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+console.log(reset);
+
 const GlobalStyle = createGlobalStyle`
   ${reset};
+
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,6 +25,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: AppleSDGothicNeoSB;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -30,8 +35,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-}
-ol, ul {
+
+ol, ul, li {
 	list-style: none;
 }
 blockquote, q {

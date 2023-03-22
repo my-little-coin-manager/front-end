@@ -27,26 +27,23 @@ const CoinTicker = () => {
           북마크
         </p>
       </SelectMenu>
-      <table align="center">
-        <thead>
-          <tr>
-            <th>한글명</th>
-            <th>현재가</th>
-            <th>전일대비</th>
-            <th>거래대금</th>
-          </tr>
-        </thead>
-        <tbody>
-          {select === "all" &&
-            Object.values<ticker>(coinTicker).map((ele, idx: number) => {
-              return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
-            })}
-          {select === "bookmark" &&
-            filterBookmark.map((ele: any, idx: number) => {
-              return <CoinListItem key={ele.code} item={ele} coinMarkets={test[idx]} />;
-            })}
-        </tbody>
-      </table>
+
+      <ul>
+        <ListHead>
+          <p>한글명</p>
+          <p>현재가</p>
+          <p>전일대비</p>
+          <p>거래대금</p>
+        </ListHead>
+        {select === "all" &&
+          Object.values<ticker>(coinTicker).map((ele, idx: number) => {
+            return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
+          })}
+        {select === "bookmark" &&
+          filterBookmark.map((ele: any, idx: number) => {
+            return <CoinListItem key={ele.code} item={ele} coinMarkets={test[idx]} />;
+          })}
+      </ul>
     </CoinTickerContainer>
   );
 };
@@ -55,8 +52,7 @@ const CoinTickerContainer = styled.aside`
   border-radius: 1rem;
   background-color: #fff;
   box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
-  width: 30%;
-  overflow: hidden;
+  width: 33%;
   overflow-y: scroll;
 
   & ul {
@@ -64,20 +60,7 @@ const CoinTickerContainer = styled.aside`
     padding: 0;
   }
   & ul li:not(:last-child) {
-    border-bottom: 1px solid black;
-  }
-
-  & table {
-    border-collapse: collapse;
-  }
-
-  & thead {
-    position: sticky;
-    top: 0;
-    height: 40px;
-    color: #666;
-    font-size: 12px;
-    background-color: #f9fafc;
+    border-bottom: solid 1px #d6d6d6;
   }
 
   &::-webkit-scrollbar {
@@ -95,6 +78,32 @@ const CoinTickerContainer = styled.aside`
     padding: 10px;
   }
 `;
+
+const ListHead = styled.li`
+  position: sticky;
+  top: 0;
+  height: 40px;
+  color: #666;
+  font-size: 12px;
+  background-color: #f9fafc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  & p {
+    width: 25%;
+    text-align: center;
+
+    :first-child {
+      margin-left: 5%;
+    }
+
+    :last-child {
+      margin-right: 5%;
+    }
+  }
+`;
+
 // 북마크 포트폴리오 메뉴선택 블럭
 const SelectMenu = styled.div`
   height: 3rem;
