@@ -24,10 +24,12 @@ const CoinName = ({ koreanName, marketCode }: NameProps) => {
   );
 };
 
-const Coin = styled.td`
+const Coin = styled.span`
   color: #333;
   font-weight: 600;
   font-size: 11px;
+  width: 25%;
+  margin-left: 5%;
 
   & img {
     width: 25px;
@@ -41,6 +43,7 @@ const Coin = styled.td`
 
   & span {
     display: flex;
+    align-items: center;
   }
 
   & span span {

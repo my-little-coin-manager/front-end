@@ -10,7 +10,6 @@ function App() {
   const [componentsControl, setComponentsControl] = useState("detail");
   return (
     <>
-      <GlobalStyle />
       <Container>
         <Header componentsControl={componentsControl} setComponentsControl={setComponentsControl} />
         <Layout>

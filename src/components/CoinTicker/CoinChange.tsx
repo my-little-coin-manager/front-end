@@ -16,7 +16,7 @@ const CoinChange = ({ change, rate, price }: ChangeProps) => {
   );
 };
 
-const ChangedCoin = styled.td<{ change: string }>`
+const ChangedCoin = styled.span<{ change: string }>`
   width: 25%;
   text-align: right;
   font-size: 12px;
