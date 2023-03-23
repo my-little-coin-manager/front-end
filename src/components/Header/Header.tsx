@@ -13,7 +13,6 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
-
   const onLoginModal = () => {
     console.log("로그인모달");
     setLoginModal(!loginModal);
@@ -92,7 +91,7 @@ const HeaderContainer = styled.div`
     & span {
       font-size: 0.9rem;
       font-weight: lighter;
-      margin: 1rem 0 0 2rem;
+      margin: 0 1rem 0 2rem;
       color: #fff;
     }
     & p:nth-child(1) {
