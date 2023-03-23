@@ -53,7 +53,7 @@ const CoinTickerContainer = styled.aside`
   background-color: #fff;
   box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
   width: 33%;
-  overflow-y: scroll;
+  overflow: overlay;
 
   & ul {
     margin: 0;
@@ -65,12 +65,12 @@ const CoinTickerContainer = styled.aside`
 
   &::-webkit-scrollbar {
     width: 0.5rem;
-    height: 90%;
     border-radius: 0.4rem;
-    background: rgba(255, 255, 255, 0.4);
+    background: none;
   }
 
   &::-webkit-scrollbar-thumb {
+    z-index: 999999;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 0.4rem;
     width: 0.5rem;
