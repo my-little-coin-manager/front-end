@@ -21,7 +21,10 @@ const BookMarker = ({ select }: NameBoxProps) => {
   };
 
   const changeStatus = async () => {
-    if (!bookmarkInfo.includes(select)) {
+  
+    if (!localStorage.getItem("token")) {
+      alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
+    } else if (!bookmarkInfo.includes(select)) {
       const response = await axios.put(
         process.env.REACT_APP_API_URL + "/bookmark",
         { bookmark: select },
