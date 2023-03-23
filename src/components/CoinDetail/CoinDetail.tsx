@@ -13,11 +13,9 @@ const CoinDetail = () => {
   const selectedMk = markets?.find((data: market) => data.market === selected);
   const bookmarkInfo = useRecoilValue<any>(userBookmark);
 
-  const status = bookmarkInfo.includes(selected);
-
   return (
     <DetailContainer>
-      <DetailNameBox select={selected} focus={selectedMk} status={status} />
+      <DetailNameBox select={selected} focus={selectedMk} status={bookmarkInfo.includes(selected)} />
       <DetailPrice select={selected} />
       <CoinChart />
     </DetailContainer>
