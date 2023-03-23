@@ -19,10 +19,4 @@ export default Portfolio;
 const PortfoiloContainer = styled.div`
   width: 72rem;
   margin-right: 1rem;
-
-  /* border-radius: 1rem;
-  background-color: #fff;
-  box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
-  
-  padding: 2rem 1rem; */
 `;

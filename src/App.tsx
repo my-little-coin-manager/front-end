@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import GlobalStyle from "style/GlobalStyle";
-import CoinTicker from "./components/CoinTicker/CoinTicker";
+import CoinList from "./components/CoinList/CoinList";
 import CoinDetail from "./components/CoinDetail/CoinDetail";
 import Portfolio from "components/portfolio/Portfolio";
 import Header from "components/Header/Header";
@@ -15,7 +14,7 @@ function App() {
         <Layout>
           {componentsControl === "detail" && <CoinDetail />}
           {componentsControl === "portfolio" && <Portfolio />}
-          <CoinTicker />
+          <CoinList />
         </Layout>
       </Container>
     </>

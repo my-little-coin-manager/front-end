@@ -9,7 +9,7 @@ interface NameBoxProps {
   status: boolean;
 }
 
-const DetailNameBox = ({ select, focus, status }: NameBoxProps) => {
+const DetailNameBox = ({ select, focus }: NameBoxProps) => {
   return (
     <NameBox>
       <div>
