@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-interface AccTradePriceProps {
+interface CoinTradePriceProps {
   price: number;
 }
 
-const AccTradePrice = ({ price }: AccTradePriceProps) => {
+const CoinTradeVolume = ({ price }: CoinTradePriceProps) => {
   return <TradePrice>{Math.round(price / 1000000).toLocaleString("ko-KR")}백만</TradePrice>;
 };
 
@@ -17,4 +17,4 @@ const TradePrice = styled.p`
   margin-right: 5%;
 `;
 
-export default AccTradePrice;
+export default CoinTradeVolume;

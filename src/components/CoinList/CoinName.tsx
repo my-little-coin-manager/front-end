@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface NameProps {
@@ -56,4 +56,4 @@ const Coin = styled.span`
   }
 `;
 
-export default CoinName;
+export default React.memo(CoinName);

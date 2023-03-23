@@ -7,7 +7,7 @@ interface ChangeProps {
   price: number;
 }
 
-const CoinChange = ({ change, rate, price }: ChangeProps) => {
+const CoinCompare = ({ change, rate, price }: ChangeProps) => {
   return (
     <ChangedCoin change={change}>
       <p>{(rate * 100).toFixed(2)}%</p>
@@ -26,4 +26,4 @@ const ChangedCoin = styled.span<{ change: string }>`
   }
 `;
 
-export default CoinChange;
+export default CoinCompare;
