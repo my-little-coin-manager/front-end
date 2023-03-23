@@ -25,16 +25,17 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family: AppleSDGothicNeoSB;
-
 }
-/* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
+	font-family: AppleSDGothicNeoSB;
+}
 
 ol, ul, li {
 	list-style: none;
