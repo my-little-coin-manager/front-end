@@ -5,7 +5,7 @@ import { coinTickers } from "recoil/atoms";
 import { portfolio } from "recoil/atoms";
 import styled from "styled-components";
 
-const PortfolioList = () => {
+const PortfolioList = ({ height }: any) => {
   const coinTicker = useRecoilValue(coinTickers);
   const [history, setHistory] = useRecoilState(portfolio);
 
@@ -14,7 +14,6 @@ const PortfolioList = () => {
       headers: { Authorization: `Bearer ${localStorage.token}` }
     });
     setHistory(response.data);
-    console.log(response.data);
   };
 
   const historyMarket = [...new Set(history.map((ele: any) => ele.history.market))];
@@ -65,7 +64,7 @@ const PortfolioList = () => {
   }, []);
 
   return (
-    <PortfolioListContainer>
+    <PortfolioListContainer height={height}>
       <History>
         <ListHeader>종목</ListHeader>
         <ListHeader>손익률</ListHeader>
@@ -101,7 +100,7 @@ const PortfolioList = () => {
                 <CoinStock>{ele.totalPrice.toFixed(3)}</CoinStock>
                 <CoinStock>{ele.nowPrice.toFixed(3)}</CoinStock>
                 <CoinStock>{ele.평가금.toFixed(3)}</CoinStock>
-                <CoinStock>{ele.averagePrice}</CoinStock>
+                <CoinStock>{ele.averagePrice.toFixed(3)}</CoinStock>
               </>
             )}
 
@@ -115,8 +114,29 @@ const PortfolioList = () => {
 
 export default PortfolioList;
 
-const PortfolioListContainer = styled.ul`
-  padding: 0;
+const PortfolioListContainer = styled.ul<{ height: number }>`
+  overflow: overlay;
+  overflow-x: hidden;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
+  padding-bottom: 2rem;
+  height: ${({ height }) => `calc(100% - (${height}px + 3rem))`};
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    border-radius: 0.4rem;
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    z-index: 999999;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.4rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 10px;
+  }
 `;
 
 const History = styled.li`
@@ -124,6 +144,15 @@ const History = styled.li`
   height: 4rem;
   display: flex;
   font-size: 15px;
+  :not(:first-child) {
+    padding: 0 1rem;
+  }
+
+  :first-child {
+    position: sticky;
+    top: 0;
+  }
+
   :not(:first-child) {
     border-bottom: solid 1px #d6d6d6;
   }
@@ -154,7 +183,12 @@ const ListHeader = styled(CoinStock)`
   font-weight: 700;
 
   :first-child {
+    padding-left: 1rem;
     justify-content: center;
+  }
+
+  :last-child {
+    padding-right: 1rem;
   }
 `;
 

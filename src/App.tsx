@@ -27,10 +27,12 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const Layout = styled.div`
   height: 80%;
+  max-height: 80%;
   margin: 3rem auto;
   display: flex;
   padding: 0 10%;

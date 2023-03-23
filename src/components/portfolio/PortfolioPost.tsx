@@ -1,16 +1,19 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import { coinMarkets } from "recoil/atoms";
 import { portfolio } from "recoil/atoms";
 import axios from "axios";
 
-const PortfolioPost = () => {
+const PortfolioPost = ({ setHeight }: any) => {
   const market = useRecoilValue(coinMarkets);
   const setHistory = useSetRecoilState(portfolio);
   const [search, setSearch] = useState<any>({ market: "", koreanName: "" });
   const [portforlio, setPortfolio] = useState({ transaction: "", price: 0, qty: 0 });
   const searchValue = useRef<any>("");
+  const portRef = useRef<any>(null);
+
+  console.dir(portRef.current);
 
   const searchCoin = (e: any) => {
     const findMarket = market.find((ele) => ele.korean_name === e.target.value);
@@ -68,8 +71,12 @@ const PortfolioPost = () => {
   const searchMarket =
     search.koreanName.length > 0 && market.filter((ele) => ele.korean_name.includes(search.koreanName));
 
+  useEffect(() => {
+    setHeight(portRef.current.clientHeight);
+  }, [search]);
+
   return (
-    <PostPortfolioContainer onSubmit={onSubmitPortfolio}>
+    <PostPortfolioContainer onSubmit={onSubmitPortfolio} ref={portRef}>
       <InputContainer>
         <div>
           <UserInput
@@ -132,11 +139,17 @@ const PortfolioPost = () => {
   );
 };
 
-export default PortfolioPost;
+export default forwardRef(PortfolioPost);
 
 const PostPortfolioContainer = styled.form`
   display: flex;
   flex-direction: column;
+  min-height: 12%;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
+  margin-bottom: 1rem;
+  padding: 2rem 1rem;
 `;
 
 const InputContainer = styled.div`

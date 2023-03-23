@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userBookmark } from "../../recoil/atoms";
 import styled from "styled-components";
 import filledStar from "../../asset/png/filled_star.png";
@@ -8,11 +8,10 @@ import axios from "axios";
 
 interface NameBoxProps {
   select: string;
-  status: boolean;
 }
 
-const BookMarker = ({ select, status }: NameBoxProps) => {
-  const setBookmarkInfo = useSetRecoilState<any>(userBookmark);
+const BookMarker = ({ select }: NameBoxProps) => {
+  const [bookmarkInfo, setBookmarkInfo] = useRecoilState<any>(userBookmark);
 
   const check = async () => {
     const getUserBookmark = await axios.get(process.env.REACT_APP_API_URL + "/bookmark", {
@@ -22,9 +21,10 @@ const BookMarker = ({ select, status }: NameBoxProps) => {
   };
 
   const changeStatus = async () => {
+  
     if (!localStorage.getItem("token")) {
       alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
-    } else if (!status) {
+    } else if (!bookmarkInfo.includes(select)) {
       const response = await axios.put(
         process.env.REACT_APP_API_URL + "/bookmark",
         { bookmark: select },
@@ -41,15 +41,13 @@ const BookMarker = ({ select, status }: NameBoxProps) => {
     }
   };
 
-  console.log(status);
-
   useEffect(() => {
     check();
   }, []);
 
   return (
     <BookmarkStar onClick={changeStatus}>
-      <img src={status ? filledStar : emptyStar}></img>
+      <img src={bookmarkInfo.includes(select) ? filledStar : emptyStar}></img>
     </BookmarkStar>
   );
 };
