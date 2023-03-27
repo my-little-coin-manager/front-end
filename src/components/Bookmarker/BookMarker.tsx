@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { userBookmark } from "../../recoil/atoms";
 import styled from "styled-components";
-import filledStar from "../../asset/png/filled_star.png";
-import emptyStar from "../../asset/png/empty_star.png";
 import axios from "axios";
+import { ReactComponent as DisabledStar } from "../../asset/svg/star-disabled.svg";
+import { ReactComponent as AbledStar } from "../../asset/svg/star-abled.svg";
 
 interface NameBoxProps {
   select: string;
@@ -21,7 +21,6 @@ const BookMarker = ({ select }: NameBoxProps) => {
   };
 
   const changeStatus = async () => {
-  
     if (!localStorage.getItem("token")) {
       alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
     } else if (!bookmarkInfo.includes(select)) {
@@ -47,7 +46,8 @@ const BookMarker = ({ select }: NameBoxProps) => {
 
   return (
     <BookmarkStar onClick={changeStatus}>
-      <img src={bookmarkInfo.includes(select) ? filledStar : emptyStar}></img>
+      {bookmarkInfo.includes(select) && <AbledStar />}
+      {!bookmarkInfo.includes(select) && <DisabledStar />}
     </BookmarkStar>
   );
 };
