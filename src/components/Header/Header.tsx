@@ -43,15 +43,15 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
       </NavBar>
 
       {localStorage.getItem("token") === null ? (
-        <span>
+        <LoginInfo>
           <p onClick={onLoginModal}>SIGN IN</p>
           <p onClick={onSignUpModal}>SIGN UP</p>
-        </span>
+        </LoginInfo>
       ) : (
-        <span>
+        <LoginInfo>
           <span>{localStorage.getItem("nickname")} 님 환영합니다.</span>
           <p onClick={logout}>로그아웃</p>
-        </span>
+        </LoginInfo>
       )}
 
       <ModalBackground
@@ -150,6 +150,10 @@ const ModalBackground = styled.div<ModalStyled>`
   backdrop-filter: blur(5px);
   background: rgba(0, 0, 0, 0.8);
   z-index: 999;
+`;
+
+const LoginInfo = styled.span`
+  align-items: center;
 `;
 
 export default Header;

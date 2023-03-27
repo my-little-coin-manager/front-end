@@ -111,13 +111,14 @@ const SignUp = ({ setSignUpModal }: any) => {
       </InputContainer>
       <Checkmsg color={inspecMsg}>{inspecMsg}</Checkmsg>
       {checkAll() === true ? <AbledBtn>회원가입</AbledBtn> : <DisabledBtn>회원가입</DisabledBtn>}
+      <FooterMsg>지금 회원이 되시면 MLCM의 주요 기능을 이용할 수 있습니다. </FooterMsg>
     </SignUpContainer>
   );
 };
 
 const SignUpContainer = styled.form`
-  width: 300px;
-  height: 30rem;
+  width: 18rem;
+  height: 28rem;
   position: absolute;
   z-index: 9999;
   background-color: #fff;
@@ -125,8 +126,9 @@ const SignUpContainer = styled.form`
   flex-direction: column;
   padding: 0 1.5rem;
   border-radius: 20px;
-  top: calc(50% - 150px);
-  left: calc(50% - 200px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   backdrop-filter: drop-shadow(4px 4px 10px blue);
 
   & div {
@@ -173,7 +175,7 @@ const InputContainer = styled.div`
 `;
 
 const Checkmsg = styled.p`
-  margin: 0.25rem 0 4rem 0;
+  margin: 0.25rem 0 3rem 0;
   font-size: 0.65rem;
   font-weight: 100;
   color: ${(props) =>
@@ -186,10 +188,10 @@ const Checkmsg = styled.p`
 
 const TopMsg = styled.div`
   & h2 {
-    height: 6rem;
+    height: 4rem;
     text-align: center;
     width: 100%;
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0 1rem 0;
 
     & p {
       color: "rgba(165,175,202,0.8)";
@@ -202,6 +204,14 @@ const TopMsg = styled.div`
       }
     }
   }
+`;
+
+const FooterMsg = styled.p`
+  font-size: 0.5rem;
+  color: #b9b9b9;
+  font-weight: 100;
+  text-align: center;
+  margin-top: 1rem;
 `;
 
 export default SignUp;
