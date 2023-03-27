@@ -1,4 +1,4 @@
-import BookMarker from "components/Bookmarker/BookMarker";
+import BookMarker from "components/bookmarker/BookMarker";
 import React from "react";
 import styled from "styled-components";
 import { market } from "types/types";
