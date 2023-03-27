@@ -69,7 +69,7 @@ const Login = ({ onSignUpModal, setLoginModal }: any) => {
 export default Login;
 
 const LoginContainer = styled.form`
-  width: 300px;
+  width: 18rem;
   height: 28rem;
   position: absolute;
   z-index: 9999;
@@ -79,8 +79,9 @@ const LoginContainer = styled.form`
   justify-content: center;
   padding: 0 1.5rem;
   border-radius: 20px;
-  top: calc(50% - 150px);
-  left: calc(50% - 200px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   & div:first-child {
     border-bottom: 1.5px solid #e5e7eb;
