@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CoinList from "./components/CoinList/CoinList";
-import CoinDetail from "./components/CoinDetail/CoinDetail";
+import CoinList from "./components/coinList/CoinList";
+import CoinDetail from "./components/coinDetail/CoinDetail";
 import Portfolio from "components/portfolio/Portfolio";
-import Header from "components/Header/Header";
+import Header from "components/header/Header";
 import styled from "styled-components";
 
 function App() {

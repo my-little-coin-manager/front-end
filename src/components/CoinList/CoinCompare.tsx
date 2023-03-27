@@ -10,7 +10,9 @@ interface ChangeProps {
 const CoinCompare = ({ change, rate, price }: ChangeProps) => {
   return (
     <ChangedCoin change={change}>
-      <p>{(rate * 100).toFixed(2)}%</p>
+      {change === "RISE" && <p>+{(rate * 100).toFixed(2)}%</p>}
+      {change === "FALL" && <p>{(rate * 100).toFixed(2)}%</p>}
+
       <p>{price.toLocaleString("ko-KR")}</p>
     </ChangedCoin>
   );

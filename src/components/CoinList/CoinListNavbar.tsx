@@ -16,7 +16,7 @@ const CoinListNavbar = () => {
         전체코인
       </p>
       <p onClick={selectMenu} id={"bookmark"}>
-        북마크
+        즐겨찾기
       </p>
     </SelectMenu>
   );
