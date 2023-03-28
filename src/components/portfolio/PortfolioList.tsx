@@ -11,7 +11,7 @@ const PortfolioList = ({ height }: any) => {
 
   const getPortfolio = async () => {
     const response = await axios.get(process.env.REACT_APP_API_URL + "/history", {
-      headers: { Authorization: `Bearer ${localStorage.token}` }
+      headers: { Authorization: `Bearer ${localStorage.accessToken}` }
     });
     setHistory(response.data);
   };

@@ -9,10 +9,10 @@ const Login = ({ onSignUpModal, setLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
   const getUser = async (userInfo: any) => {
-    console.log("겟유저");
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
       localStorage.setItem("nickname", response.data.nickname);
       setLoginModal(false);
       location.reload();

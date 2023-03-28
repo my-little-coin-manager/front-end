@@ -30,7 +30,7 @@ const PortfolioPost = ({ setHeight }: any) => {
   const postPortfolio = async (portforlio: any) => {
     const history = { ...portforlio, ...search };
 
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("accessToken")) {
       alert("포트폴리오 기능은 로그인 후 이용할 수 있습니다.");
       throw new Error("포트폴리오 기능은 로그인 후 이용할 수 있습니다.");
     } else if (!history.market) {
@@ -54,7 +54,7 @@ const PortfolioPost = ({ setHeight }: any) => {
       process.env.REACT_APP_API_URL + "/history",
       { history },
       {
-        headers: { Authorization: `Bearer ${localStorage.token}` }
+        headers: { Authorization: `Bearer ${localStorage.accessToken}` }
       }
     );
 
