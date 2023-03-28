@@ -13,6 +13,8 @@ const SignUp = ({ setSignUpModal }: any) => {
   const postUser = async (userInfo: any) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/user", userInfo);
+      alert(response.data.msg);
+      window.location.reload();
     } catch (error: any) {
       const errMsg = await error.response.data.msg;
       alert(errMsg);
