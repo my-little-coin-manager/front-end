@@ -25,12 +25,14 @@ const CoinListBody = () => {
         filterBookmark.map((ele: any, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={bookmarkCoinMarkets[idx]} />;
         })}
+        
       {select === "bookmark" && !filterBookmark.length && !!localStorage.getItem("accessToken") && (
         <NoResultMsg>
           <Exclamation />
           <p>아직 북마크에 담긴 코인이 없어요.</p>
         </NoResultMsg>
       )}
+
       {select === "bookmark" && !filterBookmark.length && !localStorage.getItem("accessToken") && (
         <NoResultMsg>
           <Exclamation />
@@ -46,7 +48,6 @@ export default CoinListBody;
 const NoResultMsg = styled.div`
   text-align: center;
   margin-top: 8rem;
-
   & p {
     margin-top: 1rem;
     color: #c0c0c0;

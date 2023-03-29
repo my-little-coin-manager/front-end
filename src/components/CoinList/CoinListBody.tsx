@@ -45,8 +45,7 @@ export default CoinListBody;
 
 const NoResultMsg = styled.div`
   text-align: center;
-  margin-top: 8rem;
-
+  margin: 11rem 0 0 0;
   & p {
     margin-top: 1rem;
     color: #c0c0c0;
