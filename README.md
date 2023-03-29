@@ -119,7 +119,7 @@ src <br>
 
 <br>
 
-<img src="">
+
 <img src="https://file.notion.so/f/s/56931522-08ba-423f-be22-6bdf7acd0de8/%E1%84%85%E1%85%B5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%86%A8.gif?id=3b6f1696-bfb3-4ece-ae32-4a853a26a00e&table=block&spaceId=1330d1c1-e1d5-4f14-8dc5-88bd76a67e2f&expirationTimestamp=1680180134986&signature=x749P0IinS12Olid6Z9HQwXyLMWu8HoIqda0xxx3rV4">
 우측의 코인리스트에서 간단한 시세조회가 가능하며 클릭시 해당코인의 차트를 비롯한 상세정보를 보여준다.
 
