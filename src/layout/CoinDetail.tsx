@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
-import DetailNameBox from "./DetailNameBox";
-import DetailPrice from "./DetailPrice";
-import { coinMarkets, coinSelect, userBookmark } from "../../recoil/atoms";
+import DetailNameBox from "../components/coinDetail/DetailNameBox";
+import DetailPrice from "../components/coinDetail/DetailPrice";
+import { coinMarkets, coinSelect, userBookmark } from "../recoil/atoms";
 import styled from "styled-components";
 import CoinChart from "components/chart/CoinChart";
 import { market } from "types/types";

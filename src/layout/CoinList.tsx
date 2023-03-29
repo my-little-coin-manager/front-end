@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import CoinListBody from "./CoinListBody";
-import CoinListNavbar from "./CoinListNavbar";
-import CoinListHeader from "./CoinListHeader";
+import CoinListBody from "../components/coinList/CoinListBody";
+import CoinListNavbar from "../components/coinList/CoinListNavbar";
+import CoinListHeader from "../components/coinList/CoinListHeader";
 
 const CoinList = () => {
   return (
