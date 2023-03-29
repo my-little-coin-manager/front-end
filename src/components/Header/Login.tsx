@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import useAuth from "hooks/useAuth";
 import styled from "styled-components";
+import AbledBtn from "components/common/AbledBtn";
+import DisabledBtn from "components/common/DisabledBtn";
 
-const Login = ({ onSignUpModal }: any) => {
+const Login = ({ onSignUpModal, setLoginModal }: any) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
   const getUser = async (userInfo: any) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
+      localStorage.setItem("nickname", response.data.nickname);
+      setLoginModal(false);
+      location.reload();
     } catch (error: any) {
       const errMsg = await error.response.data.msg;
       alert(errMsg);
@@ -25,7 +31,7 @@ const Login = ({ onSignUpModal }: any) => {
     >
       <TopMsg>
         <h2>
-          <p>✕</p>
+          <p onClick={() => setLoginModal(false)}>✕</p>
           로그인
         </h2>
       </TopMsg>
@@ -46,33 +52,24 @@ const Login = ({ onSignUpModal }: any) => {
         </div>
       </InputContainer>
 
-      <button>로그인</button>
-      <button
+      {userInfo.id !== "" && userInfo.pw !== "" ? <AbledBtn>로그인</AbledBtn> : <DisabledBtn>로그인</DisabledBtn>}
+      <AbledBtn
         type="button"
-        onClick={(e) => {
+        onClick={() => {
           onSignUpModal();
         }}
       >
         회원가입
-      </button>
+      </AbledBtn>
       <LoginMsg>회원가입을 하고 MLCM의 서비스를 자유롭게 이용하세요!</LoginMsg>
     </LoginContainer>
   );
 };
 
-// const ModalBackground = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   backdrop-filter: blur(5px);
-//   background: rgba(0, 0, 0, 0.8);
-//   z-index: 999;
-// `;
+export default Login;
 
 const LoginContainer = styled.form`
-  width: 300px;
+  width: 18rem;
   height: 28rem;
   position: absolute;
   z-index: 9999;
@@ -82,30 +79,9 @@ const LoginContainer = styled.form`
   justify-content: center;
   padding: 0 1.5rem;
   border-radius: 20px;
-  top: calc(50% - 150px);
-  left: calc(50% - 200px);
-
-  & button {
-    height: 3rem;
-    background-color: #3d6bfb;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    color: #fff;
-    font-weight: 500;
-    font-size: 0.85rem;
-  }
-
-  & button:last-child {
-    height: 3rem;
-    background-color: #fff;
-    border: 1px solid gray;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    color: gray;
-    font-weight: 500;
-    font-size: 0.85rem;
-  }
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   & div:first-child {
     border-bottom: 1.5px solid #e5e7eb;
@@ -141,8 +117,14 @@ const TopMsg = styled.div`
     margin: -2rem 0 0 0;
 
     & p {
+      color: "rgba(165,175,202,0.8)";
+      font-weight: lighter;
       text-align: right;
       margin: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;
@@ -159,5 +141,3 @@ const LoginMsg = styled.p`
   color: gray;
   font-weight: normal;
 `;
-
-export default Login;

@@ -13,14 +13,21 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
-  const onLoginModal = (e: any) => {
+  const onLoginModal = () => {
+    console.log("로그인모달");
     setLoginModal(!loginModal);
     setSignUpModal(false);
   };
 
-  const onSignUpModal = (e: any) => {
-    setSignUpModal(!signUpModal);
+  const onSignUpModal = () => {
+    console.log("회원가입모달");
+    setSignUpModal(true);
     setLoginModal(false);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    location.reload();
   };
 
   return (
@@ -32,10 +39,19 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         <p onClick={() => setComponentsControl("detail")}>COIN DETAIL</p>
         <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
       </NavBar>
-      <span>
-        <p onClick={onLoginModal}>SIGN IN</p>
-        <p onClick={onSignUpModal}>SIGN UP</p>
-      </span>
+
+      {localStorage.getItem("accessToken") === null ? (
+        <LoginInfo>
+          <p onClick={onLoginModal}>SIGN IN</p>
+          <p onClick={onSignUpModal}>SIGN UP</p>
+        </LoginInfo>
+      ) : (
+        <LoginInfo>
+          <span>{localStorage.getItem("nickname")} 님 환영합니다.</span>
+          <p onClick={logout}>로그아웃</p>
+        </LoginInfo>
+      )}
+
       <ModalBackground
         onClick={(e) => {
           e.stopPropagation();
@@ -45,8 +61,10 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         loginModal={loginModal}
         signUpModal={signUpModal}
       >
-        {loginModal ? <Login onSignUpModal={onSignUpModal} /> : null}
-        {signUpModal ? <SignUp /> : null}
+        {loginModal ? (
+          <Login onSignUpModal={onSignUpModal} onLoginModal={onLoginModal} setLoginModal={setLoginModal} />
+        ) : null}
+        {signUpModal ? <SignUp onSignUpModal={onSignUpModal} setSignUpModal={setSignUpModal} /> : null}
       </ModalBackground>
     </HeaderContainer>
   );
@@ -63,12 +81,26 @@ const HeaderContainer = styled.div`
 
   & h1 {
     margin: 0;
-    width: 200px;
     display: flex;
   }
 
   & span {
-    & p {
+    & span {
+      font-size: 0.9rem;
+      font-weight: lighter;
+      margin: 0 1rem 0 2rem;
+      color: #fff;
+    }
+    & p:nth-child(1) {
+      margin-left: 2rem;
+      color: #fff;
+      &:hover {
+        cursor: pointer;
+        color: #3d6bfb;
+      }
+    }
+
+    & p:nth-child(2) {
       margin-left: 2rem;
       color: #fff;
       &:hover {
@@ -116,6 +148,10 @@ const ModalBackground = styled.div<ModalStyled>`
   backdrop-filter: blur(5px);
   background: rgba(0, 0, 0, 0.8);
   z-index: 999;
+`;
+
+const LoginInfo = styled.span`
+  align-items: center;
 `;
 
 export default Header;

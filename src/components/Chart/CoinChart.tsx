@@ -5,15 +5,6 @@ import useGetInitialDataList from "../../hooks/useGetInitialDataList";
 import useNewData from "../../hooks/useNewData";
 import styled from "styled-components";
 
-const types = [
-  { key: "candle_solid", text: "Solid" },
-  { key: "candle_stroke", text: "Stroke" },
-  { key: "candle_up_stroke", text: "Rise" },
-  { key: "candle_down_stroke", text: "Fall" },
-  { key: "ohlc", text: "OHLC" },
-  { key: "area", text: "mountain" }
-];
-
 const CoinChart = () => {
   let chart: any;
   const [initialized, setInitialized] = useState(false);
@@ -57,26 +48,7 @@ const CoinChart = () => {
   return (
     <div>
       <div id="coin-chart" className="coin-chart" style={{ width: "100%", height: "30rem" }} />
-      <div className="chart-menu-container">
-        {types.map(({ key, text }) => {
-          return (
-            <StyleButton
-              key={key}
-              onClick={(e) => {
-                e.stopPropagation();
-                chart &&
-                  chart.setStyles({
-                    candle: {
-                      type: key as CandleType
-                    }
-                  });
-              }}
-            >
-              {text}
-            </StyleButton>
-          );
-        })}
-      </div>
+      <div className="chart-menu-container"></div>
     </div>
   );
 };

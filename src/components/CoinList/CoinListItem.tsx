@@ -3,8 +3,8 @@ import { useSetRecoilState } from "recoil";
 import { coinSelect } from "recoil/atoms";
 import styled from "styled-components";
 import CoinPrice from "./CoinPrice";
-import CoinChange from "./CoinChange";
-import AccTradePrice from "./AccTradePirce";
+import CoinCompare from "./CoinCompare";
+import CoinTradeVolume from "./CoinTradeVolume";
 import CoinName from "./CoinName";
 import { market, ticker } from "types/types";
 
@@ -24,22 +24,20 @@ const CoinListItem = ({ item, coinMarkets }: ListItemProps) => {
     >
       <CoinName koreanName={coinMarkets.korean_name} marketCode={coinMarkets.market} />
       <CoinPrice price={item.trade_price} change={item.change} />
-      <CoinChange change={item.change} rate={item.signed_change_rate} price={item.signed_change_price} />
-      <AccTradePrice price={item.acc_trade_price_24h} />
+      <CoinCompare change={item.change} rate={item.signed_change_rate} price={item.signed_change_price} />
+      <CoinTradeVolume price={item.acc_trade_price_24h} />
     </CoinList>
   );
 };
 
-const CoinList = styled.tr`
+const CoinList = styled.li`
   height: 60px;
   border-bottom: solid 1px #d6d6d6;
-
-  & td:first-child {
-    padding-left: 20px;
-  }
-
-  & td:last-child {
-    padding-right: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: #f1efef;
   }
 `;
 

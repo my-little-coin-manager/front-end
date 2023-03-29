@@ -7,16 +7,18 @@ interface ChangeProps {
   price: number;
 }
 
-const CoinChange = ({ change, rate, price }: ChangeProps) => {
+const CoinCompare = ({ change, rate, price }: ChangeProps) => {
   return (
     <ChangedCoin change={change}>
-      <p>{(rate * 100).toFixed(2)}%</p>
+      {change === "RISE" && <p>+{(rate * 100).toFixed(2)}%</p>}
+      {change === "FALL" && <p>{(rate * 100).toFixed(2)}%</p>}
+
       <p>{price.toLocaleString("ko-KR")}</p>
     </ChangedCoin>
   );
 };
 
-const ChangedCoin = styled.td<{ change: string }>`
+const ChangedCoin = styled.span<{ change: string }>`
   width: 25%;
   text-align: right;
   font-size: 12px;
@@ -26,4 +28,4 @@ const ChangedCoin = styled.td<{ change: string }>`
   }
 `;
 
-export default CoinChange;
+export default CoinCompare;

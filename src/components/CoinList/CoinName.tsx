@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface NameProps {
@@ -24,10 +24,12 @@ const CoinName = ({ koreanName, marketCode }: NameProps) => {
   );
 };
 
-const Coin = styled.td`
+const Coin = styled.span`
   color: #333;
   font-weight: 600;
   font-size: 11px;
+  width: 25%;
+  margin-left: 5%;
 
   & img {
     width: 25px;
@@ -41,6 +43,7 @@ const Coin = styled.td`
 
   & span {
     display: flex;
+    align-items: center;
   }
 
   & span span {
@@ -53,4 +56,4 @@ const Coin = styled.td`
   }
 `;
 
-export default CoinName;
+export default React.memo(CoinName);
