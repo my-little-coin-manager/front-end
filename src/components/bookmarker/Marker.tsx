@@ -15,26 +15,26 @@ const BookMarker = ({ select }: NameBoxProps) => {
 
   const check = async () => {
     const getUserBookmark = await axios.get(process.env.REACT_APP_API_URL + "/bookmark", {
-      headers: { Authorization: `Bearer ${localStorage.token}` }
+      headers: { Authorization: `Bearer ${localStorage.accessToken}` }
     });
     setBookmarkInfo(getUserBookmark.data.result.bookmark);
   };
 
   const changeStatus = async () => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("accessToken")) {
       alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
     } else if (!bookmarkInfo.includes(select)) {
       const response = await axios.put(
         process.env.REACT_APP_API_URL + "/bookmark",
         { bookmark: select },
         {
-          headers: { Authorization: `Bearer ${localStorage.token}` }
+          headers: { Authorization: `Bearer ${localStorage.accessToken}` }
         }
       );
       setBookmarkInfo(response.data.result);
     } else {
       const response = await axios.delete(process.env.REACT_APP_API_URL + `/bookmark/${select}`, {
-        headers: { Authorization: `Bearer ${localStorage.token}` }
+        headers: { Authorization: `Bearer ${localStorage.accessToken}` }
       });
       setBookmarkInfo(response.data.result);
     }

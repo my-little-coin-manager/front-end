@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as Logo } from "../../asset/svg/mlcm_logo_white.svg";
-import Login from "./Login";
-import SignUp from "./SignUp";
+import { ReactComponent as Logo } from "../asset/svg/mlcm_logo_white.svg";
+import Login from "../components/header/Login";
+import SignUp from "../components/header/SignUp";
 
 interface ModalStyled {
   loginModal: boolean;
@@ -30,8 +30,6 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
     location.reload();
   };
 
-  console.log(signUpModal);
-
   return (
     <HeaderContainer>
       <h1>
@@ -42,7 +40,7 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
       </NavBar>
 
-      {localStorage.getItem("token") === null ? (
+      {localStorage.getItem("accessToken") === null ? (
         <LoginInfo>
           <p onClick={onLoginModal}>SIGN IN</p>
           <p onClick={onSignUpModal}>SIGN UP</p>
