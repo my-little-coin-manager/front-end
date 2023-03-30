@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
 import DetailNameBox from "../components/coinDetail/DetailNameBox";
 import DetailPrice from "../components/coinDetail/DetailPrice";
@@ -11,7 +11,7 @@ const CoinDetail = () => {
   const markets = useRecoilValue(coinMarkets);
   const selected = useRecoilValue<string>(coinSelect);
   const selectedMk = markets?.find((data: market) => data.market === selected);
-  const bookmarkInfo = useRecoilValue<any>(userBookmark);
+  const bookmarkInfo = useRecoilValue(userBookmark);
 
   return (
     <DetailContainer>

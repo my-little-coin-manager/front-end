@@ -9,18 +9,21 @@ interface ModalStyled {
   signUpModal: boolean;
 }
 
-const Header = ({ componentsControl, setComponentsControl }: any) => {
-  const [loginModal, setLoginModal] = useState(false);
-  const [signUpModal, setSignUpModal] = useState(false);
+interface IProps {
+  componentsControl: string;
+  setComponentsControl: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Header = ({ componentsControl, setComponentsControl }: IProps) => {
+  const [loginModal, setLoginModal] = useState<boolean>(false);
+  const [signUpModal, setSignUpModal] = useState<boolean>(false);
 
   const onLoginModal = () => {
-    console.log("로그인모달");
     setLoginModal(!loginModal);
     setSignUpModal(false);
   };
 
   const onSignUpModal = () => {
-    console.log("회원가입모달");
     setSignUpModal(true);
     setLoginModal(false);
   };
@@ -61,10 +64,8 @@ const Header = ({ componentsControl, setComponentsControl }: any) => {
         loginModal={loginModal}
         signUpModal={signUpModal}
       >
-        {loginModal ? (
-          <Login onSignUpModal={onSignUpModal} onLoginModal={onLoginModal} setLoginModal={setLoginModal} />
-        ) : null}
-        {signUpModal ? <SignUp onSignUpModal={onSignUpModal} setSignUpModal={setSignUpModal} /> : null}
+        {loginModal ? <Login onSignUpModal={onSignUpModal} setLoginModal={setLoginModal} /> : null}
+        {signUpModal ? <SignUp setSignUpModal={setSignUpModal} /> : null}
       </ModalBackground>
     </HeaderContainer>
   );
