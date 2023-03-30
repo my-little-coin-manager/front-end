@@ -4,8 +4,41 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { coinTickers } from "recoil/atoms";
 import { portfolio } from "recoil/atoms";
 import styled from "styled-components";
+import { ticker } from "../../types/types";
 
-const PortfolioList = ({ height }: any) => {
+type Height = {
+  height: number;
+};
+
+type CoinInfo = {
+  averagePrice: number;
+  code: string;
+  koreanName: string;
+  nowPrice: number;
+  qty: number;
+  totalPrice: number;
+  profitRate: number;
+  equitiesValue: number;
+  income: number;
+};
+
+interface IHistory {
+  history: {
+    date: string;
+    koreanName: string;
+    market: string;
+    price: number;
+    qty: number;
+    transaction: string;
+  };
+  _id: string;
+}
+
+interface IAcc {
+  [market: string]: CoinInfo;
+}
+
+const PortfolioList = ({ height }: Height) => {
   const coinTicker = useRecoilValue(coinTickers);
   const [history, setHistory] = useRecoilState(portfolio);
 
@@ -16,11 +49,13 @@ const PortfolioList = ({ height }: any) => {
     setHistory(response.data);
   };
 
-  const historyMarket = [...new Set(history.map((ele: any) => ele.history.market))];
-  const filterTicker = Object.values(coinTicker).filter((ele: any) => historyMarket.includes(ele.code));
+  const historyMarket = [...new Set(history.map((ele: IHistory) => ele.history.market))];
+  const filterTicker = Object.values(coinTicker).filter((ele: ticker) => historyMarket.includes(ele.code));
 
-  const groupValues = history.reduce((acc: any, current: any) => {
-    const a = filterTicker.filter((ele: any) => Object.values(current.history)[0] === ele.code);
+  const groupValues = history.reduce((acc: IAcc, current: IHistory) => {
+    const tickerInfo = filterTicker.filter((ele: ticker) => {
+      return Object.values(current.history)[0] === ele.code;
+    });
 
     acc[current.history.market] = acc[current.history.market] || {
       code: current.history.market,
@@ -28,10 +63,10 @@ const PortfolioList = ({ height }: any) => {
       totalPrice: 0,
       averagePrice: 0,
       qty: 0,
-      nowPrice: a[0] && a[0].trade_price,
-      평가금: 0,
-      평가손익: 0,
-      손익률: 0
+      nowPrice: tickerInfo[0] && tickerInfo[0].trade_price,
+      equitiesValue: 0,
+      income: 0,
+      profitRate: 0
     };
 
     if (current.history.transaction === "buy") {
@@ -47,10 +82,11 @@ const PortfolioList = ({ height }: any) => {
         acc[current.history.market].totalPrice / acc[current.history.market].qty;
     }
 
-    acc[current.history.market].평가금 = acc[current.history.market].qty * acc[current.history.market].nowPrice;
-    acc[current.history.market].평가손익 = acc[current.history.market].평가금 - acc[current.history.market].totalPrice;
-    acc[current.history.market].손익률 =
-      (acc[current.history.market].평가손익 / acc[current.history.market].totalPrice) * 100;
+    acc[current.history.market].equitiesValue = acc[current.history.market].qty * acc[current.history.market].nowPrice;
+    acc[current.history.market].income =
+      acc[current.history.market].equitiesValue - acc[current.history.market].totalPrice;
+    acc[current.history.market].profitRate =
+      (acc[current.history.market].income / acc[current.history.market].totalPrice) * 100;
 
     if (acc[current.history.market].qty < 1) {
       delete acc[current.history.market];
@@ -75,7 +111,7 @@ const PortfolioList = ({ height }: any) => {
         <ListHeader>평균단가</ListHeader>
         <ListHeader>보유수량</ListHeader>
       </History>
-      {Object.values(groupValues).map((ele: any) => {
+      {Object.values<CoinInfo>(groupValues).map((ele) => {
         const splitMarketCode = ele.code.split("-");
         return (
           <History key={ele.code}>
@@ -84,22 +120,22 @@ const PortfolioList = ({ height }: any) => {
               {ele.koreanName}
             </CoinStock>
 
-            <Profit profit={ele.평가손익}>{ele.손익률.toFixed(2)}%</Profit>
+            <Profit profit={ele.income}>{ele.profitRate.toFixed(2)}%</Profit>
 
             {Number.isInteger(ele.averagePrice) ? (
               <>
-                <Profit profit={ele.평가손익}>{ele.평가손익.toLocaleString("ko-KR")}</Profit>
+                <Profit profit={ele.income}>{ele.income.toLocaleString("ko-KR")}</Profit>
                 <CoinStock>{ele.totalPrice.toLocaleString("ko-KR")}</CoinStock>
                 <CoinStock>{ele.nowPrice.toLocaleString("ko-KR")}</CoinStock>
-                <CoinStock>{ele.평가금.toLocaleString("ko-KR")}</CoinStock>
+                <CoinStock>{ele.equitiesValue.toLocaleString("ko-KR")}</CoinStock>
                 <CoinStock>{ele.averagePrice.toLocaleString("ko-KR")}</CoinStock>
               </>
             ) : (
               <>
-                <Profit profit={ele.평가손익}>{ele.평가손익.toFixed(3)}</Profit>
+                <Profit profit={ele.income}>{ele.income.toFixed(3)}</Profit>
                 <CoinStock>{ele.totalPrice.toFixed(3)}</CoinStock>
                 <CoinStock>{ele.nowPrice.toFixed(3)}</CoinStock>
-                <CoinStock>{ele.평가금.toFixed(3)}</CoinStock>
+                <CoinStock>{ele.equitiesValue.toFixed(3)}</CoinStock>
                 <CoinStock>{ele.averagePrice.toFixed(3)}</CoinStock>
               </>
             )}

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import PortfolioPost from "../components/portfolio/PortfolioPost";
 import styled from "styled-components";
 import PortfolioList from "../components/portfolio/PortfolioList";
 
 const Portfolio = () => {
-  const [height, setHeight] = useState(165);
+  const [height, setHeight] = useState<number>(165);
 
   return (
     <PortfoiloContainer>

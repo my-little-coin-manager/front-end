@@ -11,14 +11,14 @@ const initialState = { id: "", pw: "", nickname: "" };
 const useAuth = () => {
   const [userInfo, setUserInfo] = useState<User>(initialState);
 
-  const onChangehandler = (e: any) => {
+  const onChangehandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUserInfo((prevState: any) => {
+    setUserInfo((prevState: User) => {
       return { ...prevState, [name]: value };
     });
   };
 
-  const onSubmit = (e: any, axiosFunc: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>, axiosFunc: (userInfo: any) => Promise<void>) => {
     e.preventDefault();
     axiosFunc(userInfo);
   };

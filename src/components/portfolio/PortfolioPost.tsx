@@ -1,33 +1,46 @@
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { coinMarkets } from "recoil/atoms";
 import { portfolio } from "recoil/atoms";
 import axios from "axios";
 
-const PortfolioPost = ({ setHeight }: any) => {
+type SearchMarket = { market: string; korean_name: string; english_name: string };
+
+interface ISearch {
+  market: string | undefined;
+  koreanName: string;
+}
+
+interface IPortfolio {
+  transaction: string;
+  price: number;
+  qty: number;
+  date: string;
+}
+
+const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetStateAction<number>> }) => {
   const market = useRecoilValue(coinMarkets);
   const setHistory = useSetRecoilState(portfolio);
-  const [search, setSearch] = useState<any>({ market: "", koreanName: "" });
-  const [portforlio, setPortfolio] = useState({ transaction: "", price: 0, qty: 0 });
-  const searchValue = useRef<any>("");
-  const portRef = useRef<any>(null);
+  const [search, setSearch] = useState<ISearch>({ market: "", koreanName: "" });
+  const [portforlio, setPortfolio] = useState<IPortfolio>({ transaction: "", price: 0, qty: 0, date: "" });
+  const searchValue = useRef<HTMLInputElement>(null);
+  const portRef = useRef<HTMLFormElement>(null);
 
-  console.dir(portRef.current);
-
-  const searchCoin = (e: any) => {
+  const searchCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
     const findMarket = market.find((ele) => ele.korean_name === e.target.value);
     setSearch({ ...search, koreanName: e.target.value, market: findMarket?.market });
   };
 
-  const onChnagePortfolio = (e: any) => {
+  const onChnagePortfolio = (e: React.ChangeEvent<HTMLInputElement> & React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.target;
+
     setPortfolio((prevState) => {
       return { ...prevState, [name]: value };
     });
   };
 
-  const postPortfolio = async (portforlio: any) => {
+  const postPortfolio = async (portforlio: IPortfolio) => {
     const history = { ...portforlio, ...search };
 
     if (!localStorage.getItem("accessToken")) {
@@ -58,12 +71,13 @@ const PortfolioPost = ({ setHeight }: any) => {
       }
     );
 
-    setHistory((prevState: any) => {
-      return [...prevState, response.data];
+    setHistory((prevHistory: []) => {
+      const newHistory = [...prevHistory, response.data];
+      return [...newHistory];
     });
   };
 
-  const onSubmitPortfolio = (e: any) => {
+  const onSubmitPortfolio = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postPortfolio(portforlio);
   };
@@ -71,8 +85,10 @@ const PortfolioPost = ({ setHeight }: any) => {
   const searchMarket =
     search.koreanName.length > 0 && market.filter((ele) => ele.korean_name.includes(search.koreanName));
 
+  console.log(searchMarket);
+
   useEffect(() => {
-    setHeight(portRef.current.clientHeight);
+    setHeight(portRef?.current?.clientHeight || 0);
   }, [search]);
 
   return (
@@ -85,7 +101,7 @@ const PortfolioPost = ({ setHeight }: any) => {
             }}
             ref={searchValue}
             placeholder="종목"
-            value={searchValue.current.value || ""}
+            value={searchValue.current?.value || ""}
             type="text"
             name="market"
           />
@@ -98,12 +114,12 @@ const PortfolioPost = ({ setHeight }: any) => {
       </InputContainer>
       <CoinSelect>
         {searchMarket &&
-          searchMarket.map((ele: any) => {
+          searchMarket.map((ele: SearchMarket) => {
             return (
               <span
                 key={ele.market}
                 onClick={() => {
-                  searchValue.current.value = ele.korean_name;
+                  searchValue?.current && (searchValue.current.value = ele.korean_name);
                   setSearch({ market: ele.market, koreanName: ele.korean_name });
                 }}
               >
