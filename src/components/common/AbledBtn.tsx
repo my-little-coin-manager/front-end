@@ -2,7 +2,14 @@ import useAuth from "hooks/useAuth";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const AbledBtn = (props: any) => {
+interface IProps {
+  type?: string;
+  children?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const AbledBtn = (props: IProps) => {
+  console.log(props);
   return (
     <Btn type="submit" onClick={props.onClick}>
       {props.children}

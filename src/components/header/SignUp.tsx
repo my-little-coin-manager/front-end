@@ -5,18 +5,28 @@ import styled from "styled-components";
 import AbledBtn from "components/common/AbledBtn";
 import DisabledBtn from "components/common/DisabledBtn";
 
-const SignUp = ({ setSignUpModal }: any) => {
+interface IResponse {
+  response?: {
+    status: number;
+    headers: string;
+  };
+}
+interface IProps {
+  setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignUp = ({ setSignUpModal }: IProps) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
   const [checkPw, setCheckPw] = useState("");
   const [inspecMsg, setInspecMsg] = useState("비밀번호 확인을 위해 다시 한 번 입력해주세요.");
 
-  const postUser = async (userInfo: any) => {
+  const postUser = async (userInfo: IResponse) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/user", userInfo);
       alert(response.data.msg);
       window.location.reload();
-    } catch (error: any) {
-      const errMsg = await error.response.data.msg;
+    } catch (error: unknown) {
+      const errMsg = (await error) as IResponse;
       alert(errMsg);
     }
   };

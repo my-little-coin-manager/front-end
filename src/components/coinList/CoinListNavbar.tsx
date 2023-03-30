@@ -6,8 +6,8 @@ import { menuSelect } from "recoil/atoms";
 const CoinListNavbar = () => {
   const [select, setSelect] = useRecoilState(menuSelect);
 
-  const selectMenu = (e: any) => {
-    e.target.id === "all" ? setSelect("all") : setSelect("bookmark");
+  const selectMenu = (e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.id === "all" ? setSelect("all") : setSelect("bookmark"); // currentTarget 과 target 차이?
   };
 
   return (

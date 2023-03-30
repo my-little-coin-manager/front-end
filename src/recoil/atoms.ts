@@ -32,7 +32,7 @@ export const liveCandleData = atom({
 });
 
 //북마크 정보
-export const userBookmark = atom<string[]>({
+export const userBookmark = atom<string[] | string>({
   key: "userBookmark",
   default: []
 });
