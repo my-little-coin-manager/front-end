@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import useAuth from "hooks/useAuth";
 import styled from "styled-components";
 import AbledBtn from "components/common/AbledBtn";
 import DisabledBtn from "components/common/DisabledBtn";
 
-const Login = ({ onSignUpModal, setLoginModal }: any) => {
+interface IResponse {
+  response?: {
+    status: number;
+    headers: string;
+  };
+}
+
+interface IProps {
+  onSignUpModal: () => void;
+  setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login = ({ onSignUpModal, setLoginModal }: IProps) => {
   const { onChangehandler, onSubmit, userInfo } = useAuth();
 
-  const getUser = async (userInfo: any) => {
+  const getUser = async (userInfo: IResponse) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
       localStorage.setItem("accessToken", response.data.accessToken);
@@ -16,8 +28,8 @@ const Login = ({ onSignUpModal, setLoginModal }: any) => {
       localStorage.setItem("nickname", response.data.nickname);
       setLoginModal(false);
       location.reload();
-    } catch (error: any) {
-      const errMsg = await error.response.data.msg;
+    } catch (error: unknown) {
+      const errMsg = (await error) as IResponse;
       alert(errMsg);
     }
   };

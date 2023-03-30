@@ -11,7 +11,7 @@ interface NameBoxProps {
 }
 
 const BookMarker = ({ select }: NameBoxProps) => {
-  const [bookmarkInfo, setBookmarkInfo] = useRecoilState<any>(userBookmark);
+  const [bookmarkInfo, setBookmarkInfo] = useRecoilState(userBookmark);
 
   const check = async () => {
     const getUserBookmark = await axios.get(process.env.REACT_APP_API_URL + "/bookmark", {
