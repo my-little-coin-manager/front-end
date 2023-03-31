@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { init, dispose, CandleType, LineType, Chart } from "klinecharts";
+import { init, dispose, LineType, Chart } from "klinecharts";
 
 import useGetInitialDataList from "../../hooks/useGetInitialDataList";
 import useNewData from "../../hooks/useNewData";
 import styled from "styled-components";
 
 const CoinChart = () => {
-  let chart: Chart | null;
+  let chart: Chart | any;
   const [initialized, setInitialized] = useState(false);
   const { coinCandles } = useGetInitialDataList();
   const newData = useNewData();
