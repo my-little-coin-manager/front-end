@@ -59,6 +59,7 @@ export type ticker = {
   trade_volume: number;
   type: string;
 };
+
 export type tickerInfo = { [market: string]: ticker };
 
 // Atom liveCandleData
