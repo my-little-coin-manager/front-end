@@ -2,35 +2,35 @@ import React from "react";
 import { ticker, market } from "types/types";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { menuSelect, userBookmark } from "recoil/atoms";
+import { menuSelect, userBookmarkSelctor } from "recoil/atoms";
 import { ReactComponent as Exclamation } from "../../asset/svg/exclamation.svg";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 
 const CoinListBody = () => {
   const { coinMarketList, coinTicker } = useGetCoins();
-  const users = useRecoilValue(userBookmark);
-  const select = useRecoilValue(menuSelect);
-  const filterBookmark = Object.values<ticker>(coinTicker).filter((ele) => users.includes(ele.code));
-  const bookmarkCoinMarkets = coinMarketList.filter((ele: market) => users.includes(ele.market));
+  const userBookmark = useRecoilValue(userBookmarkSelctor);
+  const selectedMenu = useRecoilValue(menuSelect);
+  const filterBookmark = Object.values<ticker>(coinTicker).filter((ele) => userBookmark.includes(ele.code));
+  const bookmarkCoinMarkets = coinMarketList.filter((ele: market) => userBookmark.includes(ele.market));
 
   return (
     <>
-      {select === "all" &&
+      {selectedMenu === "all" &&
         Object.values<ticker>(coinTicker).map((ele, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
         })}
-      {select === "bookmark" &&
+      {selectedMenu === "bookmark" &&
         filterBookmark.map((ele: ticker, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={bookmarkCoinMarkets[idx]} />;
         })}
-      {select === "bookmark" && !filterBookmark.length && !!localStorage.getItem("accessToken") && (
+      {selectedMenu === "bookmark" && !filterBookmark.length && !!localStorage.getItem("accessToken") && (
         <NoResultMsg>
           <Exclamation />
           <p>아직 북마크에 담긴 코인이 없어요.</p>
         </NoResultMsg>
       )}
-      {select === "bookmark" && !filterBookmark.length && !localStorage.getItem("accessToken") && (
+      {selectedMenu === "bookmark" && !filterBookmark.length && !localStorage.getItem("accessToken") && (
         <NoResultMsg>
           <Exclamation />
           <p>로그인 후 이용해 주세요.</p>

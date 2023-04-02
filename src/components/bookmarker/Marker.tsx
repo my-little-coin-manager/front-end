@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
-import { userBookmark } from "../../recoil/atoms";
-import styled from "styled-components";
-import axios from "axios";
+import { userBookmarkSelctor } from "../../recoil/atoms";
+import instance from "service/API";
 import { ReactComponent as DisabledStar } from "../../asset/svg/star-disabled.svg";
 import { ReactComponent as AbledStar } from "../../asset/svg/star-abled.svg";
 
@@ -11,46 +10,26 @@ interface NameBoxProps {
 }
 
 const BookMarker = ({ select }: NameBoxProps) => {
-  const [bookmarkInfo, setBookmarkInfo] = useRecoilState(userBookmark);
+  const [bookmarkInfo, setBookmarkInfo] = useRecoilState(userBookmarkSelctor);
 
-  const check = async () => {
-    const getUserBookmark = await axios.get(process.env.REACT_APP_API_URL + "/bookmark", {
-      headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-    });
-    setBookmarkInfo(getUserBookmark.data.result.bookmark);
-  };
-
+  console.log(bookmarkInfo);
   const changeStatus = async () => {
     if (!localStorage.getItem("accessToken")) {
       alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
     } else if (!bookmarkInfo.includes(select)) {
-      const response = await axios.put(
-        process.env.REACT_APP_API_URL + "/bookmark",
-        { bookmark: select },
-        {
-          headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-        }
-      );
+      const response = await instance.put("/bookmark", { bookmark: select });
       setBookmarkInfo(response.data.result);
     } else {
-      const response = await axios.delete(process.env.REACT_APP_API_URL + `/bookmark/${select}`, {
-        headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-      });
+      const response = await instance.delete(`/bookmark/${select}`);
       setBookmarkInfo(response.data.result);
     }
   };
 
-  useEffect(() => {
-    check();
-  }, []);
-
   return (
-    <BookmarkStar onClick={changeStatus}>
+    <div onClick={changeStatus}>
       {bookmarkInfo.includes(select) && <AbledStar />}
       {!bookmarkInfo.includes(select) && <DisabledStar />}
-    </BookmarkStar>
+    </div>
   );
 };
 export default BookMarker;
-
-const BookmarkStar = styled.div``;

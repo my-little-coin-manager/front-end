@@ -1,4 +1,5 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+import instance from "service/API";
 import { marketName, tickerInfo } from "types/types";
 
 //실시간 코인 시세
@@ -35,6 +36,23 @@ export const liveCandleData = atom({
 export const userBookmark = atom<string[] | string>({
   key: "userBookmark",
   default: []
+});
+
+export const userBookmarkSelctor = selector({
+  key: "userBookmarkSelector",
+  get: async ({ get }) => {
+    get(userBookmark);
+    if (localStorage.getItem("accessToken")) {
+      const response = await instance.get("/bookmark");
+      return response.data.result.bookmark;
+    }
+    return [];
+  },
+
+  set: ({ set }, newValue) => {
+    console.log(newValue);
+    if (localStorage.getItem("accessToken")) set(userBookmark, newValue);
+  }
 });
 
 //전체코인 or 북마크 선택
