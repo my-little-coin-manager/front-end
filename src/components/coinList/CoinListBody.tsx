@@ -2,17 +2,17 @@ import React from "react";
 import { ticker, market } from "types/types";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { menuSelect, userBookmarkSelctor } from "recoil/atoms";
+import { menuSelect, userBookmark } from "recoil/atoms";
 import { ReactComponent as Exclamation } from "../../asset/svg/exclamation.svg";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 
 const CoinListBody = () => {
   const { coinMarketList, coinTicker } = useGetCoins();
-  const userBookmark = useRecoilValue(userBookmarkSelctor);
+  const bookmarkList = useRecoilValue(userBookmark);
   const selectedMenu = useRecoilValue(menuSelect);
-  const filterBookmark = Object.values<ticker>(coinTicker).filter((ele) => userBookmark.includes(ele.code));
-  const bookmarkCoinMarkets = coinMarketList.filter((ele: market) => userBookmark.includes(ele.market));
+  const filterBookmark = Object.values<ticker>(coinTicker).filter((ele) => bookmarkList?.includes(ele.code));
+  const bookmarkCoinMarkets = coinMarketList.filter((ele: market) => bookmarkList?.includes(ele.market));
 
   return (
     <>

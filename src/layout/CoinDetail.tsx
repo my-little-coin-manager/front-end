@@ -15,7 +15,7 @@ const CoinDetail = () => {
 
   return (
     <DetailContainer>
-      <DetailNameBox select={selected} focus={selectedMk} status={bookmarkInfo.includes(selected)} />
+      <DetailNameBox select={selected} focus={selectedMk} status={bookmarkInfo?.includes(selected)} />
       <DetailPrice select={selected} />
       <CoinChart />
     </DetailContainer>
