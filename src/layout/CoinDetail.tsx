@@ -1,21 +1,22 @@
 import React from "react";
+import styled from "styled-components";
 import { useRecoilValue } from "recoil";
+import { coinMarkets, coinSelect } from "../recoil/atoms";
+import { market } from "types/types";
+import useGetBookmark from "hooks/bookmark/useGetBookmark";
 import DetailNameBox from "../components/coinDetail/DetailNameBox";
 import DetailPrice from "../components/coinDetail/DetailPrice";
-import { coinMarkets, coinSelect, userBookmark } from "../recoil/atoms";
-import styled from "styled-components";
 import CoinChart from "components/chart/CoinChart";
-import { market } from "types/types";
 
 const CoinDetail = () => {
+  const { data: bookmark } = useGetBookmark();
   const markets = useRecoilValue(coinMarkets);
   const selected = useRecoilValue<string>(coinSelect);
   const selectedMk = markets?.find((data: market) => data.market === selected);
-  const bookmarkInfo = useRecoilValue(userBookmark);
 
   return (
     <DetailContainer>
-      <DetailNameBox select={selected} focus={selectedMk} status={bookmarkInfo?.includes(selected)} />
+      <DetailNameBox select={selected} focus={selectedMk} status={bookmark?.includes(selected)} />
       <DetailPrice select={selected} />
       <CoinChart />
     </DetailContainer>
