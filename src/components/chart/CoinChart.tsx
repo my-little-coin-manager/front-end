@@ -1,38 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { init, dispose, LineType, Chart } from "klinecharts";
 
-import useGetInitialDataList from "../../hooks/useGetInitialDataList";
+import useGetCoinCandles from "../../hooks/useGetInitialDataList";
 import useNewData from "../../hooks/useNewData";
 import styled from "styled-components";
 
 const CoinChart = () => {
   let chart: Chart | any;
   const [initialized, setInitialized] = useState(false);
-  const { coinCandles } = useGetInitialDataList();
+  const { data: coinCandles } = useGetCoinCandles();
   const newData = useNewData();
 
   useEffect(() => {
-    chart = init("coin-chart", {
-      styles: {
-        grid: { horizontal: { style: LineType.Dashed } },
-        candle: {
-          bar: {
-            upColor: "#d24f45",
-            downColor: "#1261c4",
-            noChangeColor: "#888888"
+    if (coinCandles) {
+      chart = init("coin-chart", {
+        styles: {
+          grid: { horizontal: { style: LineType.Dashed } },
+          candle: {
+            bar: {
+              upColor: "#d24f45",
+              downColor: "#1261c4",
+              noChangeColor: "#888888"
+            }
           }
         }
-      }
-    });
+      });
 
-    const fetchData = () => {
-      chart?.applyNewData(coinCandles);
-      setInitialized(true);
-    };
-    fetchData();
-    return () => {
-      dispose("coin-chart");
-    };
+      const fetchData = () => {
+        chart?.applyNewData(coinCandles);
+        setInitialized(true);
+      };
+      fetchData();
+      return () => {
+        dispose("coin-chart");
+      };
+    }
   }, [coinCandles]);
 
   useEffect(() => {
