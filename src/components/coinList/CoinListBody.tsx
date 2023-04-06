@@ -6,14 +6,16 @@ import { useRecoilValue } from "recoil";
 import { menuSelect } from "recoil/atoms";
 import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
+import useGetMarkets from "hooks/useGetMarkets";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
 
 const CoinListBody = () => {
-  const { coinMarketList, coinTicker } = useGetCoins();
+  const coinTicker = useGetCoins();
+  const { data: coinMarketList } = useGetMarkets();
   const { data: bookmark } = useGetBookmark();
   const selectedMenu = useRecoilValue(menuSelect);
   const filterBookmark = Object.values<ticker>(coinTicker).filter((ele) => bookmark?.includes(ele.code));
-  const bookmarkCoinMarkets = coinMarketList.filter((ele: market) => bookmark?.includes(ele.market));
+  const bookmarkCoinMarkets = coinMarketList?.filter((ele: market) => bookmark?.includes(ele.market));
 
   return (
     <>
