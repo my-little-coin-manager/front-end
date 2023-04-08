@@ -1,9 +1,10 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { coinMarkets } from "recoil/atoms";
+import { useSetRecoilState } from "recoil";
 import { portfolio } from "recoil/atoms";
 import axios from "axios";
+import usePostBookmark from "hooks/portfolio/usePostPortfolio";
+import useGetMarkets from "hooks/useGetMarkets";
 
 type SearchMarket = { market: string; korean_name: string; english_name: string };
 
@@ -20,15 +21,17 @@ interface IPortfolio {
 }
 
 const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetStateAction<number>> }) => {
-  const market = useRecoilValue(coinMarkets);
+  const { data: market } = useGetMarkets();
+
   const setHistory = useSetRecoilState(portfolio);
   const [search, setSearch] = useState<ISearch>({ market: "", koreanName: "" });
   const [portforlio, setPortfolio] = useState<IPortfolio>({ transaction: "", price: 0, qty: 0, date: "" });
   const searchValue = useRef<HTMLInputElement>(null);
   const portRef = useRef<HTMLFormElement>(null);
+  const { mutate } = usePostBookmark();
 
   const searchCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const findMarket = market.find((ele) => ele.korean_name === e.target.value);
+    const findMarket = market?.find((ele: any) => ele.korean_name === e.target.value);
     setSearch({ ...search, koreanName: e.target.value, market: findMarket?.market });
   };
 
@@ -83,7 +86,7 @@ const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetState
   };
 
   const searchMarket =
-    search.koreanName.length > 0 && market.filter((ele) => ele.korean_name.includes(search.koreanName));
+    search.koreanName.length > 0 && market.filter((ele: any) => ele.korean_name.includes(search.koreanName));
 
   console.log(searchMarket);
 
