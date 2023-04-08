@@ -10,17 +10,19 @@ import useGetMarkets from "hooks/useGetMarkets";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
 
 const CoinListBody = () => {
-  const coinTicker = useGetCoins();
+  const { data: coinTicker } = useGetCoins();
   const { data: coinMarketList } = useGetMarkets();
   const { data: bookmark } = useGetBookmark();
   const selectedMenu = useRecoilValue(menuSelect);
-  const filterBookmark = Object.values<ticker>(coinTicker).filter((ele) => bookmark?.includes(ele.code));
+  const filterBookmark = Object.values<ticker>(coinTicker ? coinTicker : {}).filter((ele) =>
+    bookmark?.includes(ele.code)
+  );
   const bookmarkCoinMarkets = coinMarketList?.filter((ele: market) => bookmark?.includes(ele.market));
 
   return (
     <>
       {selectedMenu === "all" &&
-        Object.values<ticker>(coinTicker).map((ele, idx: number) => {
+        Object.values<ticker>(coinTicker ? coinTicker : {}).map((ele, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
         })}
       {selectedMenu === "bookmark" &&
