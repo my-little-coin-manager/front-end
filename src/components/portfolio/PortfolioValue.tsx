@@ -14,19 +14,19 @@ const PortfolioValue = ({ income, totalPrice, nowPrice, equitiesValue, averagePr
     <>
       {Number.isInteger(averagePrice) ? (
         <>
-          <Profit profit={income}>{income.toLocaleString("ko-KR")}</Profit>
-          <CoinStock>{totalPrice.toLocaleString("ko-KR")}</CoinStock>
-          <CoinStock>{nowPrice.toLocaleString("ko-KR")}</CoinStock>
-          <CoinStock>{equitiesValue.toLocaleString("ko-KR")}</CoinStock>
-          <CoinStock>{averagePrice.toLocaleString("ko-KR")}</CoinStock>
+          <Profit profit={income}>{income?.toLocaleString("ko-KR")}</Profit>
+          <CoinStock>{totalPrice?.toLocaleString("ko-KR")}</CoinStock>
+          <CoinStock>{nowPrice?.toLocaleString("ko-KR")}</CoinStock>
+          <CoinStock>{equitiesValue?.toLocaleString("ko-KR")}</CoinStock>
+          <CoinStock>{averagePrice?.toLocaleString("ko-KR")}</CoinStock>
         </>
       ) : (
         <>
-          <Profit profit={income}>{income.toFixed(3)}</Profit>
-          <CoinStock>{totalPrice.toFixed(3)}</CoinStock>
-          <CoinStock>{nowPrice.toFixed(3)}</CoinStock>
-          <CoinStock>{equitiesValue.toFixed(3)}</CoinStock>
-          <CoinStock>{averagePrice.toFixed(3)}</CoinStock>
+          <Profit profit={income}>{income?.toFixed(3)}</Profit>
+          <CoinStock>{totalPrice?.toFixed(3)}</CoinStock>
+          <CoinStock>{nowPrice?.toFixed(3)}</CoinStock>
+          <CoinStock>{equitiesValue?.toFixed(3)}</CoinStock>
+          <CoinStock>{averagePrice?.toFixed(3)}</CoinStock>
         </>
       )}
     </>
