@@ -1,4 +1,3 @@
-import React from "react";
 import instance from "service/API";
 import { useQuery } from "react-query";
 
