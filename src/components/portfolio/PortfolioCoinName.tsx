@@ -7,7 +7,6 @@ interface IPorfolioCoinName {
 }
 
 const PortfolioCoinName = ({ koreanName, marketCode }: IPorfolioCoinName) => {
-  console.log(koreanName, marketCode);
   const splitMarketCode = marketCode.split("-");
   return (
     <CoinStock>
