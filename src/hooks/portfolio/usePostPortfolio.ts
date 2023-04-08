@@ -9,11 +9,11 @@ interface IHistory {
 }
 
 const postPortfolio = async (history: IHistory) => {
-  const response = await instance.put("/history", { history });
+  const response = await instance.post("/history", { history });
   return response.data;
 };
 
-const usePostBookmark = () => {
+const usePostPortfolio = () => {
   const queryClient = useQueryClient();
   return useMutation(postPortfolio, {
     onSuccess() {
@@ -22,4 +22,4 @@ const usePostBookmark = () => {
   });
 };
 
-export default usePostBookmark;
+export default usePostPortfolio;
