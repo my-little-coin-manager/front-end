@@ -14,15 +14,14 @@ const CoinListBody = () => {
   const { data: coinMarketList } = useGetMarkets();
   const { data: bookmark } = useGetBookmark();
   const selectedMenu = useRecoilValue(menuSelect);
-  const filterBookmark = Object.values<ticker>(coinTicker ? coinTicker : {}).filter((ele) =>
-    bookmark?.includes(ele.code)
-  );
+  const filterBookmark = coinTicker && Object.values<ticker>(coinTicker).filter((ele) => bookmark?.includes(ele.code));
   const bookmarkCoinMarkets = coinMarketList?.filter((ele: market) => bookmark?.includes(ele.market));
 
   return (
     <>
       {selectedMenu === "all" &&
-        Object.values<ticker>(coinTicker ? coinTicker : {}).map((ele, idx: number) => {
+        coinTicker &&
+        Object.values<ticker>(coinTicker).map((ele, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
         })}
       {selectedMenu === "bookmark" &&
