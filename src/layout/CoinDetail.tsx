@@ -7,10 +7,11 @@ import useGetBookmark from "hooks/bookmark/useGetBookmark";
 import DetailNameBox from "../components/coinDetail/DetailNameBox";
 import DetailPrice from "../components/coinDetail/DetailPrice";
 import CoinChart from "components/chart/CoinChart";
+import useGetMarkets from "hooks/useGetMarkets";
 
 const CoinDetail = () => {
   const { data: bookmark } = useGetBookmark();
-  const markets = useRecoilValue(coinMarkets);
+  const { data: markets } = useGetMarkets();
   const selected = useRecoilValue<string>(coinSelect);
   const selectedMk = markets?.find((data: market) => data.market === selected);
 
