@@ -30,8 +30,3 @@ export const menuSelect = atom<string>({
   key: "menuSelect",
   default: "all"
 });
-
-export const portfolio = atom<any>({
-  key: "portfolio",
-  default: []
-});
