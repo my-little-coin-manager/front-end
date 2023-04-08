@@ -6,6 +6,7 @@ import { ticker } from "../../types/types";
 import useGetPortfolio from "hooks/portfolio/useGetPortfolio";
 import PortfolioCoinName from "./PortfolioCoinName";
 import PortfolioValue from "./PortfolioValue";
+import useGetCoins from "hooks/useGetCoins";
 
 type CoinInfo = {
   averagePrice: number;
@@ -36,14 +37,14 @@ interface IAcc {
 }
 
 const PortfolioListBody = () => {
-  const coinTicker = useRecoilValue(coinTickers);
+  const { data: coinTicker } = useGetCoins();
   const { data: history } = useGetPortfolio();
 
   const historyMarket = [...new Set(history?.map((ele: IHistory) => ele.history.market))];
-  const filterTicker = Object.values(coinTicker).filter((ele: ticker) => historyMarket.includes(ele.code));
+  const filterTicker = Object.values(coinTicker).filter((ele: any) => historyMarket.includes(ele.code));
 
   const groupValues = history?.reduce((acc: IAcc, current: IHistory) => {
-    const tickerInfo = filterTicker.filter((ele: ticker) => {
+    const tickerInfo: any = filterTicker?.filter((ele: any) => {
       return Object.values(current.history)[0] === ele.code;
     });
 
