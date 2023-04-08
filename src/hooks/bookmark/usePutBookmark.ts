@@ -9,11 +9,12 @@ interface IData {
 }
 
 const putBookmark = async (data: IData) => {
-  if (!data.bookmark.includes(data.selected)) {
-    const response = await instance.put("/bookmark", { bookmark: data.selected });
+  const { bookmark, selected } = data;
+  if (!bookmark.includes(selected)) {
+    const response = await instance.put("/bookmark", { bookmark: selected });
     return response.data.result.bookmark;
   }
-  const response = await instance.delete(`/bookmark/${data.selected}`);
+  const response = await instance.delete(`/bookmark/${selected}`);
   return response.data.result.bookmark;
 };
 
