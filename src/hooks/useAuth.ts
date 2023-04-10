@@ -18,9 +18,9 @@ const useAuth = () => {
     });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>, axiosFunc: (userInfo: any) => Promise<void>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>, axiosFn: (userInfo: any) => Promise<void>) => {
     e.preventDefault();
-    axiosFunc(userInfo);
+    axiosFn(userInfo);
   };
 
   return { onChangehandler, onSubmit, userInfo };
