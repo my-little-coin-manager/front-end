@@ -1,13 +1,12 @@
+import React from "react";
 import axios from "axios";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { coinCandle, coinSelect } from "recoil/atoms";
-import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { coinSelect } from "recoil/atoms";
 import { IInitialData } from "types/types";
+import { useQuery } from "react-query";
 
-const useGetInitialDataList = () => {
+const useGetCoinCandles = () => {
   const selected = useRecoilValue(coinSelect);
-
-  const [coinCandles, setCoinCandles] = useRecoilState(coinCandle);
 
   const config = {
     params: {
@@ -33,17 +32,20 @@ const useGetInitialDataList = () => {
         };
       });
 
-      setCoinCandles(item);
+      return item;
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    getCandles();
-  }, [selected]);
+  const getCoinCandles = () => {
+    return useQuery(["coinCandles", selected], getCandles, {
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+      retry: 0
+    });
+  };
 
-  return { coinCandles };
+  return getCoinCandles();
 };
-
-export default useGetInitialDataList;
+export default useGetCoinCandles;

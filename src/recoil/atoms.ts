@@ -19,31 +19,14 @@ export const coinSelect = atom<string>({
   default: "KRW-BTC"
 });
 
-//코인 차트데이터
-export const coinCandle = atom({
-  key: "coinCandle",
-  default: {}
-});
-
 //차트 실시간데이터
 export const liveCandleData = atom({
   key: "liveCandleData",
   default: {}
 });
 
-//북마크 정보
-export const userBookmark = atom<string[] | string>({
-  key: "userBookmark",
-  default: []
-});
-
 //전체코인 or 북마크 선택
 export const menuSelect = atom<string>({
   key: "menuSelect",
   default: "all"
-});
-
-export const portfolio = atom<any>({
-  key: "portfolio",
-  default: []
 });

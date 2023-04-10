@@ -72,3 +72,5 @@ export type livecandle = {
   turnover: number;
   volume: number;
 };
+
+export type Bookmark = string[];

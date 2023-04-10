@@ -1,9 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { coinMarkets } from "recoil/atoms";
-import { portfolio } from "recoil/atoms";
-import axios from "axios";
+import usePostBookmark from "hooks/portfolio/usePostPortfolio";
+import useGetMarkets from "hooks/useGetMarkets";
 
 type SearchMarket = { market: string; korean_name: string; english_name: string };
 
@@ -20,27 +18,25 @@ interface IPortfolio {
 }
 
 const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetStateAction<number>> }) => {
-  const market = useRecoilValue(coinMarkets);
-  const setHistory = useSetRecoilState(portfolio);
+  const { data: market } = useGetMarkets();
+  const { mutate: postPortfolio } = usePostBookmark();
   const [search, setSearch] = useState<ISearch>({ market: "", koreanName: "" });
   const [portforlio, setPortfolio] = useState<IPortfolio>({ transaction: "", price: 0, qty: 0, date: "" });
+
   const searchValue = useRef<HTMLInputElement>(null);
   const portRef = useRef<HTMLFormElement>(null);
 
   const searchCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const findMarket = market.find((ele) => ele.korean_name === e.target.value);
+    const findMarket = market?.find((ele: any) => ele.korean_name === e.target.value);
     setSearch({ ...search, koreanName: e.target.value, market: findMarket?.market });
   };
 
   const onChnagePortfolio = (e: React.ChangeEvent<HTMLInputElement> & React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.target;
-
-    setPortfolio((prevState) => {
-      return { ...prevState, [name]: value };
-    });
+    setPortfolio({ ...portforlio, [name]: value });
   };
 
-  const postPortfolio = async (portforlio: IPortfolio) => {
+  const postPortfolioHandelr = async (portforlio: IPortfolio) => {
     const history = { ...portforlio, ...search };
 
     if (!localStorage.getItem("accessToken")) {
@@ -63,29 +59,16 @@ const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetState
       throw new Error("매수/매도를 선택해 주세요.");
     }
 
-    const response = await axios.post(
-      process.env.REACT_APP_API_URL + "/history",
-      { history },
-      {
-        headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-      }
-    );
-
-    setHistory((prevHistory: []) => {
-      const newHistory = [...prevHistory, response.data];
-      return [...newHistory];
-    });
+    postPortfolio(history);
   };
 
   const onSubmitPortfolio = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postPortfolio(portforlio);
+    postPortfolioHandelr(portforlio);
   };
 
   const searchMarket =
-    search.koreanName.length > 0 && market.filter((ele) => ele.korean_name.includes(search.koreanName));
-
-  console.log(searchMarket);
+    search.koreanName.length > 0 && market.filter((ele: any) => ele.korean_name.includes(search.koreanName));
 
   useEffect(() => {
     setHeight(portRef?.current?.clientHeight || 0);
