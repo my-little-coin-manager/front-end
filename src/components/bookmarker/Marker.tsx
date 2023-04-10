@@ -1,56 +1,29 @@
-import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { userBookmark } from "../../recoil/atoms";
-import styled from "styled-components";
-import axios from "axios";
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { coinSelect } from "../../recoil/atoms";
 import { ReactComponent as DisabledStar } from "../../asset/svg/star-disabled.svg";
 import { ReactComponent as AbledStar } from "../../asset/svg/star-abled.svg";
+import useGetBookmark from "hooks/bookmark/useGetBookmark";
+import usePutBookmark from "hooks/bookmark/usePutBookmark";
 
-interface NameBoxProps {
-  select: string;
-}
+const BookMarker = () => {
+  const { data: bookmark } = useGetBookmark();
+  const { mutate: putBookmark } = usePutBookmark();
+  const selected = useRecoilValue<string>(coinSelect);
 
-const BookMarker = ({ select }: NameBoxProps) => {
-  const [bookmarkInfo, setBookmarkInfo] = useRecoilState(userBookmark);
-
-  const check = async () => {
-    const getUserBookmark = await axios.get(process.env.REACT_APP_API_URL + "/bookmark", {
-      headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-    });
-    setBookmarkInfo(getUserBookmark.data.result.bookmark);
-  };
-
-  const changeStatus = async () => {
+  const changeStatus = () => {
     if (!localStorage.getItem("accessToken")) {
       alert("북마크 기능은 로그인 후 사용할 수 있습니다.");
-    } else if (!bookmarkInfo.includes(select)) {
-      const response = await axios.put(
-        process.env.REACT_APP_API_URL + "/bookmark",
-        { bookmark: select },
-        {
-          headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-        }
-      );
-      setBookmarkInfo(response.data.result);
     } else {
-      const response = await axios.delete(process.env.REACT_APP_API_URL + `/bookmark/${select}`, {
-        headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-      });
-      setBookmarkInfo(response.data.result);
+      putBookmark({ selected, bookmark });
     }
   };
 
-  useEffect(() => {
-    check();
-  }, []);
-
   return (
-    <BookmarkStar onClick={changeStatus}>
-      {bookmarkInfo.includes(select) && <AbledStar />}
-      {!bookmarkInfo.includes(select) && <DisabledStar />}
-    </BookmarkStar>
+    <div onClick={changeStatus}>
+      {bookmark?.includes(selected) && <AbledStar />}
+      {!bookmark?.includes(selected) && <DisabledStar />}
+    </div>
   );
 };
 export default BookMarker;
-
-const BookmarkStar = styled.div``;

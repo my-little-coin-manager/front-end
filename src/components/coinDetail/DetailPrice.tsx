@@ -1,26 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { coinTickers } from "recoil/atoms";
-import { ticker } from "types/types";
+import useGetCoins from "hooks/useGetCoins";
 
 interface PriceProps {
   select: string;
 }
 
 const DetailPrice = ({ select }: PriceProps) => {
-  const tickers = useRecoilValue(coinTickers);
-  const ticker = tickers[select];
+  const { data: coinTicker }: any = useGetCoins();
+  const ticker = coinTicker ? coinTicker[select] : {};
+
   return (
     <Price>
       <State change={ticker?.change}>
         <div>
-          <h4>{ticker?.trade_price.toLocaleString("ko-KR")}</h4>
+          <h4>{ticker?.trade_price?.toLocaleString("ko-KR")}</h4>
           <span>KRW</span>
         </div>
         <div>
           전일대비 :&nbsp;<span> {(ticker?.signed_change_rate * 100).toFixed(2)}%</span>
-          <span>{ticker?.signed_change_price.toLocaleString("ko-KR")}</span>
+          <span>{ticker?.signed_change_price?.toLocaleString("ko-KR")}</span>
           <em>KRW</em>
         </div>
       </State>
@@ -29,14 +28,14 @@ const DetailPrice = ({ select }: PriceProps) => {
           <P1>
             고가
             <Span1>
-              {ticker?.high_price.toLocaleString("ko-KR")}
+              {ticker?.high_price?.toLocaleString("ko-KR")}
               <em>KRW</em>
             </Span1>
           </P1>
           <P2>
             저가
             <Span2>
-              {ticker?.low_price.toLocaleString("ko-KR")}
+              {ticker?.low_price?.toLocaleString("ko-KR")}
               <em>KRW</em>
             </Span2>
           </P2>

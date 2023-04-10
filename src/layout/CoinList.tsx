@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import CoinListBody from "../components/coinList/CoinListBody";
 import CoinListNavbar from "../components/coinList/CoinListNavbar";
 import CoinListHeader from "../components/coinList/CoinListHeader";
 
 const CoinList = () => {
-  return (
-    <CoinListContainer>
-      <CoinListNavbar />
-      <ul>
-        <CoinListHeader />
-        <CoinListBody />
-      </ul>
-    </CoinListContainer>
-  );
+  return useMemo(() => {
+    return (
+      <CoinListContainer>
+        <CoinListNavbar />
+        <ul>
+          <CoinListHeader />
+          <CoinListBody />
+        </ul>
+      </CoinListContainer>
+    );
+  }, []);
 };
 
 export default CoinList;

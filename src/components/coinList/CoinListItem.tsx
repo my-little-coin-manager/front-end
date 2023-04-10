@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSetRecoilState } from "recoil";
 import { coinSelect } from "recoil/atoms";
 import styled from "styled-components";
@@ -15,13 +15,12 @@ interface ListItemProps {
 
 const CoinListItem = ({ item, coinMarkets }: ListItemProps) => {
   const setCoinSelected = useSetRecoilState(coinSelect);
+  const onClickCoinListItem = useCallback(() => {
+    setCoinSelected(item.code);
+  }, [item.code]);
 
   return (
-    <CoinList
-      onClick={() => {
-        setCoinSelected(item.code);
-      }}
-    >
+    <CoinList onClick={onClickCoinListItem}>
       <CoinName koreanName={coinMarkets.korean_name} marketCode={coinMarkets.market} />
       <CoinPrice price={item.trade_price} change={item.change} />
       <CoinCompare change={item.change} rate={item.signed_change_rate} price={item.signed_change_price} />
