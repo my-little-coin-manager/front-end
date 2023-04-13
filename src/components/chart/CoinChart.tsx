@@ -11,18 +11,7 @@ const CoinChart = () => {
 
   useEffect(() => {
     if (coinCandles) {
-      chart = init("coin-chart", {
-        styles: {
-          grid: { horizontal: { style: LineType.Dashed } },
-          candle: {
-            bar: {
-              upColor: "#d24f45",
-              downColor: "#1261c4",
-              noChangeColor: "#888888"
-            }
-          }
-        }
-      });
+      chart = init("coin-chart");
 
       const fetchData = () => {
         chart?.applyNewData(coinCandles);
@@ -36,7 +25,18 @@ const CoinChart = () => {
   }, [coinCandles]);
 
   useEffect(() => {
-    chart = init("coin-chart");
+    chart = init("coin-chart", {
+      styles: {
+        grid: { horizontal: { style: LineType.Dashed } },
+        candle: {
+          bar: {
+            upColor: "#d24f45",
+            downColor: "#1261c4",
+            noChangeColor: "#888888"
+          }
+        }
+      }
+    });
     if (initialized) {
       chart?.updateData(newData);
       return () => {
