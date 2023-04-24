@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { coinMarkets, coinSelect } from "../recoil/atoms";
+import { coinSelect } from "../recoil/atoms";
 import { market } from "types/types";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
 import DetailNameBox from "../components/coinDetail/DetailNameBox";
