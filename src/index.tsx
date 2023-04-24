@@ -6,7 +6,6 @@ import { RecoilRoot } from "recoil";
 import GlobalStyle from "style/GlobalStyle";
 import Fonts from "style/Fonts";
 import App from "./App";
-import Loading from "components/common/Loading";
 import "./index.css";
 
 const container = document.getElementById("root") as HTMLElement;
@@ -17,11 +16,9 @@ const queryClient = new QueryClient();
 root.render(
   <QueryClientProvider client={queryClient}>
     <RecoilRoot>
-      <Suspense fallback={<Loading />}>
-        <Fonts />
-        <GlobalStyle />
-        <App />
-      </Suspense>
+      <Fonts />
+      <GlobalStyle />
+      <App />
     </RecoilRoot>
     <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
   </QueryClientProvider>

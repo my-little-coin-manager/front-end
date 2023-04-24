@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import CoinTitle from "components/CoinTitle";
+import CoinImg from "components/CoinImg";
+import CoinMarketCode from "components/CoinMarketCode";
 
 interface NameProps {
   koreanName: string;
@@ -12,9 +15,9 @@ const CoinName = ({ koreanName, marketCode }: NameProps) => {
   return (
     <Coin>
       <span>
-        <img src={`https://static.upbit.com/logos/${splitMarketCode[1]}.png`} alt="" />
+        <CoinImg coinImg={splitMarketCode[1]} />
         <span>
-          <p>{koreanName}</p>
+          <CoinTitle title={koreanName} />
           <p>
             {splitMarketCode[1]}/{splitMarketCode[0]}
           </p>
