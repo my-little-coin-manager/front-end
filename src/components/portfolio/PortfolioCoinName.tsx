@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import CoinTitle from "components/CoinTitle";
+import CoinImg from "components/CoinImg";
 
 interface IPorfolioCoinName {
   koreanName: string;
@@ -10,15 +12,15 @@ const PortfolioCoinName = ({ koreanName, marketCode }: IPorfolioCoinName) => {
   const splitMarketCode = marketCode.split("-");
   return (
     <CoinStock>
-      <img src={`https://static.upbit.com/logos/${splitMarketCode[1]}.png`} alt="" />
-      {koreanName}
+      <CoinImg coinImg={splitMarketCode[1]} />
+      <CoinTitle title={koreanName} />
     </CoinStock>
   );
 };
 
 export default React.memo(PortfolioCoinName);
 
-const CoinStock = styled.p`
+const CoinStock = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
