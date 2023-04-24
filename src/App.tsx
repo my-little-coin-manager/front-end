@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { RecoilRoot } from "recoil";
+import GlobalStyle from "style/GlobalStyle";
+import Fonts from "style/Fonts";
 import CoinList from "./layout/CoinList";
 import CoinDetail from "./layout/CoinDetail";
 import Portfolio from "layout/Portfolio";
@@ -7,17 +12,24 @@ import styled from "styled-components";
 
 function App() {
   const [componentsControl, setComponentsControl] = useState("detail");
+  const queryClient = new QueryClient();
+
   return (
-    <>
-      <Container>
-        <Header componentsControl={componentsControl} setComponentsControl={setComponentsControl} />
-        <Layout>
-          {componentsControl === "detail" && <CoinDetail />}
-          {componentsControl === "portfolio" && <Portfolio />}
-          <CoinList />
-        </Layout>
-      </Container>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <Fonts />
+        <GlobalStyle />
+        <Container>
+          <Header componentsControl={componentsControl} setComponentsControl={setComponentsControl} />
+          <Layout>
+            {componentsControl === "detail" && <CoinDetail />}
+            {componentsControl === "portfolio" && <Portfolio />}
+            <CoinList />
+          </Layout>
+        </Container>
+      </RecoilRoot>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   );
 }
 
