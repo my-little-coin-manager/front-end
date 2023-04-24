@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { coinSelect } from "../recoil/atoms";
 import { market } from "types/types";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
-import DetailNameBox from "../components/coinDetail/DetailNameBox";
+import DetailNameBox from "../container/DetailNameBox";
 import DetailPrice from "../components/coinDetail/DetailPrice";
 import CoinChart from "components/chart/CoinChart";
 import useGetMarkets from "hooks/useGetMarkets";
