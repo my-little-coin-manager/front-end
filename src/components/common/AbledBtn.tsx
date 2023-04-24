@@ -9,7 +9,6 @@ interface IProps {
 }
 
 const AbledBtn = (props: IProps) => {
-  console.log(props);
   return (
     <Btn type="submit" onClick={props.onClick}>
       {props.children}
