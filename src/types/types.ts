@@ -16,15 +16,15 @@ export interface IInitialData {
 }
 
 // Atom coinMarkets
-export type market = {
+export type Market = {
   market: string;
   korean_name: string;
   english_name: string;
 };
-export type marketName = market[];
+export type MarketName = Market[];
 
 // Atom coinTickers
-export type ticker = {
+export type Ticker = {
   acc_ask_volume: number;
   acc_bid_volume: number;
   acc_trade_price: number;
@@ -60,10 +60,10 @@ export type ticker = {
   type: string;
 };
 
-export type tickerInfo = { [market: string]: ticker };
+export type TickerInfo = { [market: string]: Ticker };
 
 // Atom liveCandleData
-export type livecandle = {
+export type Livecandle = {
   open: number;
   close: number;
   high: number;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Exclamation } from "../../asset/svg/exclamation.svg";
-import { ticker, market } from "types/types";
+import { Ticker, Market } from "types/types";
 import { useRecoilValue } from "recoil";
 import { menuSelect } from "recoil/atoms";
 import CoinListItem from "./CoinListItem";
@@ -14,18 +14,18 @@ const CoinListBody = () => {
   const { data: coinMarketList } = useGetMarkets();
   const { data: bookmark } = useGetBookmark();
   const selectedMenu = useRecoilValue(menuSelect);
-  const filterBookmark = coinTicker && Object.values<ticker>(coinTicker).filter((ele) => bookmark?.includes(ele.code));
-  const bookmarkCoinMarkets = coinMarketList?.filter((ele: market) => bookmark?.includes(ele.market));
+  const filterBookmark = coinTicker && Object.values<Ticker>(coinTicker).filter((ele) => bookmark?.includes(ele.code));
+  const bookmarkCoinMarkets = coinMarketList?.filter((ele: Market) => bookmark?.includes(ele.market));
 
   return (
     <>
       {selectedMenu === "all" &&
         coinTicker &&
-        Object.values<ticker>(coinTicker).map((ele, idx: number) => {
+        Object.values<Ticker>(coinTicker).map((ele, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
         })}
       {selectedMenu === "bookmark" &&
-        filterBookmark.map((ele: ticker, idx: number) => {
+        filterBookmark.map((ele: Ticker, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={bookmarkCoinMarkets[idx]} />;
         })}
       {selectedMenu === "bookmark" && !filterBookmark.length && !!localStorage.getItem("accessToken") && (

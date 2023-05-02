@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import CoinTitle from "components/CoinTitle";
 import CoinImg from "components/CoinImg";
-import CoinMarketCode from "components/CoinMarketCode";
 
 interface NameProps {
   koreanName: string;

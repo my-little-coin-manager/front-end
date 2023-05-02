@@ -10,7 +10,7 @@ interface IData {
 
 const putBookmark = async (data: IData) => {
   const { bookmark, selected } = data;
-  if (!bookmark.includes(selected)) {
+  if (!bookmark?.includes(selected)) {
     const response = await instance.put("/bookmark", { bookmark: selected });
     return response.data.result.bookmark;
   }
