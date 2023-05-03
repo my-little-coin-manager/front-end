@@ -2,8 +2,10 @@ import instance from "service/API";
 import { useQuery } from "react-query";
 
 const getBookmark = async () => {
-  const response = await instance.get("/bookmark");
-  return response.data.result.bookmark;
+  if (localStorage.getItem("accessToken")) {
+    const response = await instance.get("/bookmark");
+    return response.data.result.bookmark;
+  }
 };
 
 const useGetBookmark = () => {
