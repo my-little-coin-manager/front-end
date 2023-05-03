@@ -24,7 +24,6 @@ instance.interceptors.response.use(
     return config;
   },
   (error) => {
-    console.log(error);
     if (error.response.data.msg === "로그인 만료") {
       localStorage.clear();
       alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
