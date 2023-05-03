@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../asset/svg/mlcm_logo_white.svg";
+import useLogout from "hooks/useLogout";
 import Login from "../components/header/Login";
 import SignUp from "../components/header/SignUp";
 
@@ -30,6 +31,7 @@ const Header = ({ componentsControl, setComponentsControl }: IProps) => {
 
   const logout = () => {
     localStorage.clear();
+    useLogout();
     location.reload();
   };
 
