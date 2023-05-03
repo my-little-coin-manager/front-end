@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
 import { useSetRecoilState } from "recoil";
 import { coinSelect } from "recoil/atoms";
+import { Market, Ticker } from "types/types";
 import styled from "styled-components";
 import CoinPrice from "./CoinPrice";
 import CoinCompare from "./CoinCompare";
 import CoinTradeVolume from "./CoinTradeVolume";
 import CoinName from "./CoinName";
-import { Market, Ticker } from "types/types";
 
 interface ListItemProps {
   item: Ticker;
