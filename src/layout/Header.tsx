@@ -43,7 +43,7 @@ const Header = ({ componentsControl, setComponentsControl }: IProps) => {
         <p onClick={() => setComponentsControl("portfolio")}>PORTFOLIO</p>
       </NavBar>
 
-      {localStorage.getItem("accessToken") === null ? (
+      {!localStorage.getItem("accessToken") ? (
         <LoginInfo>
           <p onClick={onLoginModal}>SIGN IN</p>
           <p onClick={onSignUpModal}>SIGN UP</p>
