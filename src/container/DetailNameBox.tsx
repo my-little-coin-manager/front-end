@@ -1,14 +1,14 @@
-import BookMarker from "components/bookmarker/Marker";
+import BookMarker from "components/BookMarker";
 import React from "react";
 import styled from "styled-components";
-import { market } from "types/types";
+import { Market } from "types/types";
 import CoinTitle from "components/CoinTitle";
 import CoinImg from "components/CoinImg";
 import CoinMarketCode from "components/CoinMarketCode";
 
 interface NameBoxProps {
   select: string;
-  focus: market;
+  focus: Market;
   status: boolean;
 }
 

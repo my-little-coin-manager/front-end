@@ -6,11 +6,11 @@ import CoinPrice from "./CoinPrice";
 import CoinCompare from "./CoinCompare";
 import CoinTradeVolume from "./CoinTradeVolume";
 import CoinName from "./CoinName";
-import { market, ticker } from "types/types";
+import { Market, Ticker } from "types/types";
 
 interface ListItemProps {
-  item: ticker;
-  coinMarkets: market;
+  item: Ticker;
+  coinMarkets: Market;
 }
 
 const CoinListItem = ({ item, coinMarkets }: ListItemProps) => {

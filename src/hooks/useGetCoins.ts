@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { market } from "types/types";
+import { Market } from "types/types";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import useGetMarkets from "./useGetMarkets";
@@ -11,7 +11,7 @@ const useGetCoins = () => {
   const coinTicker = useQuery(
     "coinTicker",
     async () => {
-      const marketName = coinMarketList?.map((data: market) => data.market);
+      const marketName = coinMarketList?.map((data: Market) => data.market);
       if (marketName) {
         const response = await axios.get(`https://api.upbit.com/v1/ticker?markets=${marketName}`);
         return response.data;
@@ -26,7 +26,7 @@ const useGetCoins = () => {
 
   const getCoinTicker = () => {
     ws.current = new WebSocket(webSocketUrl);
-    const marketName = coinMarketList.map((data: market) => data.market);
+    const marketName = coinMarketList.map((data: Market) => data.market);
     const data = [{ ticket: "test" }, { type: "ticker", codes: marketName }];
 
     ws.current.onopen = () => {

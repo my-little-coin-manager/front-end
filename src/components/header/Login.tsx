@@ -1,9 +1,9 @@
 import React from "react";
-import axios from "axios";
 import useAuth from "hooks/useAuth";
 import styled from "styled-components";
 import AbledBtn from "components/common/AbledBtn";
 import DisabledBtn from "components/common/DisabledBtn";
+import API from "service/API";
 
 interface IResponse {
   response?: {
@@ -22,12 +22,11 @@ const Login = ({ onSignUpModal, setLoginModal }: IProps) => {
 
   const getUser = async (userInfo: IResponse) => {
     try {
-      const response = await axios.post(process.env.REACT_APP_API_URL + "/login", userInfo);
+      const response = await API.post(process.env.REACT_APP_API_URL + "/login", userInfo);
       localStorage.setItem("accessToken", response.data.accessToken);
-      localStorage.setItem("refreshToken", response.data.refreshToken);
       localStorage.setItem("nickname", response.data.nickname);
       setLoginModal(false);
-      location.reload();
+      // location.reload();
     } catch (error: unknown) {
       const errMsg = (await error) as IResponse;
       alert(errMsg);
