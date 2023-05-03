@@ -15,7 +15,7 @@ const getMarkets = async () => {
 
     return KRW_markets;
   } catch (error) {
-    console.log(error);
+    throw new Error("네트워크가 원활하지 않습니다. 다시 시도해 주세요.");
   }
 };
 
