@@ -1,14 +1,14 @@
 import { atom } from "recoil";
-import { marketName, tickerInfo } from "types/types";
+import { MarketName, TickerInfo } from "types/types";
 
 //실시간 코인 시세
-export const coinTickers = atom<tickerInfo>({
+export const coinTickers = atom<TickerInfo>({
   key: "coinTickers",
   default: {}
 });
 
 //코인 마켓 가져오기
-export const coinMarkets = atom<marketName>({
+export const coinMarkets = atom<MarketName>({
   key: "coinMarkets",
   default: []
 });

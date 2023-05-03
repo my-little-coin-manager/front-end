@@ -1,11 +1,14 @@
-import BookMarker from "components/bookmarker/Marker";
+import BookMarker from "components/BookMarker";
 import React from "react";
 import styled from "styled-components";
-import { market } from "types/types";
+import { Market } from "types/types";
+import CoinTitle from "components/CoinTitle";
+import CoinImg from "components/CoinImg";
+import CoinMarketCode from "components/CoinMarketCode";
 
 interface NameBoxProps {
   select: string;
-  focus?: market;
+  focus: Market;
   status: boolean;
 }
 
@@ -13,9 +16,9 @@ const DetailNameBox = ({ select, focus }: NameBoxProps) => {
   return (
     <NameBox>
       <div>
-        <img src={`https://static.upbit.com/logos/${select.split("-")[1]}.png`} alt="" />
-        <p>{focus?.korean_name}</p>
-        <h4>{focus?.market}</h4>
+        <CoinImg coinImg={select.split("-")[1]} />
+        <CoinTitle title={focus?.korean_name} />
+        <CoinMarketCode marketCode={focus?.market} />
       </div>
       <BookMarker />
     </NameBox>

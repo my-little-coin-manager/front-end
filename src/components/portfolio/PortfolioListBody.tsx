@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { coinTickers } from "recoil/atoms";
-import { ticker } from "../../types/types";
+import { Ticker } from "../../types/types";
 import useGetPortfolio from "hooks/portfolio/useGetPortfolio";
 import PortfolioCoinName from "./PortfolioCoinName";
 import PortfolioValue from "./PortfolioValue";
@@ -41,10 +39,16 @@ const PortfolioListBody = () => {
   const { data: history } = useGetPortfolio();
 
   const historyMarket = [...new Set(history?.map((ele: IHistory) => ele.history.market))];
-  const filterTicker = Object.values(coinTicker).filter((ele: any) => historyMarket.includes(ele.code));
+  const filterTicker =
+    coinTicker &&
+    Object.values(coinTicker).filter((ele: any) => {
+      return historyMarket.includes(ele.code);
+    });
 
   const groupValues = history?.reduce((acc: IAcc, current: IHistory) => {
-    const tickerInfo: any = filterTicker?.filter((ele: any) => {
+    if (!filterTicker) return;
+
+    const tickerInfo: Ticker[] = filterTicker?.filter((ele: Ticker) => {
       return Object.values(current.history)[0] === ele.code;
     });
 

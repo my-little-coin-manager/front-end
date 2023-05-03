@@ -5,7 +5,6 @@ const instance: AxiosInstance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  console.log(config);
   return config;
 });
 
