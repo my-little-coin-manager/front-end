@@ -28,8 +28,7 @@ const useNewData = () => {
         turnover: ((opening_price + low_price + high_price + trade_price) / 4) * trade_volume
       });
     };
-    ws.current.onerror = (e: any) => {
-      console.log("Error", e);
+    ws.current.onerror = () => {
       ws.current.close();
     };
     return () => {
