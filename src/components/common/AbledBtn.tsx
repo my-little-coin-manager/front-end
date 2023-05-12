@@ -1,5 +1,4 @@
-import useAuth from "hooks/useAuth";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface IProps {
