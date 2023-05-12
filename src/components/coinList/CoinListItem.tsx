@@ -24,7 +24,7 @@ const CoinListItem = ({ item, coinMarkets }: IListItemProps) => {
       <CoinName koreanName={coinMarkets.korean_name} marketCode={coinMarkets.market} />
       <CoinPrice price={item.trade_price} change={item.change} />
       <CoinCompare change={item.change} rate={item.signed_change_rate} price={item.signed_change_price} />
-      <CoinTradeVolume price={item.acc_trade_price_24h} />
+      <CoinTradeVolume tradePrice={item.acc_trade_price_24h} />
     </CoinList>
   );
 };

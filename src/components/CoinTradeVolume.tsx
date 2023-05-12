@@ -1,12 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-interface CoinTradePriceProps {
-  price: number;
+interface ICoinTradePriceProps {
+  tradePrice: number;
+  parents?: string;
 }
 
-const CoinTradeVolume = ({ price }: CoinTradePriceProps) => {
-  return <TradePrice>{Math.round(price / 1000000).toLocaleString("ko-KR")}백만</TradePrice>;
+const CoinTradeVolume = ({ tradePrice, parents }: ICoinTradePriceProps) => {
+  return (
+    <>
+      {parents === "datail" ? (
+        <TradePrice>{Math.round(tradePrice).toLocaleString("ko-KR")}KRW</TradePrice>
+      ) : (
+        <TradePrice>{Math.round(tradePrice / 1000000).toLocaleString("ko-KR")}백만</TradePrice>
+      )}
+    </>
+  );
 };
 
 const TradePrice = styled.p`

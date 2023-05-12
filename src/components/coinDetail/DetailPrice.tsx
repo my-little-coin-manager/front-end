@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import useGetCoins from "hooks/useGetCoins";
 import CoinPrice from "components/CoinPrice";
+import CoinTradeVolume from "components/CoinTradeVolume";
 
 interface PriceProps {
   select: string;
@@ -54,8 +55,7 @@ const DetailPrice = ({ select }: PriceProps) => {
           <P>
             거래대금(24H)
             <Span>
-              {Math.round(ticker?.acc_trade_price_24h).toLocaleString("ko-KR")}
-              <em>KRW</em>
+              <CoinTradeVolume tradePrice={ticker?.acc_trade_price_24h} parents="datail" />
             </Span>
           </P>
         </div>
