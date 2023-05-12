@@ -28,10 +28,11 @@ export default CoinDetail;
 
 //디테일 컨테이너
 const DetailContainer = styled.div`
+  box-sizing: border-box;
   border-radius: 1rem;
   background-color: #fff;
   box-shadow: 0.25rem 0.25rem 0.5rem rgb(0 0 0 / 12%);
   width: 70rem;
   margin-right: 1rem;
-  padding: 1rem;
+  padding: 2rem;
 `;

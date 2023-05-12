@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import useGetCoins from "hooks/useGetCoins";
+import CoinPrice from "components/CoinPrice";
 
 interface PriceProps {
   select: string;
@@ -13,15 +14,17 @@ const DetailPrice = ({ select }: PriceProps) => {
   return (
     <Price>
       <State change={ticker?.change}>
-        <div>
-          <h4>{ticker?.trade_price?.toLocaleString("ko-KR")}</h4>
+        <PriceContianer>
+          <CoinPrice price={ticker?.trade_price} change={ticker?.change} parents="detail" />
           <span>KRW</span>
-        </div>
-        <div>
-          전일대비 :&nbsp;<span> {(ticker?.signed_change_rate * 100).toFixed(2)}%</span>
-          <span>{ticker?.signed_change_price?.toLocaleString("ko-KR")}</span>
-          <em>KRW</em>
-        </div>
+        </PriceContianer>
+        <CompareContainer>
+          <p>전일대비 {(ticker?.signed_change_rate * 100).toFixed(2)}%</p>
+          <span>
+            <p>{ticker?.signed_change_price?.toLocaleString("ko-KR")}</p>
+            <em>KRW</em>
+          </span>
+        </CompareContainer>
       </State>
       <HighLow>
         <div>
@@ -64,59 +67,53 @@ const DetailPrice = ({ select }: PriceProps) => {
 //디테일 가격정보 컨테이너
 const Price = styled.div`
   display: flex;
+  margin: 0 1rem;
   border-bottom: 1px solid #d9d9d9;
   height: 8rem;
   justify-content: space-between;
+  align-items: center;
 `;
 
 //상승,하락 실시간반영
 const State = styled.div<{ change: string }>`
   color: ${({ change }) => (change === "RISE" ? "red" : change === "FALL" ? "blue" : "black")};
-  margin: 0 0 0 1rem;
-  width: 20rem;
+  width: 16rem;
+`;
 
-  & div:nth-child(1) {
-    display: flex;
-    flex-direction: row;
+const PriceContianer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  justify-content: space-between;
 
-    & h4 {
-      width: 13rem;
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 2rem 0 0 0;
-      justify-content: space-between;
-    }
+  & span {
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+`;
 
-    & span {
-      margin: 2.7rem 0 0 0;
-      margin-right: 0.5rem;
-      font-size: 1rem;
-      font-weight: lighter;
-    }
+const CompareContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    & p {
-      margin-top: 0.75rem;
-    }
+  & p {
+    margin-right: 1rem;
   }
 
-  & div:nth-child(2) {
-    margin: 1rem 0 0 0;
+  & span {
     display: flex;
-    flex-direction: low;
-    & span {
-      width: 4rem;
+    font-size: 1rem;
+    font-weight: lighter;
+    align-items: center;
+
+    & p {
       margin-right: 0.5rem;
-      font-size: 1rem;
-      font-weight: lighter;
     }
+
     & em {
       font-style: normal;
       font-size: 0.625rem;
-      margin: 0.25rem;
-    }
-
-    & p {
-      margin-top: 0.75rem;
     }
   }
 `;

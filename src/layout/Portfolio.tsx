@@ -17,6 +17,7 @@ const Portfolio = () => {
 export default Portfolio;
 
 const PortfoiloContainer = styled.div`
-  width: 72rem;
+  box-sizing: border-box;
+  width: 70rem;
   margin-right: 1rem;
 `;

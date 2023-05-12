@@ -7,7 +7,7 @@ const CoinListNavbar = () => {
   const [select, setSelect] = useRecoilState(menuSelect);
 
   const selectMenu = (e: React.MouseEvent<HTMLElement>) => {
-    e.currentTarget.id === "all" ? setSelect("all") : setSelect("bookmark"); // currentTarget 과 target 차이?
+    e.currentTarget.id === "all" ? setSelect("all") : setSelect("bookmark");
   };
 
   return (

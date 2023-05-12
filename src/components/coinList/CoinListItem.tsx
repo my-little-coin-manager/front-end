@@ -3,17 +3,17 @@ import { useSetRecoilState } from "recoil";
 import { coinSelect } from "recoil/atoms";
 import { Market, Ticker } from "types/types";
 import styled from "styled-components";
-import CoinPrice from "./CoinPrice";
-import CoinCompare from "./CoinCompare";
-import CoinTradeVolume from "./CoinTradeVolume";
-import CoinName from "./CoinName";
+import CoinPrice from "../CoinPrice";
+import CoinCompare from "../CoinCompare";
+import CoinTradeVolume from "../CoinTradeVolume";
+import CoinName from "../CoinName";
 
-interface ListItemProps {
+interface IListItemProps {
   item: Ticker;
   coinMarkets: Market;
 }
 
-const CoinListItem = ({ item, coinMarkets }: ListItemProps) => {
+const CoinListItem = ({ item, coinMarkets }: IListItemProps) => {
   const setCoinSelected = useSetRecoilState(coinSelect);
   const onClickCoinListItem = useCallback(() => {
     setCoinSelected(item.code);
