@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
+import styled from "styled-components";
 import GlobalStyle from "style/GlobalStyle";
 import Fonts from "style/Fonts";
-import CoinList from "./layout/CoinList";
-import CoinDetail from "./layout/CoinDetail";
-import Portfolio from "layout/Portfolio";
-import Header from "layout/Header";
-import styled from "styled-components";
+import CoinList from "components/templates/CoinList";
+import CoinDetail from "components/templates/CoinDetail";
+import Portfolio from "components/templates/Portfolio";
+import Header from "components/templates/Header";
 
 function App() {
   const [componentsControl, setComponentsControl] = useState("detail");

@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import CoinListBody from "../components/coinList/CoinListBody";
-import CoinListNavbar from "../components/coinList/CoinListNavbar";
-import CoinListHeader from "../components/coinList/CoinListHeader";
+import CoinListBody from "components/container/coinList/CoinListBody";
+import CoinListNavbar from "components/container/coinList/CoinListNavbar";
+import CoinListHeader from "components/container/coinList/CoinListHeader";
 
 const CoinList = () => {
   return useMemo(() => {
@@ -30,9 +30,6 @@ const CoinListContainer = styled.aside`
   & ul {
     margin: 0;
     padding: 0;
-  }
-  & ul li:not(:last-child) {
-    border-bottom: solid 1px #d6d6d6;
   }
 
   &::-webkit-scrollbar {

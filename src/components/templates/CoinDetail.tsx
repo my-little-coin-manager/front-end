@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { coinSelect } from "../recoil/atoms";
+import { coinSelect } from "../../recoil/atoms";
 import { Market } from "types/types";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
-import DetailNameBox from "../container/DetailNameBox";
-import DetailPrice from "../components/coinDetail/DetailPrice";
-import CoinChart from "components/chart/CoinChart";
+import DetailNameBox from "components/container/coinDetail/DetailNameBox";
+import DetailPrice from "components/container/coinDetail/DetailPrice";
+import CoinChart from "components/blocks/coinDetail/CoinChart";
 import useGetMarkets from "hooks/useGetMarkets";
 
 const CoinDetail = () => {

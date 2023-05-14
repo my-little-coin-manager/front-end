@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Ticker } from "../../types/types";
+import { Ticker } from "../../../types/types";
 import useGetPortfolio from "hooks/portfolio/useGetPortfolio";
-import PortfolioCoinName from "./PortfolioCoinName";
-import PortfolioValue from "./PortfolioValue";
+import PortfolioCoinName from "../../blocks/portfolioList/PortfolioCoinName";
+import PortfolioValue from "../../blocks/portfolioList/PortfolioValue";
 import useGetCoins from "hooks/useGetCoins";
 
 type CoinInfo = {

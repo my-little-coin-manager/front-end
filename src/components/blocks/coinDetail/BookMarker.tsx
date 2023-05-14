@@ -1,8 +1,8 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { coinSelect } from "../recoil/atoms";
-import { ReactComponent as DisabledStar } from "../asset/svg/star-disabled.svg";
-import { ReactComponent as AbledStar } from "../asset/svg/star-abled.svg";
+import { coinSelect } from "../../../recoil/atoms";
+import { ReactComponent as DisabledStar } from "asset/svg/star-disabled.svg";
+import { ReactComponent as AbledStar } from "asset/svg/star-abled.svg";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
 import usePutBookmark from "hooks/bookmark/usePutBookmark";
 

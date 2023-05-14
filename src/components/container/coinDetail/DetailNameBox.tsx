@@ -1,4 +1,4 @@
-import BookMarker from "components/BookMarker";
+import BookMarker from "components/blocks/coinDetail/BookMarker";
 import React from "react";
 import styled from "styled-components";
 import { Market } from "types/types";

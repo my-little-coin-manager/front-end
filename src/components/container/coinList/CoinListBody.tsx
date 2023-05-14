@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as Exclamation } from "../../asset/svg/exclamation.svg";
+import { ReactComponent as Exclamation } from "asset/svg/exclamation.svg";
 import { Ticker, Market } from "types/types";
 import { useRecoilValue } from "recoil";
 import { menuSelect } from "recoil/atoms";
-import CoinListItem from "./CoinListItem";
+import CoinListItem from "components/organism/CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 import useGetMarkets from "hooks/useGetMarkets";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
@@ -24,16 +24,19 @@ const CoinListBody = () => {
         Object.values<Ticker>(coinTicker).map((ele, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={coinMarketList[idx]} />;
         })}
+
       {selectedMenu === "bookmark" &&
         filterBookmark.map((ele: Ticker, idx: number) => {
           return <CoinListItem key={ele.code} item={ele} coinMarkets={bookmarkCoinMarkets[idx]} />;
         })}
+
       {selectedMenu === "bookmark" && !filterBookmark.length && !!localStorage.getItem("accessToken") && (
         <NoResultMsg>
           <Exclamation />
           <p>아직 북마크에 담긴 코인이 없어요.</p>
         </NoResultMsg>
       )}
+
       {selectedMenu === "bookmark" && !filterBookmark.length && !localStorage.getItem("accessToken") && (
         <NoResultMsg>
           <Exclamation />

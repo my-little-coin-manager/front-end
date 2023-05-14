@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import PortfolioListHeader from "./PortfolioListHeader";
-import PortfolioListBody from "./PortfolioListBody";
+import PortfolioListHeader from "components/container/portfolioList/PortfolioListHeader";
+import PortfolioListBody from "components/container/portfolioList/PortfolioListBody";
 
 type Height = {
   height: number;

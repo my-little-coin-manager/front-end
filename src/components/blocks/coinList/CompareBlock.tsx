@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { priceFomatter } from "utils";
+import { priceFomatter } from "utils/formatNumber";
+import { checkedChange } from "utils/coloredPrice";
 
 interface ICompareProps {
   change: string;
@@ -11,8 +12,7 @@ interface ICompareProps {
 const CompareBlock = ({ change, rate, changePrice }: ICompareProps) => {
   return (
     <CompareContainer change={change}>
-      {change === "RISE" && <p>+{(rate * 100).toFixed(2)}%</p>}
-      {change === "FALL" && <p>{(rate * 100).toFixed(2)}%</p>}
+      <p>{checkedChange(change, rate).toFixed(2)}%</p>
       <p>{priceFomatter(changePrice)}</p>
     </CompareContainer>
   );

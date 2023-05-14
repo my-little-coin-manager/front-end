@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as Logo } from "../asset/svg/mlcm_logo_white.svg";
+import { ReactComponent as Logo } from "asset/svg/mlcm_logo_white.svg";
 import useLogout from "hooks/useLogout";
-import Login from "../components/header/Login";
-import SignUp from "../components/header/SignUp";
+import Login from "components/header/Login";
+import SignUp from "components/header/SignUp";
 
 interface ModalStyled {
   loginModal: boolean;

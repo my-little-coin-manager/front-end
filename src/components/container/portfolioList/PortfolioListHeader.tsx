@@ -23,6 +23,7 @@ const History = styled.li`
   height: 4rem;
   display: flex;
   font-size: 15px;
+
   :not(:first-child) {
     padding: 0 1rem;
   }

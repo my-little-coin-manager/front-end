@@ -35,8 +35,14 @@ const CoinList = styled.li`
   width: 100%;
   display: flex;
   align-items: center;
+
+  :not(:last-child) {
+    border-bottom: solid 1px #d6d6d6;
+  }
+
   &:hover {
     background-color: #f1efef;
+    cursor: pointer;
   }
 `;
 

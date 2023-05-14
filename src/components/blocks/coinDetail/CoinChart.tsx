@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { init, dispose, LineType, Chart } from "klinecharts";
-import useGetCoinCandles from "../../hooks/chart/useGetInitCoinCandles";
-import useNewData from "../../hooks/chart/useNewData";
+import useGetCoinCandles from "../../../hooks/chart/useGetInitCoinCandles";
+import useNewData from "../../../hooks/chart/useNewData";
 
 const CoinChart = () => {
   let chart: Chart | any;
@@ -12,16 +12,17 @@ const CoinChart = () => {
   useEffect(() => {
     if (coinCandles) {
       chart = init("coin-chart");
-
       const fetchData = () => {
         chart?.applyNewData(coinCandles);
         setInitialized(true);
       };
+
       fetchData();
-      return () => {
-        dispose("coin-chart");
-      };
     }
+
+    return () => {
+      dispose("coin-chart");
+    };
   }, [coinCandles]);
 
   useEffect(() => {
@@ -37,12 +38,14 @@ const CoinChart = () => {
         }
       }
     });
+
     if (initialized) {
       chart?.updateData(newData);
-      return () => {
-        dispose("coin-chart");
-      };
     }
+
+    return () => {
+      dispose("coin-chart");
+    };
   }, [newData]);
 
   return (

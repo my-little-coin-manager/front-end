@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { priceFomatter } from "utils";
+import { priceFomatter } from "utils/formatNumber";
 
 interface IPriceProps {
   price: number;

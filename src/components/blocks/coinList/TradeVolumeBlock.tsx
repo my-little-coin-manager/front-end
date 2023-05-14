@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { compactFormatter } from "utils";
+import { compactFormatter } from "utils/formatNumber";
 
 interface ITradeVoulumeProps {
   tradePrice: number;
