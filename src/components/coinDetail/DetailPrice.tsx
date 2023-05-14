@@ -45,19 +45,17 @@ const DetailPrice = ({ select }: PriceProps) => {
           </P2>
         </div>
         <div>
-          <P3>
-            거래량(24H)
-            <Span>
+          <TradeInfoText>
+            <p>거래량(24H)</p>
+            <p>
               {Math.round(ticker?.acc_trade_volume_24h).toLocaleString("ko-KR")}
               <em>{select.split("-")[1]}</em>
-            </Span>
-          </P3>
-          <P>
-            거래대금(24H)
-            <Span>
-              <CoinTradeVolume tradePrice={ticker?.acc_trade_price_24h} parents="datail" />
-            </Span>
-          </P>
+            </p>
+          </TradeInfoText>
+          <TradeInfoText>
+            <p>거래대금(24H)</p>
+            <CoinTradeVolume tradePrice={ticker?.acc_trade_price_24h} parents="datail" />
+          </TradeInfoText>
         </div>
       </HighLow>
     </Price>
@@ -174,6 +172,12 @@ const P2 = styled(P)`
 `;
 const P3 = styled(P)`
   margin-top: 2rem;
+`;
+
+const TradeInfoText = styled.span`
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: lighter;
 `;
 
 export default React.memo(DetailPrice);

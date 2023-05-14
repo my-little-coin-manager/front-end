@@ -1,8 +1,8 @@
 import React from "react";
 import useAuth from "hooks/useAuth";
 import styled from "styled-components";
-import AbledBtn from "components/common/AbledBtn";
-import DisabledBtn from "components/common/DisabledBtn";
+import AbledBtn from "components/atoms/AbledBtn";
+import DisabledBtn from "components/atoms/DisabledBtn";
 import API from "service/API";
 
 interface IResponse {

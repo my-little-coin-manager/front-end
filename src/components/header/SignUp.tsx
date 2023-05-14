@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import useAuth from "hooks/useAuth";
 import axios from "axios";
 import styled from "styled-components";
-import AbledBtn from "components/common/AbledBtn";
-import DisabledBtn from "components/common/DisabledBtn";
+import AbledBtn from "components/atoms/AbledBtn";
+import DisabledBtn from "components/atoms/DisabledBtn";
 
 interface IResponse {
   response?: {

@@ -3,10 +3,10 @@ import { useSetRecoilState } from "recoil";
 import { coinSelect } from "recoil/atoms";
 import { Market, Ticker } from "types/types";
 import styled from "styled-components";
-import CoinPrice from "../CoinPrice";
-import CoinCompare from "../CoinCompare";
-import CoinTradeVolume from "../CoinTradeVolume";
-import CoinName from "../CoinName";
+import TitleBlock from "components/blocks/coinList/TitleBlock";
+import PriceBlock from "components/blocks/coinList/PriceBlock";
+import CompareBlock from "components/blocks/coinList/CompareBlock";
+import TradeVolumeBlock from "components/blocks/coinList/TradeVolumeBlock";
 
 interface IListItemProps {
   item: Ticker;
@@ -21,10 +21,10 @@ const CoinListItem = ({ item, coinMarkets }: IListItemProps) => {
 
   return (
     <CoinList onClick={onClickCoinListItem}>
-      <CoinName koreanName={coinMarkets.korean_name} marketCode={coinMarkets.market} />
-      <CoinPrice price={item.trade_price} change={item.change} />
-      <CoinCompare change={item.change} rate={item.signed_change_rate} price={item.signed_change_price} />
-      <CoinTradeVolume tradePrice={item.acc_trade_price_24h} />
+      <TitleBlock koreanMarketName={coinMarkets.korean_name} marketCode={coinMarkets.market} />
+      <PriceBlock price={item.trade_price} change={item.change} />
+      <CompareBlock change={item.change} rate={item.signed_change_rate} changePrice={item.signed_change_price} />
+      <TradeVolumeBlock tradePrice={item.acc_trade_price_24h} />
     </CoinList>
   );
 };

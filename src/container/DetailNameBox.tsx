@@ -34,6 +34,7 @@ const NameBox = styled.div`
   margin: 0 auto;
   /* padding-bottom: 1rem; */
   border-bottom: 1px solid #d9d9d9;
+
   & img {
     width: 3rem;
     height: 3rem;
