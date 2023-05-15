@@ -3,7 +3,7 @@ import { init, dispose, LineType, Chart } from "klinecharts";
 import useGetCoinCandles from "../../../hooks/chart/useGetInitCoinCandles";
 import useNewData from "../../../hooks/chart/useNewData";
 
-const CoinChart = () => {
+const ChartBlock = () => {
   let chart: Chart | any;
   const [initialized, setInitialized] = useState(false);
   const { data: coinCandles } = useGetCoinCandles();
@@ -55,4 +55,4 @@ const CoinChart = () => {
     </div>
   );
 };
-export default CoinChart;
+export default ChartBlock;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import PortfolioPost from "components/portfolio/postPortfolio/PortfolioPost";
-import PortfolioList from "components/templates/PortfolioList";
+import PortfolioPost from "components/container/postPortfolio/PortfolioPost";
+import PortfolioList from "components/container/portfolioList/PortfolioList";
 
 const Portfolio = () => {
   const [height, setHeight] = useState<number>(165);

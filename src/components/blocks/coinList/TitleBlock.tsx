@@ -40,8 +40,8 @@ const MarketTitleContainer = styled.span`
 `;
 
 const MarketSymbol = styled.img`
-  width: 25px;
-  height: 25px;
+  max-width: 1rem;
+  max-height: 1rem;
   margin: auto 0;
 `;
 

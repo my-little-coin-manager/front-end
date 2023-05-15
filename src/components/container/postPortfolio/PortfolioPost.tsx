@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import usePostBookmark from "hooks/portfolio/usePostPortfolio";
 import useGetMarkets from "hooks/useGetMarkets";
-import SearchCoin from "./SearchCoin";
-import PostBtn from "./PostBtn";
-import PostInput from "./PostInput";
+import SearchResultBlock from "../../blocks/postPortfolio/SearchResultBlock";
+import BtnBlock from "../../blocks/postPortfolio/BtnBlock";
+import InputBlock from "../../blocks/postPortfolio/InputBlock";
 
 interface ISearch {
   market: string | undefined;
@@ -69,15 +69,15 @@ const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetState
 
   return (
     <PostPortfolioContainer onSubmit={onSubmitPortfolio} ref={portRef}>
-      <PostInput
+      <InputBlock
         market={market}
         search={search}
         setSearch={setSearch}
         searchValue={searchValue}
         onChnagePortfolio={onChnagePortfolio}
       />
-      <SearchCoin search={search} market={market} searchValue={searchValue} setSearch={setSearch} />
-      <PostBtn onChnagePortfolio={onChnagePortfolio} transaction={portforlio.transaction} />
+      <SearchResultBlock search={search} market={market} searchValue={searchValue} setSearch={setSearch} />
+      <BtnBlock onChnagePortfolio={onChnagePortfolio} transaction={portforlio.transaction} />
     </PostPortfolioContainer>
   );
 };

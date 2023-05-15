@@ -4,7 +4,7 @@ import { ReactComponent as Exclamation } from "asset/svg/exclamation.svg";
 import { Ticker, Market } from "types/types";
 import { useRecoilValue } from "recoil";
 import { menuSelect } from "recoil/atoms";
-import CoinListItem from "components/organism/CoinListItem";
+import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 import useGetMarkets from "hooks/useGetMarkets";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";

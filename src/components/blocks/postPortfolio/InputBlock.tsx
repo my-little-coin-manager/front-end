@@ -14,7 +14,7 @@ interface IProps {
   onChnagePortfolio: (e: React.ChangeEvent<HTMLInputElement> & React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const PostInput = ({ setSearch, market, search, searchValue, onChnagePortfolio }: IProps) => {
+const InputBlock = ({ setSearch, market, search, searchValue, onChnagePortfolio }: IProps) => {
   const searchCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
     const findMarket = market?.find((ele: any) => ele.korean_name === e.target.value);
     setSearch({ ...search, koreanName: e.target.value, market: findMarket?.market });
@@ -43,7 +43,7 @@ const PostInput = ({ setSearch, market, search, searchValue, onChnagePortfolio }
   );
 };
 
-export default PostInput;
+export default InputBlock;
 
 const InputContainer = styled.div`
   width: 100%;

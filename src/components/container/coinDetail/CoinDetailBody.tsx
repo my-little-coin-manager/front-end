@@ -1,32 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import useGetCoins from "hooks/useGetCoins";
-import CoinPrice from "components/CoinPrice";
 import CoinTradeVolume from "components/CoinTradeVolume";
+import { coinSelect } from "recoil/atoms";
+import { useRecoilValue } from "recoil";
+import PriceInfoSection from "./PriceInfoSection";
 
-interface PriceProps {
-  select: string;
-}
+// interface PriceProps {
+//   select: string;
+// }
 
-const DetailPrice = ({ select }: PriceProps) => {
-  const { data: coinTicker }: any = useGetCoins();
-  const ticker = coinTicker ? coinTicker[select] : {};
+const CoinDetailBody = () => {
+  const selected = useRecoilValue<string>(coinSelect);
+  const { data: coinTicker } = useGetCoins();
+  const ticker = coinTicker ? coinTicker[selected] : {};
 
   return (
     <Price>
-      <State change={ticker?.change}>
-        <PriceContianer>
-          <CoinPrice price={ticker?.trade_price} change={ticker?.change} parents="detail" />
-          <span>KRW</span>
-        </PriceContianer>
-        <CompareContainer>
-          <p>전일대비 {(ticker?.signed_change_rate * 100).toFixed(2)}%</p>
-          <span>
-            <p>{ticker?.signed_change_price?.toLocaleString("ko-KR")}</p>
-            <em>KRW</em>
-          </span>
-        </CompareContainer>
-      </State>
+      <PriceInfoSection
+        price={ticker?.trade_price}
+        change={ticker?.change}
+        rate={ticker?.signed_change_rate}
+        changePrice={ticker?.signed_change_price}
+      />
       <HighLow>
         <div>
           <P1>
@@ -49,7 +45,7 @@ const DetailPrice = ({ select }: PriceProps) => {
             <p>거래량(24H)</p>
             <p>
               {Math.round(ticker?.acc_trade_volume_24h).toLocaleString("ko-KR")}
-              <em>{select.split("-")[1]}</em>
+              <em>{selected.split("-")[1]}</em>
             </p>
           </TradeInfoText>
           <TradeInfoText>
@@ -61,6 +57,8 @@ const DetailPrice = ({ select }: PriceProps) => {
     </Price>
   );
 };
+
+export default React.memo(CoinDetailBody);
 
 //디테일 가격정보 컨테이너
 const Price = styled.div`
@@ -179,5 +177,3 @@ const TradeInfoText = styled.span`
   font-size: 0.9rem;
   font-weight: lighter;
 `;
-
-export default React.memo(DetailPrice);

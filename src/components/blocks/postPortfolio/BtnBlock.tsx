@@ -6,7 +6,7 @@ interface IProps {
   transaction: string;
 }
 
-const PostBtn = ({ onChnagePortfolio, transaction }: IProps) => {
+const BtnBlock = ({ onChnagePortfolio, transaction }: IProps) => {
   return (
     <BtnContainer>
       <div>
@@ -22,7 +22,7 @@ const PostBtn = ({ onChnagePortfolio, transaction }: IProps) => {
   );
 };
 
-export default PostBtn;
+export default BtnBlock;
 
 const BtnContainer = styled.div`
   display: flex;

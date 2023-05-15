@@ -1,10 +1,11 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { coinSelect } from "../../../recoil/atoms";
+import { coinSelect } from "recoil/atoms";
 import { ReactComponent as DisabledStar } from "asset/svg/star-disabled.svg";
 import { ReactComponent as AbledStar } from "asset/svg/star-abled.svg";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
 import usePutBookmark from "hooks/bookmark/usePutBookmark";
+import styled from "styled-components";
 
 const BookMarker = () => {
   const { data: bookmark } = useGetBookmark();
@@ -20,10 +21,14 @@ const BookMarker = () => {
   };
 
   return (
-    <div onClick={changeStatus}>
+    <Bookmark onClick={changeStatus}>
       {bookmark?.includes(selected) && <AbledStar />}
       {!bookmark?.includes(selected) && <DisabledStar />}
-    </div>
+    </Bookmark>
   );
 };
 export default BookMarker;
+
+const Bookmark = styled.div`
+  cursor: pointer;
+`;

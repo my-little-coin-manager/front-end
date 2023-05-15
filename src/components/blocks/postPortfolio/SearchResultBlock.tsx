@@ -15,7 +15,7 @@ interface IProps {
   setSearch: React.Dispatch<React.SetStateAction<ISearch>>;
 }
 
-const SearchCoin = ({ search, market, searchValue, setSearch }: IProps) => {
+const SearchResultBlock = ({ search, market, searchValue, setSearch }: IProps) => {
   const searchMarket =
     search.koreanName.length > 0 && market.filter((ele: any) => ele.korean_name.includes(search.koreanName));
 
@@ -39,7 +39,7 @@ const SearchCoin = ({ search, market, searchValue, setSearch }: IProps) => {
   );
 };
 
-export default SearchCoin;
+export default SearchResultBlock;
 
 const CoinSelect = styled.div`
   display: flex;
