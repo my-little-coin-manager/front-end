@@ -21,8 +21,6 @@ MLCM (MY LITTLE COIN MANAGER) 은 최근 미국금리인상 관련 발표때마�
 <br>
 
 > **URL** &nbsp; &nbsp;&nbsp;&nbsp; : &nbsp; https://mylittlecoinmanager.vercel.app/
->
-> **Notion** &nbsp;: &nbsp; https://shkiimaa.notion.site/My-Little-Coin-Manager-49d55c7e49ef4f99974562e3a56bfbe5
 
 <br><br><br>
 
