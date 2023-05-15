@@ -24,5 +24,8 @@ export default PriceInfoSection;
 const PriceInfoSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 16rem;
+  padding: 1rem 1rem 1rem 0;
+  height: 3.5rem;
 `;

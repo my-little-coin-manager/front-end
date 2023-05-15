@@ -3,26 +3,25 @@ import styled from "styled-components";
 
 const PortfolioListHeader = () => {
   return (
-    <History>
-      <ListHeader>종목</ListHeader>
-      <ListHeader>손익률</ListHeader>
-      <ListHeader>평가손익</ListHeader>
-      <ListHeader>매입금</ListHeader>
-      <ListHeader>현재가</ListHeader>
-      <ListHeader>평가금</ListHeader>
-      <ListHeader>평균단가</ListHeader>
-      <ListHeader>보유수량</ListHeader>
-    </History>
+    <PortfolioListHeaderContainer>
+      <Division>종목</Division>
+      <Division>손익률</Division>
+      <Division>평가손익</Division>
+      <Division>매입금</Division>
+      <Division>현재가</Division>
+      <Division>평가금</Division>
+      <Division>평균단가</Division>
+      <Division>보유수량</Division>
+    </PortfolioListHeaderContainer>
   );
 };
 
 export default PortfolioListHeader;
 
-const History = styled.li`
+const PortfolioListHeaderContainer = styled.li`
   text-decoration: none;
-  height: 4rem;
   display: flex;
-  font-size: 15px;
+  font-size: 0.8rem;
 
   :not(:first-child) {
     padding: 0 1rem;
@@ -38,25 +37,11 @@ const History = styled.li`
   }
 `;
 
-const CoinStock = styled.p`
+const Division = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
   width: calc(100% / 8);
-  color: #333;
-
-  :first-child {
-    justify-content: left;
-  }
-
-  & img {
-    width: 25px;
-    height: 25px;
-    margin: 0 0.5rem;
-  }
-`;
-
-const ListHeader = styled(CoinStock)`
   height: 3rem;
   background-color: #f9fafc;
   color: #666;

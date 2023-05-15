@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Ticker } from "../../../types/types";
 import useGetPortfolio from "hooks/portfolio/useGetPortfolio";
-import PortfolioCoinName from "../../blocks/portfolioList/PortfolioCoinName";
+import CoinTilteBlock from "../../blocks/portfolioList/CoinTilteBlock";
 import PortfolioValue from "../../blocks/portfolioList/PortfolioValue";
 import useGetCoins from "hooks/useGetCoins";
 
@@ -96,7 +96,7 @@ const PortfolioListBody = () => {
         Object.values<CoinInfo>(groupValues).map((ele) => {
           return (
             <History key={ele.code}>
-              <PortfolioCoinName koreanName={ele.koreanName} marketCode={ele.code} />
+              <CoinTilteBlock koreanName={ele.koreanName} marketCode={ele.code} />
               <Profit profit={ele.income}>{ele.profitRate.toFixed(2)}%</Profit>
               <PortfolioValue
                 income={ele.income}

@@ -6,13 +6,13 @@ interface ITradeVoulumeProps {
   tradePrice: number;
 }
 
-const TradeVolumeBlock = ({ tradePrice }: ITradeVoulumeProps) => {
-  return <TreadeVolume>{compactFormatter(tradePrice)}</TreadeVolume>;
+const TransactionValueBlock = ({ tradePrice }: ITradeVoulumeProps) => {
+  return <TransactionValueBlockContainer>{compactFormatter(tradePrice)}</TransactionValueBlockContainer>;
 };
 
-export default TradeVolumeBlock;
+export default TransactionValueBlock;
 
-const TreadeVolume = styled.p`
+const TransactionValueBlockContainer = styled.p`
   color: #333;
   width: 25%;
   font-size: 12px;

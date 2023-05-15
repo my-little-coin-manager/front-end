@@ -76,10 +76,9 @@ const Header = ({ componentsControl, setComponentsControl }: IProps) => {
 const HeaderContainer = styled.div`
   display: flex;
   background-color: #1261c4;
-  height: 4rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4%;
+  padding: 0.3rem 3.5rem;
   font-weight: 700;
 
   & h1 {
@@ -88,6 +87,8 @@ const HeaderContainer = styled.div`
   }
 
   & span {
+    display: flex;
+
     & span {
       font-size: 0.9rem;
       font-weight: lighter;
@@ -111,7 +112,6 @@ const HeaderContainer = styled.div`
         color: #3d6bfb;
       }
     }
-    display: flex;
   }
 `;
 

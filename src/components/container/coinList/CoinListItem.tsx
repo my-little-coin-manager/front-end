@@ -6,7 +6,7 @@ import styled from "styled-components";
 import TitleBlock from "components/blocks/coinList/TitleBlock";
 import PriceBlock from "components/blocks/coinList/PriceBlock";
 import CompareBlock from "components/blocks/coinList/CompareBlock";
-import TradeVolumeBlock from "components/blocks/coinList/TradeVolumeBlock";
+import TransactionValueBlock from "components/blocks/coinList/TransactionValueBlock";
 
 interface IListItemProps {
   item: Ticker;
@@ -24,7 +24,7 @@ const CoinListItem = ({ item, coinMarkets }: IListItemProps) => {
       <TitleBlock koreanMarketName={coinMarkets.korean_name} marketCode={coinMarkets.market} />
       <PriceBlock price={item.trade_price} change={item.change} />
       <CompareBlock change={item.change} rate={item.signed_change_rate} changePrice={item.signed_change_price} />
-      <TradeVolumeBlock tradePrice={item.acc_trade_price_24h} />
+      <TransactionValueBlock tradePrice={item.acc_trade_price_24h} />
     </CoinList>
   );
 };
