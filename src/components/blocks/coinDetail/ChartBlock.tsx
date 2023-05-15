@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { init, dispose, LineType, Chart } from "klinecharts";
 import useGetCoinCandles from "../../../hooks/chart/useGetInitCoinCandles";
 import useNewData from "../../../hooks/chart/useNewData";
+import styled from "styled-components";
 
 const ChartBlock = () => {
   let chart: Chart | any;
@@ -49,10 +50,14 @@ const ChartBlock = () => {
   }, [newData]);
 
   return (
-    <div>
+    <ChartBlockContainer>
       <div id="coin-chart" className="coin-chart" style={{ width: "100%", height: "30rem" }} />
       <div className="chart-menu-container"></div>
-    </div>
+    </ChartBlockContainer>
   );
 };
 export default ChartBlock;
+
+const ChartBlockContainer = styled.div`
+  margin: 1.5rem 0 0 0;
+`;

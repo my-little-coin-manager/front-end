@@ -46,7 +46,7 @@ const Layout = styled.div`
   max-height: 80%;
   margin: 3rem auto;
   display: flex;
-  padding: 0 10%;
+  justify-content: space-between;
 `;
 
 export default App;

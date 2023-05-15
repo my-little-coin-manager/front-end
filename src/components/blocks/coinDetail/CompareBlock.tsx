@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { priceFomatter } from "utils/formatNumber";
-import { rateFommater } from "utils/formatNumber";
-
+import { rateFomater } from "utils/formatNumber";
+import { compareFomatter } from "utils/formatNumber";
 interface ICompareBlockProps {
   change: string;
   rate: number;
@@ -12,8 +11,8 @@ interface ICompareBlockProps {
 const CompareBlock = ({ change, rate, changePrice }: ICompareBlockProps) => {
   return (
     <Container change={change}>
-      <Rate>전일대비 {rateFommater(change, rate)}%</Rate>
-      <Compare>{priceFomatter(changePrice)} KRW</Compare>
+      <Rate>{rateFomater(change, rate)}%</Rate>
+      <Compare>{compareFomatter(changePrice, change)}</Compare>
     </Container>
   );
 };
@@ -22,10 +21,14 @@ export default CompareBlock;
 
 const Container = styled.div<{ change: string }>`
   display: flex;
-  justify-content: space-between;
   color: ${({ change }) => (change === "RISE" ? "red" : change === "FALL" ? "blue" : "black")};
 `;
 
-const Compare = styled.p``;
+const Rate = styled.p`
+  font-weight: 700;
+  margin: 0 1rem 0 0;
+`;
 
-const Rate = styled.p``;
+const Compare = styled.p`
+  font-weight: 700;
+`;
