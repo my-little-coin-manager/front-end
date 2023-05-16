@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Ticker } from "../../../types/types";
 import useGetPortfolio from "hooks/portfolio/useGetPortfolio";
 import CoinTilteBlock from "../../blocks/portfolioList/CoinTilteBlock";
-import PortfolioValue from "../../blocks/portfolioList/PortfolioValue";
+import PortfolioValueBlock from "../../blocks/portfolioList/PortfolioValueBlock";
 import useGetCoins from "hooks/useGetCoins";
 
 type CoinInfo = {
@@ -97,15 +97,15 @@ const PortfolioListBody = () => {
           return (
             <History key={ele.code}>
               <CoinTilteBlock koreanName={ele.koreanName} marketCode={ele.code} />
-              <Profit profit={ele.income}>{ele.profitRate.toFixed(2)}%</Profit>
-              <PortfolioValue
+              <PortfolioValueBlock
                 income={ele.income}
                 totalPrice={ele.totalPrice}
                 nowPrice={ele.nowPrice}
                 equitiesValue={ele.equitiesValue}
                 averagePrice={ele.averagePrice}
+                profitRate={ele.profitRate}
+                qty={ele.qty}
               />
-              <CoinQty>{ele.qty}</CoinQty>
             </History>
           );
         })}
@@ -120,43 +120,12 @@ const History = styled.li`
   height: 4rem;
   display: flex;
   font-size: 15px;
+
+  :not(:last-child) {
+    border-bottom: solid 1px #d6d6d6;
+  }
+
   :not(:first-child) {
     padding: 0 1rem;
   }
-
-  :first-child {
-    position: sticky;
-    top: 0;
-  }
-
-  :not(:first-child) {
-    border-bottom: solid 1px #d6d6d6;
-  }
-`;
-
-const CoinStock = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(100% / 8);
-  color: #333;
-
-  :first-child {
-    justify-content: left;
-  }
-
-  & img {
-    width: 25px;
-    height: 25px;
-    margin: 0 0.5rem;
-  }
-`;
-
-const Profit = styled(CoinStock)<{ profit: number }>`
-  color: ${({ profit }) => (profit > 0 ? "#c84a31" : profit < 0 ? "#1261c4" : "#333")};
-  font-weight: 700;
-`;
-
-const CoinQty = styled(CoinStock)`
-  font-weight: 700;
 `;

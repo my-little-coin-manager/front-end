@@ -1,22 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { MarketList, Market } from "types/types";
 
 interface ISearch {
   market: string | undefined;
   koreanName: string;
 }
 
-interface IProps {
+interface IInputBlockProps {
   setSearch: React.Dispatch<React.SetStateAction<ISearch>>;
-  market: any;
+  market: MarketList;
   search: ISearch;
   searchValue: React.RefObject<HTMLInputElement>;
   onChnagePortfolio: (e: React.ChangeEvent<HTMLInputElement> & React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const InputBlock = ({ setSearch, market, search, searchValue, onChnagePortfolio }: IProps) => {
+const InputBlock = ({ setSearch, market, search, searchValue, onChnagePortfolio }: IInputBlockProps) => {
   const searchCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const findMarket = market?.find((ele: any) => ele.korean_name === e.target.value);
+    const findMarket = market?.find((ele: Market) => ele.korean_name === e.target.value);
     setSearch({ ...search, koreanName: e.target.value, market: findMarket?.market });
   };
 
