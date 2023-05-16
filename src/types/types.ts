@@ -21,7 +21,8 @@ export type Market = {
   korean_name: string;
   english_name: string;
 };
-export type MarketName = Market[];
+
+export type MarketList = Market[];
 
 // Atom coinTickers
 export type Ticker = {

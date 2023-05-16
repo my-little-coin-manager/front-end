@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import PortfolioPost from "components/container/postPortfolio/PortfolioPost";
-import PortfolioList from "components/container/portfolioList/PortfolioList";
+import PortfolioPostSection from "components/container/postPortfolio/PortfolioPostSection";
+import PortfolioListSection from "components/container/portfolioList/PortfolioListSection";
 
 const Portfolio = () => {
   const [height, setHeight] = useState<number>(165);
 
   return (
     <PortfoiloContainer>
-      <PortfolioPost setHeight={setHeight} />
-      <PortfolioList height={height} />
+      <PortfolioPostSection setHeight={setHeight} />
+      <PortfolioListSection height={height} />
     </PortfoiloContainer>
   );
 };
