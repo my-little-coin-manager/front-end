@@ -4,7 +4,7 @@ import { coinSelect } from "recoil/atoms";
 import { useRecoilValue } from "recoil";
 import useGetCoins from "hooks/useGetCoins";
 import PriceInfoSection from "./PriceInfoSection";
-import HightAndLowPriceBlock from "components/container/coinDetail/HightAndLowPriceBlock";
+import HightAndLowPriceSection from "components/container/coinDetail/HightAndLowPriceSection";
 import TransactionAndVolumeSection from "./TransactionAndVolumeSection";
 
 const CoinDetailBody = () => {
@@ -22,7 +22,7 @@ const CoinDetailBody = () => {
       />
 
       <TradeInfoContainer>
-        <HightAndLowPriceBlock hightPrice={ticker?.high_price} lowPrice={ticker?.low_price} />
+        <HightAndLowPriceSection hightPrice={ticker?.high_price} lowPrice={ticker?.low_price} />
         <TransactionAndVolumeSection
           tradeVolume={ticker?.acc_trade_volume_24h}
           tradePrice={ticker?.acc_trade_price_24h}

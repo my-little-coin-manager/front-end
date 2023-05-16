@@ -3,23 +3,23 @@ import styled from "styled-components";
 import HightPriceBlock from "components/blocks/coinDetail/HightPriceBlock";
 import LowPriceBlock from "components/blocks/coinDetail/LowPriceBlock";
 
-interface IHightAndLowPriceBlockProps {
+interface HightAndLowPriceSectionProps {
   hightPrice: number;
   lowPrice: number;
 }
 
-const HightAndLowPriceBlock = ({ hightPrice, lowPrice }: IHightAndLowPriceBlockProps) => {
+const HightAndLowPriceSection = ({ hightPrice, lowPrice }: HightAndLowPriceSectionProps) => {
   return (
-    <HightAndLowPriceBlockContainer>
+    <HightAndLowPriceSectionContainer>
       <HightPriceBlock hightPrice={hightPrice} />
       <LowPriceBlock lowPrice={lowPrice} />
-    </HightAndLowPriceBlockContainer>
+    </HightAndLowPriceSectionContainer>
   );
 };
 
-export default HightAndLowPriceBlock;
+export default HightAndLowPriceSection;
 
-const HightAndLowPriceBlockContainer = styled.div`
+const HightAndLowPriceSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
