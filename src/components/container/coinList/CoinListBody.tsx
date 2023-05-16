@@ -8,6 +8,7 @@ import CoinListItem from "./CoinListItem";
 import useGetCoins from "hooks/useGetCoins";
 import useGetMarkets from "hooks/useGetMarkets";
 import useGetBookmark from "hooks/bookmark/useGetBookmark";
+import NoResultMsg from "components/atoms/NoResultMsg";
 
 const CoinListBody = () => {
   const { data: coinTicker } = useGetCoins();
@@ -31,30 +32,14 @@ const CoinListBody = () => {
         })}
 
       {selectedMenu === "bookmark" && !filterBookmark.length && !!localStorage.getItem("accessToken") && (
-        <NoResultMsg>
-          <Exclamation />
-          <p>아직 북마크에 담긴 코인이 없어요.</p>
-        </NoResultMsg>
+        <NoResultMsg>아직 북마크에 담긴 코인이 없어요.</NoResultMsg>
       )}
 
       {selectedMenu === "bookmark" && !filterBookmark.length && !localStorage.getItem("accessToken") && (
-        <NoResultMsg>
-          <Exclamation />
-          <p>로그인 후 이용해 주세요.</p>
-        </NoResultMsg>
+        <NoResultMsg>로그인 후 이용해 주세요.</NoResultMsg>
       )}
     </>
   );
 };
 
 export default CoinListBody;
-
-const NoResultMsg = styled.div`
-  text-align: center;
-  margin-top: 8rem;
-
-  & p {
-    margin-top: 1rem;
-    color: #c0c0c0;
-  }
-`;

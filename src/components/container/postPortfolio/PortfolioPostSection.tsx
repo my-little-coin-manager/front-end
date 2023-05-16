@@ -18,7 +18,7 @@ interface IPortfolio {
   date: string;
 }
 
-const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetStateAction<number>> }) => {
+const PortfolioPostSection = ({ setHeight }: { setHeight: React.Dispatch<React.SetStateAction<number>> }) => {
   const { data: market } = useGetMarkets();
   const { mutate: postPortfolio } = usePostBookmark();
   const [search, setSearch] = useState<ISearch>({ market: "", koreanName: "" });
@@ -68,7 +68,7 @@ const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetState
   }, [search]);
 
   return (
-    <PostPortfolioContainer onSubmit={onSubmitPortfolio} ref={portRef}>
+    <PortfolioPostSectionContainer onSubmit={onSubmitPortfolio} ref={portRef}>
       <InputBlock
         market={market}
         search={search}
@@ -78,13 +78,13 @@ const PortfolioPost = ({ setHeight }: { setHeight: React.Dispatch<React.SetState
       />
       <SearchResultBlock search={search} market={market} searchValue={searchValue} setSearch={setSearch} />
       <BtnBlock onChnagePortfolio={onChnagePortfolio} transaction={portforlio.transaction} />
-    </PostPortfolioContainer>
+    </PortfolioPostSectionContainer>
   );
 };
 
-export default PortfolioPost;
+export default PortfolioPostSection;
 
-const PostPortfolioContainer = styled.form`
+const PortfolioPostSectionContainer = styled.form`
   display: flex;
   flex-direction: column;
   min-height: 12%;

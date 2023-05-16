@@ -7,18 +7,18 @@ type Height = {
   height: number;
 };
 
-const PortfolioList = ({ height }: Height) => {
+const PortfolioListSection = ({ height }: Height) => {
   return (
-    <PortfolioListContainer height={height}>
+    <PortfolioListSectionContainer height={height}>
       <PortfolioListHeader />
       <PortfolioListBody />
-    </PortfolioListContainer>
+    </PortfolioListSectionContainer>
   );
 };
 
-export default PortfolioList;
+export default PortfolioListSection;
 
-const PortfolioListContainer = styled.ul<{ height: number }>`
+const PortfolioListSectionContainer = styled.ul<{ height: number }>`
   overflow: overlay;
   overflow-x: hidden;
   border-radius: 1rem;
