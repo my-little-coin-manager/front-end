@@ -73,6 +73,8 @@ const Header = ({ componentsControl, setComponentsControl }: IProps) => {
   );
 };
 
+export default Header;
+
 const HeaderContainer = styled.div`
   display: flex;
   background-color: #1261c4;
@@ -118,6 +120,7 @@ const HeaderContainer = styled.div`
 const NavBar = styled.nav`
   text-align: center;
   display: flex;
+
   & p:first-child {
     margin: 0 4rem;
     color: ${(props) => (props.color === "detail" ? "#fff" : "rgba(165,175,202,0.8)")};
@@ -156,5 +159,3 @@ const ModalBackground = styled.div<ModalStyled>`
 const LoginInfo = styled.span`
   align-items: center;
 `;
-
-export default Header;
