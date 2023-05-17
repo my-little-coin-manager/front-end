@@ -171,7 +171,7 @@ src
 ![image](https://github.com/my-little-coin-manager/front-end/assets/87426851/b106c50c-7d4d-4d63-a5c5-15382256c5d3)
 ![image](https://github.com/my-little-coin-manager/front-end/assets/87426851/b3a612e3-ebc6-4356-87db-d53e49e6d0e0)
 코인을 선택하고 거래정보를 기입한후 매수와 매도를 선택해 포트폴리오에 추가할 수 있습니다.
-DB에 로그형식으로 저장되며 추후 히스토리를 상세히 확인 할 수 있는 기능을 개발할 예정입니다.
+DB에 로그형식으로 저장되며 추후 히스토리를 상세히 확인 할 수 있는 기능을 개발할 예정입니다. <br>
 **기록이 주 목적인 기능이기에 본인의 가상화폐 거래내역을 기입하지않고 임의로 기입하여 모의투자용도로 사용이 가능합니다.**
 
 <br>
