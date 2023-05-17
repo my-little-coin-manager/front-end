@@ -42,9 +42,9 @@ src
 ├─ asset                                        # 이미지 폴더
 ├─ components
 │  ├─ atoms                                     # 스타일이 동일하여 재사용 가능한 최소단위 컴포넌트
-│  │  ├─ AbledBtn.tsx                           # 활성화 버튼 컨포넌트
+│  │  ├─ AbledBtn.tsx                           # 활성 버튼 컨포넌트
 │  │  ├─ BookMarker.tsx                         # 북마크 선택용 별 컴포넌트
-│  │  ├─ DisabledBtn.tsx                        # 비활성화 버튼 컴포넌트
+│  │  ├─ DisabledBtn.tsx                        # 비활성 버튼 컴포넌트
 │  │  └─ NoResultMsg.tsx                        # 내용이 없을 때 비어있음을 표시하는 컴포넌트
 │  ├─ blocks                                    # 하나 이상의 기능을 수행하거나 여러 컴포넌트의 조합으로 이루어진 컴포넌트
 │  │  ├─ coinDetail
@@ -63,43 +63,57 @@ src
 │  │  │  └─ TransactionValueBlock.tsx           # 거래 대금을 보여주는 컴포넌트
 │  │  ├─ portfolioList
 │  │  │  ├─ CoinTilteBlock.tsx                  # 포트폴리오 리스트 Title을 보여주는 컴포넌트
-│  │  │  └─ PortfolioValueBlock.tsx             # 포트폴리오 리스트 데이터값을 보여주는 컴포넌트
+│  │  │  └─ PortfolioValueBlock.tsx             # 가공된 포트폴리오 리스트 데이터값을 보여주는 컴포넌트
 │  │  └─ postPortfolio
 │  │     ├─ BtnBlock.tsx                        # 포트폴리오 POST를 하기위한 Button 조합 컴포넌트
 │  │     ├─ InputBlock.tsx                      # 포트폴리오 POST를 하기위한 Input 조합 컴포넌트
 │  │     └─ SearchResultBlock.tsx               # 코인 검색 결과를 보여주는 컴포넌트
-│  ├─ container                                 # 여러 blocks 컴포넌트의 조합으로 하나의 영역을 담당하는 컴포넌트
+│  ├─ container                                 # 여러 blocks 컴포넌트의 조합 또는 Layout을 그려주는 컴포넌트
 │  │  ├─ coinDetail
-│  │  │  ├─ CoinDetailBody.tsx                  # CoinDetail 컴포넌트의 Body 부분을 담당
-│  │  │  ├─ CoinDetailHeader.tsx                # CoinDetail 컴포넌트의 Header 부분을 담당
+│  │  │  ├─ CoinDetailBody.tsx                  # CoinDetail 컴포넌트의 Body Layout
+│  │  │  ├─ CoinDetailHeader.tsx                # CoinDetail 컴포넌트의 Header Layout
 │  │  │  ├─ HightAndLowPriceSection.tsx         # 당일 고가와 저가를 보여주는 컴포넌트
 │  │  │  ├─ PriceInfoSection.tsx                # 현재 코인 가격과 전날 대비 변동률을 보여주는 컴포넌트
 │  │  │  └─ TransactionAndVolumeSection.tsx     # 거래량과 거래대금을 보여주는 컴포넌트
 │  │  ├─ coinList
-│  │  │  ├─ CoinListBody.tsx                    # CoinList 컴포넌트의 Body를 담당
-│  │  │  ├─ CoinListHeader.tsx                  # CoinList 컴포넌트의 Header를 담당
+│  │  │  ├─ CoinListBody.tsx                    # CoinList 컴포넌트의 Body Layout
+│  │  │  ├─ CoinListHeader.tsx                  # CoinList 컴포넌트의 Header Layout
 │  │  │  ├─ CoinListItem.tsx                    # 다양한 마켓 정보를 표시해주는 컴포넌트
 │  │  │  └─ CoinListNavbar.tsx                  # 즐겨찾기 코인 리스트 <-> 전체 코인 리스트 전환 컴포넌트
 │  │  ├─ header
 │  │  │  ├─ Login.tsx                           # Login Modal 컴포넌트
 │  │  │  └─ SignUp.tsx                          # SignUp Modal 컴포넌트
 │  │  ├─ portfolioList
-│  │  │  ├─ PortfolioListBody.tsx               # PortfolioList Body
-│  │  │  ├─ PortfolioListHeader.tsx             # PortfolioList Header
+│  │  │  ├─ PortfolioListBody.tsx               # PortfolioList 컴포넌트의 Body Layout
+│  │  │  ├─ PortfolioListHeader.tsx             # PortfolioList 컴포넌트의 Header Layout
 │  │  │  └─ PortfolioListSection.tsx            # 유저가 등록한 포트폴리오 리스트를 표시해주는 컴포넌트
 │  │  └─ postPortfolio
-│  │     └─ PortfolioPostSection.tsx            # 포트폴리오를 POST하는 컴포넌트
+│  │     └─ PortfolioPostSection.tsx            # PostPortflio Layout
 │  ├─ pages
 │  │  └─ MainPage.tsx                           # templates 컴포넌트의 조합으로 페이지를 구성하는 컴포넌트
-│  └─ templates                                 # 여러 containers 컴포넌트의 조합으로 이루어진 최종 컴포넌트
+│  └─ templates                                 # 여러 containers 컴포넌트의 조합으로 page를 구성 가능한 최종 컴포넌트
 │     ├─ CoinDetail.tsx
 │     ├─ CoinList.tsx
 │     ├─ Header.tsx
 │     └─ Portfolio.tsx
 ├─ fonts
+├─ hooks                                        # Custom Hooks
+│  ├─ bookmark
+│  │  ├─ useGetBookmark.ts                      # Bookmark Data Get 요청 Hooks
+│  │  └─ usePutBookmark.ts.tsx                  # Bookmark Data Put 요청 Hooks
+│  ├─ chart
+│  │  ├─ useGetInitCoinCandles.ts               # Chart를 그리기 위한 Candle Initial Data 요청 Hooks
+│  │  └─ useNewData.ts                          # 실시간 Chart를 그리기위한 실시간 Candle Data 요청 Hooks
+│  ├─ portfolio
+│  │  ├─ useGetPortfolio.ts                     # PortFolio Data Get 요청 Hooks
+│  │  └─ usePostPortfolio.ts                    # PortFolio Data Post 요청 Hooks
+│  ├─ useAuth.ts                                # 회원가입, 로그인 로직 Hooks
+│  ├─ useGetCoins.ts                            # Coin 실시간 시세 websocket 연결 Hooks
+│  ├─ useGetMarkets.ts                          # Coin Market Data Get 요청 Hooks
+│  └─ useLogout.ts                              # Logout 요청 Hooks
 ├─ index.tsx
-├─ recoil
-│  └─ atoms.ts
+├─ recoil                                       # Recoil Folder
+│  └─ atoms.ts                                  # Recoil atom
 ├─ service
 │  ├─ API.ts                                    # Backend API 연결을 위한 Axios Instance
 │  └─ coinAPI.ts                                # Upbit API 연결을 위한 Axios Instance
