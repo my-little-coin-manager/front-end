@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "asset/svg/mlcm_logo_white.svg";
+import LoginModal from "components/blocks/modal/LoginModal";
+import SignUpModal from "components/blocks/modal/SignUpModal";
 import useLogout from "hooks/useLogout";
-import Login from "components/container/header/Login";
-import SignUp from "components/container/header/SignUp";
 
-interface ModalStyled {
+interface IModalControl {
   loginModal: boolean;
   signUpModal: boolean;
 }
 
-interface IProps {
+interface IHeaderProps {
   componentsControl: string;
   setComponentsControl: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Header = ({ componentsControl, setComponentsControl }: IProps) => {
+const Header = ({ componentsControl, setComponentsControl }: IHeaderProps) => {
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [signUpModal, setSignUpModal] = useState<boolean>(false);
 
@@ -66,8 +66,8 @@ const Header = ({ componentsControl, setComponentsControl }: IProps) => {
         loginModal={loginModal}
         signUpModal={signUpModal}
       >
-        {loginModal ? <Login onSignUpModal={onSignUpModal} setLoginModal={setLoginModal} /> : null}
-        {signUpModal ? <SignUp setSignUpModal={setSignUpModal} /> : null}
+        {loginModal ? <LoginModal onSignUpModal={onSignUpModal} setLoginModal={setLoginModal} /> : null}
+        {signUpModal ? <SignUpModal setSignUpModal={setSignUpModal} /> : null}
       </ModalBackground>
     </HeaderContainer>
   );
@@ -144,7 +144,7 @@ const NavBar = styled.nav`
   }
 `;
 
-const ModalBackground = styled.div<ModalStyled>`
+const ModalBackground = styled.div<IModalControl>`
   display: ${({ loginModal, signUpModal }) => (loginModal || signUpModal ? "block" : "none")};
   position: absolute;
   top: 0;

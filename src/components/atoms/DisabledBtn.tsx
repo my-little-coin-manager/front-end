@@ -1,12 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-interface IProps {
-  children: string;
+interface DisabledBtnIProps {
+  children: ReactNode;
 }
 
-const DisabledBtn = (props: IProps) => {
-  return <Btn disabled={true}>{props.children}</Btn>;
+const DisabledBtn = ({ children }: DisabledBtnIProps) => {
+  return <Btn disabled={true}>{children}</Btn>;
 };
 
 const Btn = styled.button`
