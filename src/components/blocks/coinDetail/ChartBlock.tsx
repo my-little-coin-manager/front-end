@@ -9,10 +9,22 @@ const ChartBlock = () => {
   const [initialized, setInitialized] = useState(false);
   const { data: coinCandles } = useGetCoinCandles();
   const newData = useNewData();
+  const chartStyle = {
+    styles: {
+      grid: { horizontal: { style: LineType.Dashed } },
+      candle: {
+        bar: {
+          upColor: "#d24f45",
+          downColor: "#1261c4",
+          noChangeColor: "#888888"
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     if (coinCandles) {
-      chart = init("coin-chart");
+      chart = init("coin-chart", chartStyle);
       const fetchData = () => {
         chart?.applyNewData(coinCandles);
         setInitialized(true);
@@ -27,18 +39,7 @@ const ChartBlock = () => {
   }, [coinCandles]);
 
   useEffect(() => {
-    chart = init("coin-chart", {
-      styles: {
-        grid: { horizontal: { style: LineType.Dashed } },
-        candle: {
-          bar: {
-            upColor: "#d24f45",
-            downColor: "#1261c4",
-            noChangeColor: "#888888"
-          }
-        }
-      }
-    });
+    chart = init("coin-chart", chartStyle);
 
     if (initialized) {
       chart?.updateData(newData);
