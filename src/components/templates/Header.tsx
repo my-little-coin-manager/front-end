@@ -32,7 +32,7 @@ const Header = ({ componentsControl, setComponentsControl }: IHeaderProps) => {
   const logout = () => {
     localStorage.clear();
     useLogout();
-    // location.reload();
+    window.location.reload();
   };
 
   return (
