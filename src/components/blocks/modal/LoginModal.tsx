@@ -30,7 +30,7 @@ const LoginModal = ({ onSignUpModal, setLoginModal }: ILoginModalProps) => {
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("nickname", response.data.nickname);
       setLoginModal(false);
-      location.reload();
+      // location.reload();
     } catch (error: unknown) {
       const errMsg = (await error) as IResponse;
       alert(errMsg);

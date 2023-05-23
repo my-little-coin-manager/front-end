@@ -28,7 +28,7 @@ const SignUpModal = ({ setSignUpModal }: ISignUpModalProps) => {
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/user", userInfo);
       alert(response.data.msg);
-      window.location.reload();
+      // window.location.reload();
     } catch (error: unknown) {
       const errMsg = (await error) as IResponse;
       alert(errMsg);
