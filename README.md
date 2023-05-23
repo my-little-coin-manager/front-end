@@ -45,6 +45,10 @@ src
 │  │  ├─ AbledBtn.tsx                           # 활성 버튼 컨포넌트
 │  │  ├─ BookMarker.tsx                         # 북마크 선택용 별 컴포넌트
 │  │  ├─ DisabledBtn.tsx                        # 비활성 버튼 컴포넌트
+│  │  ├─ Input.tsx                              # 입력 Input 컴포넌트
+│  │  ├─ Modal.tsx                              # Modal 영역 컴포넌트
+│  │  ├─ ModalBottomMsg.tsx                     # Modal Bottom Message 컴포넌트
+│  │  ├─ ModalTilte.tsx                         # Modal Tilte 컴포넌트
 │  │  └─ NoResultMsg.tsx                        # 내용이 없을 때 비어있음을 표시하는 컴포넌트
 │  ├─ blocks                                    # 하나 이상의 기능을 수행하거나 여러 컴포넌트의 조합으로 이루어진 컴포넌트
 │  │  ├─ coinDetail
@@ -61,6 +65,9 @@ src
 │  │  │  ├─ PriceBlock.tsx                      # 실시간 시세를 보여주는 컴포넌트
 │  │  │  ├─ TitleBlock.tsx                      # 코인 이름, 로고, 마켓 코드를 보여주는 컴포넌트
 │  │  │  └─ TransactionValueBlock.tsx           # 거래 대금을 보여주는 컴포넌트
+│  │  ├─ modal
+│  │  │  └─ LoginModal.tsx                      # 로그인 모달 컴포넌트
+│  │  │  └─ SignUpModal.tsx                     # 회원가입 모달 컴포넌트
 │  │  ├─ portfolioList
 │  │  │  ├─ CoinTilteBlock.tsx                  # 포트폴리오 리스트 Title을 보여주는 컴포넌트
 │  │  │  └─ PortfolioValueBlock.tsx             # 가공된 포트폴리오 리스트 데이터값을 보여주는 컴포넌트
@@ -80,9 +87,6 @@ src
 │  │  │  ├─ CoinListHeader.tsx                  # CoinList 컴포넌트의 Header Layout
 │  │  │  ├─ CoinListItem.tsx                    # 다양한 마켓 정보를 표시해주는 컴포넌트
 │  │  │  └─ CoinListNavbar.tsx                  # 즐겨찾기 코인 리스트 <-> 전체 코인 리스트 전환 컴포넌트
-│  │  ├─ header
-│  │  │  ├─ Login.tsx                           # Login Modal 컴포넌트
-│  │  │  └─ SignUp.tsx                          # SignUp Modal 컴포넌트
 │  │  ├─ portfolioList
 │  │  │  ├─ PortfolioListBody.tsx               # PortfolioList 컴포넌트의 Body Layout
 │  │  │  ├─ PortfolioListHeader.tsx             # PortfolioList 컴포넌트의 Header Layout
