@@ -34,7 +34,7 @@ const useGetCoinCandles = () => {
 
       return item;
     } catch (error) {
-      console.log(error);
+      throw new Error("차트 데이터를 가져오지 못했습니다. 다시 접속해 주세요.");
     }
   };
 
