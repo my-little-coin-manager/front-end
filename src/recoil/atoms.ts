@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { MarketList, TickerInfo } from "types/types";
 
-//실시간 코인 시세
+// 실시간 코인 시세
 export const coinTickers = atom<TickerInfo>({
   key: "coinTickers",
   default: {}
