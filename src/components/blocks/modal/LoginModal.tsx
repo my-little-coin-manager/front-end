@@ -32,8 +32,7 @@ const LoginModal = ({ onSignUpModal, setLoginModal }: ILoginModalProps) => {
       setLoginModal(false);
       window.location.reload();
     } catch (error: unknown) {
-      const errMsg = (await error) as IResponse;
-      alert(errMsg);
+      alert("잘못된 정보입니다.");
     }
   };
 

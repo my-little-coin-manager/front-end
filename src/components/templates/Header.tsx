@@ -29,9 +29,9 @@ const Header = ({ componentsControl, setComponentsControl }: IHeaderProps) => {
     setLoginModal(false);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await useLogout();
     localStorage.clear();
-    useLogout();
     window.location.reload();
   };
 
